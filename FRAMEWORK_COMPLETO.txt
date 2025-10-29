@@ -1,0 +1,2482 @@
+<?php 
+
+
+================================================================================
+                    PROMPT COMPLETO - FRAMEWORK PHP MVC PERSONALIZADO
+================================================================================
+
+PROMPT PARA EJECUTAR EN OTRO EQUIPO
+CONVERSACIÓN COMPLETA DEL PROYECTO
+FECHA: 28 de octubre de 2025
+
+================================================================================
+                            INSTRUCCIONES DE USO
+================================================================================
+
+Copia este prompt completo y pégalo en tu nuevo equipo para continuar el proyecto.
+El asistente implementará todo el framework basado en estas especificaciones.
+
+================================================================================
+                            PROMPT COMPLETO
+================================================================================
+
+Hola, necesito tu ayuda para crear un framework PHP MVC completo desde cero. Este es un proyecto educativo para un curso. Aquí están todas las especificaciones y requerimientos que hemos definido:
+
+## CONTEXTO DEL PROYECTO
+
+Estoy creando un curso de cómo desarrollar un framework PHP MVC desde cero. El framework debe ser educativo, pero funcional y completo.
+
+## CARACTERÍSTICAS PRINCIPALES REQUERIDAS
+
+### 1. ARQUITECTURA MVC
+- Sistema de rutas dinámicas con parámetros (ej: /producto/{id}, /usuario/{nombre})
+- Controladores con métodos para CRUD
+- Modelos con ORM personalizado (Active Record pattern)
+- Vistas con motor de plantillas personalizado
+
+### 2. SISTEMA DE RUTAS
+- Sintaxis similar a Laravel: $router->get('/productos', 'ProductController@index')
+- Soporte para parámetros dinámicos: /producto/{id}, /usuario/{nombre}/perfil
+- Rutas agrupadas con prefijos y middleware
+- Método resource() para CRUD automático
+- Archivo web.php centralizado (no annotations como Symfony)
+
+### 3. MOTOR DE PLANTILLAS PERSONALIZADO
+- Sintaxis tipo Blade de Laravel (no usar Twig ni Plates)
+- Variables: {{ $variable }} con escape automático
+- Variables sin escape: {!! $html !!}
+- Estructuras de control: @if, @foreach, @while, @for
+- Herencia de layouts: @extends, @section, @yield
+- Inclusiones: @include
+- Helpers: @isset, @empty, @auth, @guest
+- Push/stack: @push, @stack
+- Helpers de vistas: @asset, @url, @csrf, @method
+
+### 4. ORM COMPLETO
+- Active Record pattern como Laravel
+- Sintaxis: User::find(1), User::where('active', 1)->get()
+- Métodos: create(), save(), delete(), update()
+- Relaciones: hasMany(), belongsTo(), belongsToMany()
+- Query Builder con joins, where, orderBy, limit
+- Paginación: Model::paginate(10) exacto como Laravel
+- Mass assignment con fillable/guarded
+- Timestamps automáticos
+- Mutators y Accessors
+
+### 5. SISTEMA DE COMANDOS CLI
+- Nombre del comando: "maker" (NO artisan como Laravel)
+- Comandos requeridos:
+  * php maker controller ProductController
+  * php maker model Product (crea automáticamente migración base)
+  * php maker migration create_products_table
+  * php maker addfield Product (asistente interactivo para agregar campos)
+  * php maker modifyfield Product email (modificar campo existente)
+  * php maker dropfield Product age (eliminar campo)
+  * php maker describe Product (ver estructura de tabla)
+  * php maker migrate (ejecutar migraciones)
+  * php maker migrate:rollback (revertir migración)
+  * php maker crud Product --with-views (genera controlador, modelo y todas las vistas)
+  * php maker crud Product --api (genera API REST con endpoints JSON)
+  * php maker crud Product --with-views --api (genera ambos: web + API)
+  * php maker crud Product --interactive (asistente completo interactivo)
+
+=== COMANDOS DE CONFIGURACIÓN DE PROYECTO ===
+
+  * php maker project web --only (elimina archivos API, solo web tradicional)
+  * php maker project api --only (elimina archivos web, solo API REST)
+  * php maker project full (restaura funcionalidad completa web + API)
+  * php maker project optimize (limpia archivos no utilizados)
+  * php maker route:list
+  * php maker serve
+
+### 6. SISTEMA DE MIGRACIONES INTERACTIVO
+- Migración automática al crear modelo: php maker model User (crea migración base)
+- Asistente interactivo de campos: php maker addfield User
+  * Pregunta tipo de campo (string, text, integer, decimal, boolean, etc.)
+  * Pregunta longitud, si puede ser NULL, si es único, si tiene índice
+  * Pregunta valor por defecto
+  * Genera Schema Builder automáticamente (NO SQL crudo)
+  * Actualiza automáticamente migración y modelo (fillable)
+- Modificación de campos: php maker modifyfield User email
+- Eliminación de campos: php maker dropfield User age
+- Visualización de estructura: php maker describe User
+- Detección automática de relaciones (foreign_id genera métodos en modelo)
+- Sugerencias inteligentes (email sugiere único e índice)
+- Schema Builder como Laravel: $table->string('name')->unique()->nullable()
+- Cross-database: Mismo código funciona en MySQL, PostgreSQL, SQLite
+- Tipos soportados: id(), string(), text(), integer(), decimal(), boolean(), date(), timestamp(), json(), enum(), foreignId()
+### 7. FUNCIONALIDADES ADICIONALES
+- Variables de entorno con archivo .env
+- Sistema de caché básico
+- Helpers globales (asset(), url(), old(), csrf_token(), etc.)
+- Página de bienvenida automática en la ruta /
+- Sistema de validación básico
+- Manejo de errores
+- Middleware básico
+- Autoloading PSR-4
+
+## ESPECIFICACIONES TÉCNICAS
+
+### Estructura de Carpetas:
+```
+mi-framework/
+├── app/
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Views/
+│   ├── Middleware/
+│   └── Helpers/
+├── core/
+│   ├── Database/
+│   ├── Http/
+│   ├── View/
+│   └── Support/
+├── config/
+├── public/
+├── routes/
+├── storage/
+├── commands/
+└── maker (archivo ejecutable)
+```
+
+### Tecnologías:
+- PHP 8.0+
+- Composer para autoloading
+- PDO para base de datos
+- Motor de plantillas propio (no librerías externas)
+- Variables de entorno con vlucas/phpdotenv
+
+## EJEMPLOS DE FLUJO INTERACTIVO
+
+### Crear modelo con migración:
+```bash
+php maker model User
+```
+
+### Agregar campos interactivamente:
+```bash
+php maker addfield User
+
+# Flujo interactivo:
+Campo #1:
+Nombre del campo: name
+Tipo: 1 (string)
+Longitud [255]: 255
+¿Puede ser NULL? [y/N]: N
+
+Campo #2:
+Nombre del campo: email  
+Tipo: 1 (string)
+Longitud [255]: 255
+¿Puede ser NULL? [y/N]: N
+¿Es único? [y/N]: y
+
+Campo #3:
+Nombre del campo: age
+Tipo: 3 (integer)
+¿Puede ser NULL? [y/N]: y
+¿Valor por defecto? [y/N]: y
+Valor: 0
+
+✅ Migración actualizada automáticamente
+✅ Modelo actualizado (fillable fields)
+```
+
+### Ver estructura:
+```bash
+php maker describe User
+
+| Campo      | Tipo         | NULL | Clave | Default |
+|------------|--------------|------|-------|---------|
+| id         | INT          | NO   | PRI   | AI      |
+| name       | VARCHAR(255) | NO   |       |         |
+| email      | VARCHAR(255) | NO   | UNI   |         |
+| age        | INT          | YES  |       | 0       |
+| created_at | TIMESTAMP    | NO   |       | CURRENT |
+| updated_at | TIMESTAMP    | NO   |       | CURRENT |
+```
+
+### Mapeo automático de modelos:
+```php
+// app/Models/User.php (generado automáticamente)
+class User extends Model {
+    protected $table = 'users'; // Automático: User -> users
+    protected $fillable = ['name', 'email', 'age']; // Auto-generado
+    
+    // Si se detecta category_id, se genera automáticamente:
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+}
+```
+
+### Rutas (routes/web.php):
+```php
+$router->get('/', 'WelcomeController@index');
+$router->get('/productos', 'ProductController@index');
+$router->get('/producto/{id}', 'ProductController@show');
+$router->resource('/products', 'ProductController');
+```
+
+### Controlador:
+```php
+class ProductController extends Controller {
+    public function index() {
+        $products = Product::paginate(10);
+        return $this->view('products.index', compact('products'));
+    }
+}
+```
+
+### Modelo:
+```php
+class Product extends Model {
+    protected $fillable = ['name', 'price', 'description'];
+    
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+}
+```
+
+### Vista (con motor personalizado):
+```php
+@extends('layouts.app')
+
+@section('content')
+<h1>Productos</h1>
+@foreach($products->items() as $product)
+    <div>{{ $product->name }} - ${{ $product->price }}</div>
+@endforeach
+{{ $products->links() }}
+@endsection
+```
+
+### Comandos:
+```bash
+php maker crud Product --with-views
+php maker controller UserController  
+php maker model User
+php maker addfield User --interactive
+```
+
+## CARACTERÍSTICAS ESPECIALES
+
+1. **Paginación como Laravel**: Product::paginate(10) con links() en vistas
+2. **Motor de plantillas compilado**: Cache de vistas compiladas
+3. **Helpers globales**: Disponibles en PHP y vistas
+4. **CRUD automático**: Un comando genera controlador + modelo + vistas
+5. **Página de bienvenida**: Al instalar muestra info del framework
+6. **URLs amigables**: Con .htaccess automático
+
+## PROGRESIÓN DEL DESARROLLO
+
+Implementar en este orden:
+1. Estructura básica y autoloading
+2. Sistema de rutas con parámetros
+3. Controladores y clase base
+4. Motor de plantillas personalizado
+5. Conexión a base de datos
+6. ORM con Active Record
+7. Query Builder y relaciones
+8. Sistema de paginación
+9. Comandos CLI (maker)
+10. Helpers y utilidades
+11. Sistema de caché
+12. Archivos de ejemplo
+
+## OBJETIVOS EDUCATIVOS
+
+- Enseñar cómo funcionan los frameworks internamente
+- Mostrar patrones de diseño (Active Record, MVC, Factory)
+- Explicar autoloading, namespaces y PSR-4
+- Demostrar compilación de plantillas
+- Enseñar construcción de query builders
+- Mostrar implementación de paginación
+
+## DIFERENCIACIÓN
+
+- Motor de plantillas propio (no Twig/Plates)
+- Comando "maker" (no artisan)
+- Enfoque educativo y explicativo
+- Código limpio y comentado
+- Progresión incremental
+
+POR FAVOR, implementa este framework completo siguiendo estas especificaciones exactas. Comienza con la estructura básica y el sistema de rutas.
+
+
+
+================================================================================
+                        5. SISTEMA DE COMANDOS (MAKER)
+================================================================================
+
+El sistema de comandos incluye:
+
+php maker controller ProductController
+php maker model Product
+php maker migration create_products_table
+php maker crud Product --with-views
+php maker route:list
+php maker serve
+php maker install
+
+Comandos disponibles:
+- make:controller - Crear controlador
+- make:model - Crear modelo
+- make:migration - Crear migración
+- make:crud - Crear CRUD completo con vistas
+- route:list - Listar todas las rutas
+- serve - Servidor de desarrollo
+- install - Configuración inicial
+
+================================================================================
+                        6. MOTOR DE PLANTILLAS PERSONALIZADO
+================================================================================
+
+Sintaxis soportada:
+
+Variables:
+{{ $variable }}           // Con escape automático
+{!! $html !!}            // Sin escape
+
+Estructuras de control:
+@if($condicion)
+    <p>Contenido</p>
+@elseif($otra)
+    <p>Otra condición</p>
+@else
+    <p>Por defecto</p>
+@endif
+
+@unless($condicion)
+    <p>Solo si es falso</p>
+@endunless
+
+Loops:
+@foreach($items as $item)
+    <div>{{ $item->nombre }}</div>
+@endforeach
+
+@for($i = 0; $i < 10; $i++)
+    <p>Número: {{ $i }}</p>
+@endfor
+
+@while($condicion)
+    <p>Mientras sea verdadero</p>
+@endwhile
+
+Herencia:
+@extends('layouts.app')
+
+@section('titulo', 'Mi Página')
+
+@section('contenido')
+    <h1>Contenido</h1>
+@endsection
+
+@push('scripts')
+    <script src="app.js"></script>
+@endpush
+
+Inclusiones:
+@include('partials.header')
+@include('partials.sidebar', ['activo' => 'inicio'])
+
+Helpers:
+@isset($variable)
+    <p>Existe</p>
+@endisset
+
+@empty($array)
+    <p>Está vacío</p>
+@endempty
+
+@auth
+    <p>Usuario autenticado</p>
+@endauth
+
+@guest
+    <p>Usuario no autenticado</p>
+@endguest
+
+Helpers de vistas:
+@asset('css/app.css')
+@url('productos')
+@csrf
+@method('PUT')
+
+================================================================================
+                        7. ORM COMPLETO CON PAGINACIÓN
+================================================================================
+
+Funcionalidades del ORM:
+
+=== Consultas Básicas ===
+$users = User::all();
+$user = User::find(1);
+$users = User::where('active', 1)->get();
+$user = User::where('email', 'user@example.com')->first();
+
+=== Creación y Actualización ===
+$user = User::create([
+    'name' => 'Juan',
+    'email' => 'juan@example.com'
+]);
+
+$user = User::find(1);
+$user->name = 'Juan Carlos';
+$user->save();
+
+$user->update(['name' => 'Juan Carlos']);
+
+=== Eliminación ===
+$user = User::find(1);
+$user->delete();
+
+User::where('active', 0)->delete();
+
+=== Relaciones ===
+class User extends Model {
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+}
+
+class Post extends Model {
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function categories() {
+        return $this->belongsToMany(Category::class);
+    }
+}
+
+// Uso
+$user = User::find(1);
+$posts = $user->posts()->get();
+$post = Post::find(1);
+$author = $post->user()->first();
+
+=== Paginación ===
+$users = User::paginate(10);
+$posts = Post::where('published', 1)->paginate(15);
+
+// En la vista
+@foreach($users->items() as $user)
+    <div>{{ $user->name }}</div>
+@endforeach
+
+{{ $users->links() }}
+
+=== Query Builder Avanzado ===
+$results = User::query()
+    ->select(['users.*', 'profiles.avatar'])
+    ->join('profiles', 'users.id', '=', 'profiles.user_id')
+    ->where('users.active', 1)
+    ->where('users.created_at', '>', '2023-01-01')
+    ->whereIn('users.role', ['admin', 'editor'])
+    ->orderBy('users.created_at', 'desc')
+    ->limit(50)
+    ->get();
+
+================================================================================
+                            8. HELPERS GLOBALES
+================================================================================
+
+Los helpers incluyen:
+
+=== URL y Assets ===
+asset('css/app.css')                    // /assets/css/app.css
+url('productos')                        // /productos
+route('productos.show', ['id' => 1])   // /productos/1
+
+=== Formularios ===
+csrf_field()                            // <input type="hidden" name="_token" value="...">
+method_field('PUT')                     // <input type="hidden" name="_method" value="PUT">
+old('nombre', 'default')                // Valor anterior del formulario
+
+=== Autenticación ===
+auth()                                  // Usuario autenticado
+auth()->id                             // ID del usuario
+auth()->name                           // Nombre del usuario
+
+=== Utilidades ===
+str_slug('Mi Título')                   // mi-titulo
+str_limit($texto, 100)                  // Texto limitado
+carbon('2023-01-01')                    // Instancia de fecha
+dd($variable)                           // Debug y salir
+config('app.name')                      // Configuración
+env('APP_DEBUG')                        // Variable de entorno
+collect([1, 2, 3])                      // Colección
+
+================================================================================
+                            9. COMANDOS DE INSTALACIÓN
+================================================================================
+
+=== Instalación paso a paso ===
+
+1. Clonar o crear el proyecto:
+mkdir mi-framework
+cd mi-framework
+
+2. Crear composer.json (ver sección 3)
+
+3. Instalar dependencias:
+composer install
+
+4. Crear archivo .env:
+cp .env.example .env
+
+5. Configurar base de datos en .env
+
+6. Crear estructura inicial:
+php maker install
+
+7. Configurar servidor web:
+
+Opción 1 - Servidor PHP integrado:
+cd public
+php -S localhost:8000
+
+Opción 2 - Apache/Nginx:
+DocumentRoot: /ruta/al/proyecto/public
+
+8. Crear primera migración:
+php maker migration create_users_table
+
+9. Crear primer modelo y controlador:
+php maker model User
+php maker controller UserController
+
+10. Crear CRUD completo:
+php maker crud Product --with-views
+
+================================================================================
+                            10. GUÍA DE USO COMPLETA
+================================================================================
+
+=== Crear un módulo completo ===
+
+1. Generar CRUD:
+php maker crud Product --with-views
+
+2. Esto crea:
+- app/Controllers/ProductController.php
+- app/Models/Product.php
+- app/Views/products/index.php
+- app/Views/products/show.php
+- app/Views/products/create.php
+- app/Views/products/edit.php
+- Rutas en routes/web.php
+
+3. Configurar base de datos:
+php maker migration create_products_table
+
+=== Ejemplo de migración ===
+// database/migrations/xxxx_create_products_table.php
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2),
+    category_id INT,
+    slug VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+=== Ejemplo de modelo ===
+// app/Models/Product.php
+class Product extends Model {
+    protected $fillable = ['name', 'description', 'price', 'category_id'];
+    
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+}
+
+=== Ejemplo de controlador ===
+// app/Controllers/ProductController.php
+class ProductController extends Controller {
+    public function index() {
+        $products = Product::paginate(10);
+        return $this->view('products.index', compact('products'));
+    }
+    
+    public function store() {
+        $product = Product::create(request()->all());
+        return $this->redirect(url('products'));
+    }
+}
+
+=== Ejemplo de vista ===
+// app/Views/products/index.php
+@extends('layouts.app')
+
+@section('content')
+<h1>Productos</h1>
+
+@foreach($products->items() as $product)
+    <div class="card">
+        <h3>{{ $product->name }}</h3>
+        <p>{{ $product->description }}</p>
+        <span>${{ $product->price }}</span>
+    </div>
+@endforeach
+
+{{ $products->links() }}
+@endsection
+
+=== Ejemplo de rutas ===
+// routes/web.php
+$router->get('/', 'WelcomeController@index');
+$router->get('/products', 'ProductController@index');
+$router->post('/products', 'ProductController@store');
+$router->get('/products/{id}', 'ProductController@show');
+
+================================================================================
+                            CARACTERÍSTICAS AVANZADAS
+================================================================================
+
+=== Middleware ===
+class AuthMiddleware {
+    public function handle($request, $next) {
+        if (!auth()) {
+            return redirect('/login');
+        }
+        return $next($request);
+    }
+}
+
+=== Validación ===
+$validator = Validator::make(request()->all(), [
+    'name' => 'required|max:255',
+    'email' => 'required|email|unique:users'
+]);
+
+=== Cache ===
+Cache::put('products', $products, 3600);
+$products = Cache::get('products');
+
+=== Colecciones ===
+$collection = collect([1, 2, 3, 4, 5]);
+$filtered = $collection->filter(function ($item) {
+    return $item > 2;
+});
+
+================================================================================
+                            CONCLUSIÓN
+================================================================================
+
+Este framework incluye todas las características modernas de un framework PHP:
+
+✅ MVC completo
+✅ ORM con relaciones
+✅ Sistema de plantillas
+✅ Paginación
+✅ Comandos CLI
+✅ Routing dinámico
+✅ Helpers útiles
+✅ Sistema de caché
+✅ Validación
+✅ Middleware
+
+Es perfecto para:
+- Aprender desarrollo de frameworks
+- Proyectos educativos
+- Aplicaciones pequeñas a medianas
+- Base para frameworks más complejos
+
+Para soporte o preguntas, revisar la documentación en cada archivo.
+
+================================================================================
+                    SISTEMA DE MIGRACIONES INTERACTIVO COMPLETO
+================================================================================
+
+=== FLUJO DE TRABAJO COMPLETO ===
+
+1. CREAR MODELO CON MIGRACIÓN AUTOMÁTICA:
+   php maker model User
+   
+   Esto crea automáticamente:
+   - app/Models/User.php
+   - database/migrations/2025_10_28_143022_create_users_table.php (con estructura base)
+
+2. AGREGAR CAMPOS INTERACTIVAMENTE:
+   php maker addfield User
+   
+   Flujo interactivo paso a paso:
+   ====================================================
+            AGREGAR CAMPOS A LA TABLA: users
+   ====================================================
+   
+   Campo #1:
+   Nombre del campo: name
+   Tipo de dato:
+     1) string (VARCHAR)
+     2) text (TEXT)
+     3) integer (INT)
+     4) decimal (DECIMAL)
+     5) boolean (BOOLEAN)
+     6) date (DATE)
+     7) timestamp (TIMESTAMP)
+     8) json (JSON)
+     9) enum (ENUM)
+     10) foreign_id (FOREIGN KEY)
+   Seleccione tipo [1-10]: 1
+   
+   Longitud (para VARCHAR) [255]: 255
+   ¿Puede ser NULL? [y/N]: N
+   ¿Es único? [y/N]: N
+   ¿Tiene índice? [y/N]: N
+   
+   Campo agregado: name (Schema Builder: $table->string('name'))
+   
+   ¿Agregar otro campo? [y/N]: y
+   
+   Campo #2:
+   Nombre del campo: email
+   Tipo de dato [1-10]: 1
+   Longitud [255]: 255
+   ¿Puede ser NULL? [y/N]: N
+   ¿Es único? [y/N]: y
+   ¿Tiene índice? [y/N]: y
+   
+   Campo agregado: email (Schema Builder: $table->string('email')->unique())
+   
+   ¿Agregar otro campo? [y/N]: y
+   
+   Campo #3:
+   Nombre del campo: category_id
+   Tipo de dato [1-10]: 10
+   ¿Tabla relacionada? [categories]: categories
+   ¿Campo relacionado? [id]: id
+   ¿Cascada al eliminar? [y/N]: y
+   
+   Campo agregado: category_id (Schema Builder: $table->foreignId('category_id')->constrained()->onDelete('cascade'))
+   Relación agregada al modelo: belongsTo(Category::class)
+   
+   ¿Agregar otro campo? [y/N]: n
+   
+   ====================================================
+                RESUMEN DE CAMPOS AGREGADOS
+   ====================================================
+   - name: $table->string('name')
+   - email: $table->string('email')->unique()
+   - category_id: $table->foreignId('category_id')->constrained()->onDelete('cascade')
+   
+   ¿Confirmar cambios? [Y/n]: y
+   
+   ✅ Migración actualizada: create_users_table.php (con Schema Builder)
+   ✅ Modelo actualizado: User.php (fillable y relaciones)
+
+3. OTROS COMANDOS ÚTILES:
+
+   # Ver estructura de tabla
+   php maker describe User
+   
+   # Modificar campo existente
+   php maker modifyfield User email
+   
+   # Eliminar campo
+   php maker dropfield User age
+   
+   # Ejecutar migraciones
+   php maker migrate
+   
+   # Revertir última migración
+   php maker migrate:rollback
+
+=== ARCHIVOS GENERADOS CON SCHEMA BUILDER ===
+
+Migración actualizada con Schema Builder (NO SQL crudo):
+// database/migrations/2025_10_28_143022_create_users_table.php
+<?php
+
+use Core\\Database\\Schema;
+use Core\\Database\\Blueprint;
+
+class CreateUsersTable
+{
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->integer('age')->nullable()->default(0);
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+}
+
+Modelo actualizado automáticamente:
+// app/Models/User.php
+<?php
+
+namespace App\\Models;
+
+use Core\\Database\\Model;
+
+class User extends Model
+{
+    protected $table = 'users';
+    
+    // Fillable generado automáticamente
+    protected $fillable = [
+        'name',
+        'email',
+        'category_id'
+    ];
+    
+    // Relaciones generadas automáticamente
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    
+    // Validaciones sugeridas
+    protected $rules = [
+        'name' => 'required|max:255',
+        'email' => 'required|email|unique:users',
+        'category_id' => 'required|exists:categories,id'
+    ];
+}
+
+=== DETECCIÓN INTELIGENTE DE RELACIONES ===
+
+Al agregar campos tipo foreign_id, el sistema:
+1. Detecta automáticamente la tabla relacionada
+2. Genera el método de relación en el modelo
+3. Añade la foreign key constraint en la migración
+4. Sugiere validaciones apropiadas
+
+Ejemplo: category_id genera automáticamente:
+- Constraint FK en migración
+- Método category() en modelo User
+- Validación exists:categories,id
+
+=== TIPOS DE DATOS SOPORTADOS ===
+
+1. string(length)     - VARCHAR con longitud específica
+2. text              - TEXT para contenido largo
+3. longtext          - LONGTEXT para contenido muy largo
+4. integer           - INT estándar
+5. bigint            - BIGINT para números grandes
+6. decimal(p,s)      - DECIMAL con precisión y escala
+7. float             - FLOAT para decimales
+8. boolean           - BOOLEAN (0/1)
+9. date              - DATE (YYYY-MM-DD)
+10. datetime         - DATETIME completo
+11. timestamp        - TIMESTAMP con zona horaria
+12. json             - JSON (MySQL 5.7+)
+13. enum(values)     - ENUM con valores específicos
+14. foreign_id       - INT + Foreign Key constraint
+
+=== COMANDO CRUD COMPLETO ===
+
+php maker crud Product --interactive
+
+Esto ejecuta el asistente completo:
+1. Crea modelo base
+2. Abre asistente de campos
+3. Genera migración completa
+4. Crea controlador CRUD
+5. Genera todas las vistas
+6. Añade rutas automáticamente
+
+Todo en un solo comando con asistencia interactiva.
+
+================================================================================
+                        SCHEMA BUILDER COMPLETO COMO LARAVEL
+================================================================================
+
+=== VENTAJAS DEL SCHEMA BUILDER SOBRE SQL CRUDO ===
+
+✅ Más educativo: Los estudiantes aprenden API PHP moderna
+✅ Más legible: $table->string('name') vs name VARCHAR(255)
+✅ Cross-database: Funciona en MySQL, PostgreSQL, SQLite
+✅ Validación automática: El builder valida tipos y opciones
+✅ Intellisense: Autocompletado completo en IDEs
+✅ Menos errores: No errores de sintaxis SQL
+✅ Modificadores encadenados: ->nullable()->unique()->default()
+
+=== MÉTODOS DEL SCHEMA BUILDER ===
+
+Tipos de columnas básicos:
+$table->id();                                    // BIGINT AUTO_INCREMENT PRIMARY KEY
+$table->string('name', 255);                     // VARCHAR(255)
+$table->string('email');                         // VARCHAR(255) default
+$table->text('description');                     // TEXT
+$table->longText('content');                     // LONGTEXT
+$table->integer('age');                          // INT
+$table->bigInteger('views');                     // BIGINT
+$table->decimal('price', 8, 2);                  // DECIMAL(8,2)
+$table->float('rating', 3, 1);                   // FLOAT(3,1)
+$table->double('latitude');                      // DOUBLE
+$table->boolean('active');                       // BOOLEAN
+$table->date('birth_date');                      // DATE
+$table->datetime('published_at');                // DATETIME
+$table->timestamp('created_at');                 // TIMESTAMP
+$table->time('start_time');                      // TIME
+$table->year('graduation_year');                 // YEAR
+$table->json('metadata');                        // JSON
+$table->enum('status', ['active', 'inactive']);  // ENUM
+$table->timestamps();                            // created_at y updated_at
+
+Modificadores de columnas:
+$table->string('email')->nullable();             // Permite NULL
+$table->string('slug')->unique();                // Índice único
+$table->integer('sort_order')->default(0);       // Valor por defecto
+$table->string('title')->index();                // Índice normal
+$table->text('content')->fulltext();             // Índice fulltext
+$table->string('name')->comment('User name');    // Comentario de columna
+$table->integer('age')->unsigned();              // Sin signo (solo números positivos)
+
+Foreign Keys y relaciones:
+$table->foreignId('user_id')->constrained();                           // FK a users.id
+$table->foreignId('category_id')->constrained('categories');           // FK específica
+$table->foreignId('author_id')->constrained('users', 'id');           // FK con tabla y campo
+$table->foreign('user_id')->references('id')->on('users');            // FK manual
+$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+$table->foreign('user_id')->references('id')->on('users')->onUpdate('restrict');
+
+=== FLUJO INTERACTIVO CON SCHEMA BUILDER ===
+
+Cuando el usuario selecciona tipos, el sistema genera Schema Builder:
+
+Campo: email
+Tipo: string
+Único: sí
+NULL: no
+→ Genera: $table->string('email')->unique();
+
+Campo: price  
+Tipo: decimal
+Precisión: 8
+Escala: 2
+NULL: sí
+Default: 0.00
+→ Genera: $table->decimal('price', 8, 2)->nullable()->default(0.00);
+
+Campo: category_id
+Tipo: foreign_id
+Tabla: categories
+Cascada: sí
+→ Genera: $table->foreignId('category_id')->constrained()->onDelete('cascade');
+
+=== EJEMPLO COMPLETO DE MIGRACIÓN GENERADA ===
+
+// Resultado del asistente interactivo
+use Core\Database\Schema;
+use Core\Database\Blueprint;
+
+class CreateProductsTable
+{
+    public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->integer('stock')->default(0);
+            $table->boolean('active')->default(true);
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->json('attributes')->nullable();
+            $table->timestamp('published_at')->nullable();
+            $table->timestamps();
+            
+            // Índices adicionales
+            $table->index(['category_id', 'active']);
+            $table->fulltext(['name', 'description']);
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('products');
+    }
+}
+
+=== IMPLEMENTACIÓN DE BLUEPRINT CLASS ===
+
+El framework incluirá una clase Blueprint que traduce métodos PHP a SQL:
+
+class Blueprint
+{
+    protected $table;
+    protected $columns = [];
+    protected $indexes = [];
+    
+    public function string($name, $length = 255)
+    {
+        return $this->addColumn('string', $name, compact('length'));
+    }
+    
+    public function foreignId($name)
+    {
+        return $this->addColumn('foreignId', $name, [])
+                   ->constrained();
+    }
+    
+    // Métodos encadenables
+    public function nullable($value = true)
+    {
+        return $this->setModifier('nullable', $value);
+    }
+    
+    public function unique($value = true)
+    {
+        return $this->setModifier('unique', $value);
+    }
+    
+    public function default($value)
+    {
+        return $this->setModifier('default', $value);
+    }
+}
+
+El Schema Builder es MUCHÍSIMO mejor para el curso educativo porque:
+- Los estudiantes aprenden API moderna de PHP
+- Es más fácil de usar que SQL crudo  
+- Menos propenso a errores
+- Cross-database compatibility
+- Intellisense completo
+- Más profesional y moderno
+
+================================================================================
+                            FIN DEL DOCUMENTO COMPLETO
+================================================================================
+
+================================================================================
+                        SISTEMA DE API REST CON CORS
+================================================================================
+
+=== NUEVAS CARACTERÍSTICAS DE API ===
+
+✅ Generación automática de API con --api flag
+✅ Rutas API separadas en routes/api.php
+✅ Controladores API con respuestas JSON estándar
+✅ CORS configurado para conexiones cross-origin
+✅ Middleware CORS configurable
+✅ Respuestas HTTP con códigos de estado apropiados
+✅ Soporte para aplicaciones JavaScript/móviles
+
+=== COMANDOS API EXTENDIDOS ===
+
+php maker crud Product --api
+→ Genera SOLO API (controlador API + rutas API)
+
+php maker crud Product --with-views --api  
+→ Genera WEB + API (controlador web + controlador API + vistas + rutas)
+
+### RUTAS API SEPARADAS
+
+**routes/api.php**
+```php
+<?php
+// En proyecto API-only: métodos normales agregan /api/ automáticamente
+// En proyecto FULL: usar métodos apiGet(), apiPost(), etc.
+$router->get('/products', 'Api\ProductController@index');
+$router->get('/products/{id}', 'Api\ProductController@show');
+$router->post('/products', 'Api\ProductController@store');
+$router->put('/products/{id}', 'Api\ProductController@update');
+$router->delete('/products/{id}', 'Api\ProductController@destroy');
+```
+
+### CONTROLADOR API BASE
+
+**core/Controller/ApiController.php**
+```php
+<?php
+namespace Core\Controller;
+
+class ApiController extends Controller {
+    protected $cors = true;
+    
+    public function __construct() {
+        $this->setCorsHeaders();
+    }
+    
+    protected function setCorsHeaders() {
+        if ($this->cors) {
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+            header('Content-Type: application/json');
+            
+            // Responder a preflight requests
+            if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+                http_response_code(200);
+                exit();
+            }
+        }
+    }
+    
+    protected function jsonResponse($data, $status = 200) {
+        http_response_code($status);
+        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+    
+    protected function errorResponse($message, $status = 400) {
+        $this->jsonResponse([
+            'error' => true,
+            'message' => $message
+        ], $status);
+    }
+    
+    protected function successResponse($data, $message = 'Success') {
+        $this->jsonResponse([
+            'success' => true,
+            'message' => $message,
+            'data' => $data
+        ]);
+    }
+}
+```
+
+### CONTROLADOR API ESPECÍFICO
+
+**app/Controllers/Api/ProductController.php**
+```php
+<?php
+namespace App\Controllers\Api;
+
+use Core\Controller\ApiController;
+use App\Models\Product;
+
+class ProductController extends ApiController {
+    
+    public function index() {
+        try {
+            $products = Product::paginate(10);
+            $this->successResponse($products);
+        } catch (Exception $e) {
+            $this->errorResponse('Error al obtener productos: ' . $e->getMessage(), 500);
+        }
+    }
+    
+    public function show($id) {
+        try {
+            $product = Product::find($id);
+            if (!$product) {
+                $this->errorResponse('Producto no encontrado', 404);
+            }
+            $this->successResponse($product);
+        } catch (Exception $e) {
+            $this->errorResponse('Error al obtener producto: ' . $e->getMessage(), 500);
+        }
+    }
+    
+    public function store() {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            if (!$data) {
+                $this->errorResponse('Datos JSON requeridos', 400);
+            }
+            
+            $product = Product::create($data);
+            $this->successResponse($product, 'Producto creado exitosamente');
+            
+        } catch (Exception $e) {
+            $this->errorResponse('Error al crear producto: ' . $e->getMessage(), 500);
+        }
+    }
+    
+    public function update($id) {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            if (!$data) {
+                $this->errorResponse('Datos JSON requeridos', 400);
+            }
+            
+            $product = Product::find($id);
+            if (!$product) {
+                $this->errorResponse('Producto no encontrado', 404);
+            }
+            
+            $product->update($data);
+            $this->successResponse($product, 'Producto actualizado exitosamente');
+            
+        } catch (Exception $e) {
+            $this->errorResponse('Error al actualizar producto: ' . $e->getMessage(), 500);
+        }
+    }
+    
+    public function destroy($id) {
+        try {
+            $product = Product::find($id);
+            if (!$product) {
+                $this->errorResponse('Producto no encontrado', 404);
+            }
+            
+            $product->delete();
+            $this->successResponse(null, 'Producto eliminado exitosamente');
+            
+        } catch (Exception $e) {
+            $this->errorResponse('Error al eliminar producto: ' . $e->getMessage(), 500);
+        }
+    }
+}
+```
+
+### ROUTER CON SOPORTE API
+
+**core/Router.php** (actualización)
+```php
+<?php
+namespace Core;
+
+class Router {
+    private $routes = [];
+    private $apiRoutes = [];
+    
+    public function loadWebRoutes() {
+        require_once 'routes/web.php';
+    }
+    
+    public function loadApiRoutes() {
+        require_once 'routes/api.php';
+    }
+    
+    // Métodos para rutas API
+    public function apiGet($uri, $action) {
+        $this->apiRoutes['GET']['/api' . $uri] = $action;
+    }
+    
+    public function apiPost($uri, $action) {
+        $this->apiRoutes['POST']['/api' . $uri] = $action;
+    }
+    
+    public function apiPut($uri, $action) {
+        $this->apiRoutes['PUT']['/api' . $uri] = $action;
+    }
+    
+    public function apiDelete($uri, $action) {
+        $this->apiRoutes['DELETE']['/api' . $uri] = $action;
+    }
+    
+    public function resolve() {
+        $uri = $_SERVER['REQUEST_URI'];
+        $method = $_SERVER['REQUEST_METHOD'];
+        
+        // Buscar en rutas API primero
+        if (strpos($uri, '/api/') === 0) {
+            return $this->resolveApiRoute($uri, $method);
+        }
+        
+        // Buscar en rutas web
+        return $this->resolveWebRoute($uri, $method);
+    }
+    
+    private function resolveApiRoute($uri, $method) {
+        foreach ($this->apiRoutes[$method] ?? [] as $route => $action) {
+            if ($this->matchRoute($route, $uri)) {
+                return $this->executeAction($action, $uri, $route);
+            }
+        }
+        
+        // API route not found
+        http_response_code(404);
+        echo json_encode(['error' => 'API endpoint not found']);
+        exit();
+    }
+}
+```
+
+### CONFIGURACIÓN CORS AVANZADA
+
+**config/cors.php**
+```php
+<?php
+return [
+    'enabled' => true,
+    'allowed_origins' => ['*'], // ['http://localhost:3000', 'https://miapp.com']
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    'allowed_headers' => ['Content-Type', 'Authorization', 'X-Requested-With'],
+    'allow_credentials' => false,
+    'max_age' => 86400 // 24 horas
+];
+```
+
+### MIDDLEWARE CORS
+
+**core/Middleware/CorsMiddleware.php**
+```php
+<?php
+namespace Core\Middleware;
+
+class CorsMiddleware {
+    
+    public static function handle() {
+        $config = require 'config/cors.php';
+        
+        if (!$config['enabled']) {
+            return;
+        }
+        
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+        
+        // Verificar origen permitido
+        if ($config['allowed_origins'] !== ['*']) {
+            if (!in_array($origin, $config['allowed_origins'])) {
+                $origin = 'null';
+            }
+        }
+        
+        header("Access-Control-Allow-Origin: {$origin}");
+        header("Access-Control-Allow-Methods: " . implode(', ', $config['allowed_methods']));
+        header("Access-Control-Allow-Headers: " . implode(', ', $config['allowed_headers']));
+        
+        if ($config['allow_credentials']) {
+            header("Access-Control-Allow-Credentials: true");
+        }
+        
+        header("Access-Control-Max-Age: {$config['max_age']}");
+        
+        // Responder a preflight OPTIONS
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit();
+        }
+    }
+}
+```
+
+### BOOTSTRAP CON API
+
+**public/index.php** (actualización)
+```php
+<?php
+require_once '../vendor/autoload.php';
+
+use Core\Router;
+use Core\Middleware\CorsMiddleware;
+
+// Aplicar CORS si es una ruta API
+if (strpos($_SERVER['REQUEST_URI'], '/api/') === 0) {
+    CorsMiddleware::handle();
+}
+
+$router = new Router();
+
+// Cargar rutas
+$router->loadWebRoutes();
+$router->loadApiRoutes();
+
+// Resolver ruta
+$router->resolve();
+```
+
+### COMANDO MAKER EXTENDIDO
+
+**commands/MakeCrudCommand.php** (con --api)
+```php
+<?php
+namespace Commands;
+
+class MakeCrudCommand extends Command {
+    
+    public function execute($args) {
+        $name = $args[0] ?? null;
+        $withViews = in_array('--with-views', $args);
+        $withApi = in_array('--api', $args);
+        $interactive = in_array('--interactive', $args);
+        
+        if (!$name) {
+            echo "Uso: php maker crud <NombreModelo> [--with-views] [--api] [--interactive]\n";
+            return;
+        }
+        
+        if ($interactive) {
+            $this->interactiveMode($name);
+        }
+        
+        // Crear modelo
+        $this->createModel($name);
+        
+        // Crear controlador web
+        if ($withViews || !$withApi) {
+            $this->createController($name);
+        }
+        
+        // Crear controlador API
+        if ($withApi) {
+            $this->createApiController($name);
+            $this->createApiRoutes($name);
+        }
+        
+        // Crear vistas
+        if ($withViews) {
+            $this->createViews($name);
+        }
+        
+        echo "CRUD generado exitosamente para {$name}\n";
+        
+        if ($withApi) {
+            echo "API endpoints disponibles en:\n";
+            echo "GET    /api/" . strtolower($name) . "s\n";
+            echo "GET    /api/" . strtolower($name) . "s/{id}\n";
+            echo "POST   /api/" . strtolower($name) . "s\n";
+            echo "PUT    /api/" . strtolower($name) . "s/{id}\n";
+            echo "DELETE /api/" . strtolower($name) . "s/{id}\n";
+        }
+    }
+    
+    private function createApiController($name) {
+        $template = file_get_contents(__DIR__ . '/stubs/api-controller.stub');
+        $content = str_replace([
+            '{{ClassName}}',
+            '{{ModelName}}',
+            '{{VariableName}}',
+            '{{TableName}}'
+        ], [
+            $name,
+            $name,
+            strtolower($name),
+            strtolower($name) . 's'
+        ], $template);
+        
+        $directory = "app/Controllers/Api";
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+        
+        file_put_contents("{$directory}/{$name}Controller.php", $content);
+    }
+    
+    private function createApiRoutes($name) {
+        $routeName = strtolower($name) . 's';
+        $controllerName = "Api\\{$name}Controller";
+        
+        // Detectar tipo de proyecto para generar rutas apropiadas
+        $projectConfig = $this->getProjectConfig();
+        
+        $routes = "\n// {$name} API routes\n";
+        
+        if ($projectConfig['project_type'] === 'api') {
+            // En proyecto API-only: métodos normales agregan /api/ automáticamente
+            $routes .= "\$router->get('/{$routeName}', '{$controllerName}@index');\n";
+            $routes .= "\$router->get('/{$routeName}/{id}', '{$controllerName}@show');\n";
+            $routes .= "\$router->post('/{$routeName}', '{$controllerName}@store');\n";
+            $routes .= "\$router->put('/{$routeName}/{id}', '{$controllerName}@update');\n";
+            $routes .= "\$router->delete('/{$routeName}/{id}', '{$controllerName}@destroy');\n";
+        } else {
+            // En proyecto FULL: usar métodos específicos de API
+            $routes .= "\$router->apiGet('/{$routeName}', '{$controllerName}@index');\n";
+            $routes .= "\$router->apiGet('/{$routeName}/{id}', '{$controllerName}@show');\n";
+            $routes .= "\$router->apiPost('/{$routeName}', '{$controllerName}@store');\n";
+            $routes .= "\$router->apiPut('/{$routeName}/{id}', '{$controllerName}@update');\n";
+            $routes .= "\$router->apiDelete('/{$routeName}/{id}', '{$controllerName}@destroy');\n";
+        }
+        
+        // Agregar al archivo api.php
+        if (!file_exists('routes/api.php')) {
+            file_put_contents('routes/api.php', "<?php\n" . $routes);
+        } else {
+            file_put_contents('routes/api.php', $routes, FILE_APPEND);
+        }
+    }
+}
+```
+
+## EJEMPLOS DE USO API CON CORS
+
+### JavaScript Frontend (React/Vue/Angular)
+```javascript
+// GET todos los productos
+fetch('http://localhost:8000/api/products')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+// POST crear producto
+fetch('http://localhost:8000/api/products', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        name: 'Producto nuevo',
+        price: 29.99
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+
+### React con axios
+```javascript
+// Configuración axios con CORS
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: 'http://localhost:8000/api',
+    headers: {
+        'Content-Type': 'application/json',
+    }
+});
+
+// Usar en componentes
+const products = await api.get('/products');
+const newProduct = await api.post('/products', productData);
+```
+
+### Aplicación móvil
+```javascript
+// React Native / Flutter / Ionic
+const API_BASE = 'http://192.168.1.100:8000/api';
+
+fetch(`${API_BASE}/products`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+
+### RESPUESTAS JSON ESTÁNDAR
+
+**Éxito:**
+```json
+{
+    "success": true,
+    "message": "Producto creado exitosamente",
+    "data": {
+        "id": 1,
+        "name": "Producto",
+        "price": 29.99
+    }
+}
+```
+
+**Error:**
+```json
+{
+    "error": true,
+    "message": "Producto no encontrado"
+}
+```
+
+**Lista con paginación:**
+```json
+{
+    "success": true,
+    "message": "Success",
+    "data": {
+        "items": [...],
+        "pagination": {
+            "current_page": 1,
+            "total_pages": 5,
+            "total_items": 48,
+            "per_page": 10
+        }
+    }
+}
+```
+
+=== VENTAJAS DEL SISTEMA API ===
+
+✅ **Cross-Origin**: CORS configurado para conectar desde cualquier frontend
+✅ **Separación clara**: Rutas API separadas de rutas web
+✅ **Respuestas estándar**: JSON con formato consistente
+✅ **Códigos HTTP**: 200, 404, 500 apropiados para cada caso
+✅ **Manejo de errores**: Try/catch con respuestas JSON de error
+✅ **Preflight OPTIONS**: Soporte completo para peticiones complejas
+✅ **Configuración flexible**: CORS configurable por dominio
+✅ **Generación automática**: Comando --api crea todo automáticamente
+
+## COMANDOS DE CONFIGURACIÓN DE PROYECTO
+
+### 21. Comando de optimización de proyecto
+
+**commands/MakeProjectCommand.php**
+```php
+<?php
+namespace Commands;
+
+class MakeProjectCommand extends Command {
+    
+    public function execute($args) {
+        $type = $args[0] ?? null;
+        $only = in_array('--only', $args);
+        
+        switch ($type) {
+            case 'web':
+                if ($only) {
+                    $this->convertToWebOnly();
+                } else {
+                    $this->enableWebFeatures();
+                }
+                break;
+                
+            case 'api':
+                if ($only) {
+                    $this->convertToApiOnly();
+                } else {
+                    $this->enableApiFeatures();
+                }
+                break;
+                
+            case 'full':
+                $this->enableFullFeatures();
+                break;
+                
+            case 'optimize':
+                $this->optimizeProject();
+                break;
+                
+            default:
+                $this->showHelp();
+                break;
+        }
+    }
+    
+    private function convertToWebOnly() {
+        echo "🔄 Convirtiendo proyecto a WEB ONLY...\n\n";
+        
+        // 1. Eliminar archivos API
+        $apiFiles = [
+            'routes/api.php',
+            'app/Controllers/Api/',
+            'core/Controller/ApiController.php',
+            'core/Middleware/CorsMiddleware.php',
+            'config/cors.php'
+        ];
+        
+        foreach ($apiFiles as $file) {
+            $this->removeFileOrDirectory($file);
+        }
+        
+        // 2. Limpiar Router de métodos API
+        $this->cleanRouterForWeb();
+        
+        // 3. Limpiar index.php de CORS
+        $this->cleanIndexForWeb();
+        
+        // 4. Actualizar composer.json
+        $this->updateComposerForWeb();
+        
+        // 5. Crear .project-config
+        $this->createProjectConfig('web');
+        
+        echo "✅ Proyecto convertido a WEB ONLY\n";
+        echo "📦 Archivos eliminados: API controllers, CORS, rutas API\n";
+        echo "🎯 Proyecto optimizado para aplicaciones web tradicionales\n\n";
+        
+        echo "Comandos disponibles:\n";
+        echo "  php maker crud Product --with-views (solo web)\n";
+        echo "  php maker project full (restaurar API)\n";
+    }
+    
+    private function convertToApiOnly() {
+        echo "🔄 Convirtiendo proyecto a API ONLY...\n\n";
+        
+        // 1. Eliminar archivos WEB
+        $webFiles = [
+            'routes/web.php',
+            'app/Controllers/' => ['*.php', '!Api/'],
+            'app/Views/',
+            'core/View/',
+            'core/BladeEngine.php',
+            'public/assets/',
+            'resources/views/'
+        ];
+        
+        foreach ($webFiles as $file => $pattern) {
+            if (is_array($pattern)) {
+                $this->removeWebControllers();
+            } else {
+                $this->removeFileOrDirectory($file);
+            }
+        }
+        
+        // 2. Simplificar Router solo para API
+        $this->createApiOnlyRouter();
+        
+        // 3. Simplificar index.php para API
+        $this->createApiOnlyIndex();
+        
+        // 4. Actualizar composer.json
+        $this->updateComposerForApi();
+        
+        // 5. Crear .project-config
+        $this->createProjectConfig('api');
+        
+        echo "✅ Proyecto convertido a API ONLY\n";
+        echo "📦 Archivos eliminados: Views, BladeEngine, assets, web controllers\n";
+        echo "🎯 Proyecto optimizado para API REST pura\n\n";
+        
+        echo "Comandos disponibles:\n";
+        echo "  php maker crud Product --api (solo API)\n";
+        echo "  php maker project full (restaurar WEB)\n";
+    }
+    
+    private function enableFullFeatures() {
+        echo "🔄 Restaurando funcionalidad completa WEB + API...\n\n";
+        
+        // 1. Crear archivos WEB si no existen
+        $this->createWebFiles();
+        
+        // 2. Crear archivos API si no existen
+        $this->createApiFiles();
+        
+        // 3. Restaurar Router completo
+        $this->createFullRouter();
+        
+        // 4. Restaurar index.php completo
+        $this->createFullIndex();
+        
+        // 5. Actualizar composer.json completo
+        $this->updateComposerForFull();
+        
+        // 6. Crear .project-config
+        $this->createProjectConfig('full');
+        
+        echo "✅ Funcionalidad completa restaurada\n";
+        echo "🌐 WEB: Vistas, controladores, assets\n";
+        echo "🚀 API: Endpoints REST, CORS, JSON\n\n";
+        
+        echo "Comandos disponibles:\n";
+        echo "  php maker crud Product --with-views (web)\n";
+        echo "  php maker crud Product --api (api)\n";
+        echo "  php maker crud Product --with-views --api (ambos)\n";
+    }
+    
+    private function optimizeProject() {
+        echo "🔄 Optimizando proyecto...\n\n";
+        
+        $config = $this->getProjectConfig();
+        
+        // Analizar archivos no utilizados
+        $unusedFiles = $this->findUnusedFiles($config);
+        
+        if (empty($unusedFiles)) {
+            echo "✅ Proyecto ya está optimizado\n";
+            return;
+        }
+        
+        echo "📋 Archivos no utilizados encontrados:\n";
+        foreach ($unusedFiles as $file) {
+            echo "  - {$file}\n";
+        }
+        
+        echo "\n¿Eliminar archivos no utilizados? (y/n): ";
+        $confirm = trim(fgets(STDIN));
+        
+        if (strtolower($confirm) === 'y') {
+            foreach ($unusedFiles as $file) {
+                $this->removeFileOrDirectory($file);
+            }
+            echo "✅ Archivos no utilizados eliminados\n";
+        } else {
+            echo "❌ Optimización cancelada\n";
+        }
+    }
+    
+    private function createApiOnlyRouter() {
+        $routerContent = '<?php
+namespace Core;
+
+class Router {
+    private $apiRoutes = [];
+    
+    public function get($uri, $action) {
+        $this->apiRoutes["GET"]["/api" . $uri] = $action;
+    }
+    
+    public function post($uri, $action) {
+        $this->apiRoutes["POST"]["/api" . $uri] = $action;
+    }
+    
+    public function put($uri, $action) {
+        $this->apiRoutes["PUT"]["/api" . $uri] = $action;
+    }
+    
+    public function delete($uri, $action) {
+        $this->apiRoutes["DELETE"]["/api" . $uri] = $action;
+    }
+    
+    public function loadApiRoutes() {
+        require_once "routes/api.php";
+    }
+    
+    public function resolve() {
+        $uri = $_SERVER["REQUEST_URI"];
+        $method = $_SERVER["REQUEST_METHOD"];
+        
+        // Solo procesar rutas API
+        foreach ($this->apiRoutes[$method] ?? [] as $route => $action) {
+            if ($this->matchRoute($route, $uri)) {
+                return $this->executeAction($action, $uri, $route);
+            }
+        }
+        
+        // API route not found
+        http_response_code(404);
+        echo json_encode(["error" => "API endpoint not found"]);
+        exit();
+    }
+    
+    // ... resto de métodos
+}';
+        
+        file_put_contents('core/Router.php', $routerContent);
+    }
+    
+    private function createApiOnlyIndex() {
+        $indexContent = '<?php
+require_once "../vendor/autoload.php";
+
+use Core\Router;
+use Core\Middleware\CorsMiddleware;
+
+// Aplicar CORS siempre
+CorsMiddleware::handle();
+
+$router = new Router();
+
+// Solo cargar rutas API
+$router->loadApiRoutes();
+
+// Resolver ruta
+$router->resolve();
+';
+        
+        file_put_contents('public/index.php', $indexContent);
+    }
+    
+    private function cleanRouterForWeb() {
+        $routerContent = '<?php
+namespace Core;
+
+class Router {
+    private $routes = [];
+    
+    public function get($uri, $action) {
+        $this->routes["GET"][$uri] = $action;
+    }
+    
+    public function post($uri, $action) {
+        $this->routes["POST"][$uri] = $action;
+    }
+    
+    public function put($uri, $action) {
+        $this->routes["PUT"][$uri] = $action;
+    }
+    
+    public function delete($uri, $action) {
+        $this->routes["DELETE"][$uri] = $action;
+    }
+    
+    public function loadWebRoutes() {
+        require_once "routes/web.php";
+    }
+    
+    public function resolve() {
+        $uri = $_SERVER["REQUEST_URI"];
+        $method = $_SERVER["REQUEST_METHOD"];
+        
+        // Solo procesar rutas WEB
+        foreach ($this->routes[$method] ?? [] as $route => $action) {
+            if ($this->matchRoute($route, $uri)) {
+                return $this->executeAction($action, $uri, $route);
+            }
+        }
+        
+        // Web route not found
+        require_once "app/Views/errors/404.php";
+    }
+    
+    // ... resto de métodos
+}';
+        
+        file_put_contents('core/Router.php', $routerContent);
+    }
+    
+    private function cleanIndexForWeb() {
+        $indexContent = '<?php
+require_once "../vendor/autoload.php";
+
+use Core\Router;
+
+$router = new Router();
+
+// Solo cargar rutas WEB
+$router->loadWebRoutes();
+
+// Resolver ruta
+$router->resolve();
+';
+        
+        file_put_contents('public/index.php', $indexContent);
+    }
+    
+    private function createProjectConfig($type) {
+        $config = [
+            'project_type' => $type,
+            'created_at' => date('Y-m-d H:i:s'),
+            'features' => []
+        ];
+        
+        switch ($type) {
+            case 'web':
+                $config['features'] = ['views', 'blade_engine', 'web_controllers', 'assets'];
+                break;
+            case 'api':
+                $config['features'] = ['api_controllers', 'cors', 'json_responses', 'api_routes'];
+                break;
+            case 'full':
+                $config['features'] = ['views', 'blade_engine', 'web_controllers', 'assets', 'api_controllers', 'cors', 'json_responses', 'api_routes'];
+                break;
+        }
+        
+        file_put_contents('.project-config', json_encode($config, JSON_PRETTY_PRINT));
+    }
+    
+    private function getProjectConfig() {
+        if (!file_exists('.project-config')) {
+            return ['project_type' => 'full', 'features' => []];
+        }
+        
+        return json_decode(file_get_contents('.project-config'), true);
+    }
+    
+    private function findUnusedFiles($config) {
+        $unusedFiles = [];
+        
+        // Si es web-only, detectar archivos API no usados
+        if ($config['project_type'] === 'web') {
+            $apiFiles = [
+                'app/Controllers/Api/',
+                'core/Controller/ApiController.php',
+                'core/Middleware/CorsMiddleware.php'
+            ];
+            
+            foreach ($apiFiles as $file) {
+                if (file_exists($file)) {
+                    $unusedFiles[] = $file;
+                }
+            }
+        }
+        
+        // Si es api-only, detectar archivos WEB no usados
+        if ($config['project_type'] === 'api') {
+            $webFiles = [
+                'app/Views/',
+                'core/View/',
+                'core/BladeEngine.php',
+                'public/assets/'
+            ];
+            
+            foreach ($webFiles as $file) {
+                if (file_exists($file)) {
+                    $unusedFiles[] = $file;
+                }
+            }
+        }
+        
+        return $unusedFiles;
+    }
+    
+    private function removeFileOrDirectory($path) {
+        if (!file_exists($path)) {
+            return;
+        }
+        
+        if (is_dir($path)) {
+            $this->removeDirectory($path);
+            echo "📁 Eliminado directorio: {$path}\n";
+        } else {
+            unlink($path);
+            echo "📄 Eliminado archivo: {$path}\n";
+        }
+    }
+    
+    private function removeDirectory($dir) {
+        $files = array_diff(scandir($dir), array('.', '..'));
+        foreach ($files as $file) {
+            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
+            if (is_dir($filePath)) {
+                $this->removeDirectory($filePath);
+            } else {
+                unlink($filePath);
+            }
+        }
+        rmdir($dir);
+    }
+    
+    private function removeWebControllers() {
+        $controllersDir = 'app/Controllers/';
+        if (!is_dir($controllersDir)) {
+            return;
+        }
+        
+        $files = scandir($controllersDir);
+        foreach ($files as $file) {
+            if ($file === '.' || $file === '..' || $file === 'Api') {
+                continue;
+            }
+            
+            $filePath = $controllersDir . $file;
+            if (is_file($filePath) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                unlink($filePath);
+                echo "📄 Eliminado controlador web: {$filePath}\n";
+            }
+        }
+    }
+    
+    private function showHelp() {
+        echo "Uso: php maker project <tipo> [--only]\n\n";
+        echo "Tipos disponibles:\n";
+        echo "  web --only    Convertir a proyecto WEB únicamente\n";
+        echo "  api --only    Convertir a proyecto API únicamente\n";
+        echo "  full          Restaurar funcionalidad completa\n";
+        echo "  optimize      Limpiar archivos no utilizados\n\n";
+        echo "Ejemplos:\n";
+        echo "  php maker project web --only\n";
+        echo "  php maker project api --only\n";
+        echo "  php maker project full\n";
+        echo "  php maker project optimize\n";
+    }
+}
+```
+
+### 22. Actualización del comando principal
+
+**maker** (actualización para incluir project)
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Commands\MakeCrudCommand;
+use Commands\MakeMigrationCommand;
+use Commands\MakeProjectCommand;
+
+$command = $argv[1] ?? null;
+$args = array_slice($argv, 2);
+
+switch ($command) {
+    case 'crud':
+        (new MakeCrudCommand())->execute($args);
+        break;
+        
+    case 'migration':
+        (new MakeMigrationCommand())->execute($args);
+        break;
+        
+    case 'project':
+        (new MakeProjectCommand())->execute($args);
+        break;
+        
+    default:
+        echo "Comandos disponibles:\n";
+        echo "  crud <nombre> [--with-views] [--api] [--interactive]\n";
+        echo "  migration <nombre>\n";
+        echo "  project <web|api|full|optimize> [--only]\n";
+        break;
+}
+```
+
+### 23. Comando CRUD inteligente con detección
+
+**commands/MakeCrudCommand.php** (actualización)
+```php
+<?php
+namespace Commands;
+
+class MakeCrudCommand extends Command {
+    
+    public function execute($args) {
+        $name = $args[0] ?? null;
+        $withViews = in_array('--with-views', $args);
+        $withApi = in_array('--api', $args);
+        $interactive = in_array('--interactive', $args);
+        
+        if (!$name) {
+            echo "Uso: php maker crud <NombreModelo> [--with-views] [--api] [--interactive]\n";
+            return;
+        }
+        
+        // Detectar tipo de proyecto
+        $projectConfig = $this->getProjectConfig();
+        
+        // Adaptar comportamiento según configuración
+        switch ($projectConfig['project_type']) {
+            case 'web':
+                $withViews = true;
+                $withApi = false;
+                echo "🌐 Proyecto WEB detectado - generando solo funcionalidad web\n";
+                break;
+                
+            case 'api':
+                $withViews = false;
+                $withApi = true;
+                echo "🚀 Proyecto API detectado - generando solo funcionalidad API\n";
+                break;
+                
+            case 'full':
+            default:
+                // En proyecto FULL, respeta los flags del usuario
+                if (!$withViews && !$withApi) {
+                    $withViews = true; // Default tradicional: web
+                    echo "🔄 Proyecto COMPLETO detectado - generando funcionalidad web (default)\n";
+                    echo "ℹ️  Usa --api para API o --with-views --api para ambos\n";
+                }
+                break;
+        }
+        
+        if ($interactive) {
+            $this->interactiveMode($name);
+        }
+        
+        // Crear modelo (siempre necesario)
+        $this->createModel($name);
+        
+        // Crear controlador web solo si es necesario y posible
+        if ($withViews) {
+            if ($this->canCreateWebFiles()) {
+                $this->createController($name);
+                $this->createViews($name);
+                echo "✅ Controlador web creado: app/Controllers/{$name}Controller.php\n";
+                echo "✅ Vistas creadas: app/Views/" . strtolower($name) . "s/\n";
+            } else {
+                echo "❌ ERROR: No se pueden crear archivos WEB (proyecto configurado como API-only)\n";
+                echo "💡 Usa: php maker project full  (para habilitar funcionalidad web)\n";
+                return;
+            }
+        }
+        
+        // Crear controlador API solo si es necesario y posible
+        if ($withApi) {
+            if ($this->canCreateApiFiles()) {
+                $this->createApiController($name);
+                $this->createApiRoutes($name);
+                echo "✅ Controlador API creado: app/Controllers/Api/{$name}Controller.php\n";
+                echo "✅ Rutas API agregadas: routes/api.php\n";
+            } else {
+                echo "❌ ERROR: No se pueden crear archivos API (proyecto configurado como WEB-only)\n";
+                echo "💡 Usa: php maker project full  (para habilitar funcionalidad API)\n";
+                return;
+            }
+        }
+        
+        echo "\n🎉 CRUD generado exitosamente para {$name}\n";
+        
+        // Mostrar endpoints API si se crearon
+        if ($withApi && $this->canCreateApiFiles()) {
+            echo "\n🚀 API endpoints creados:\n";
+            echo "   GET    /api/" . strtolower($name) . "s           (Listar todos)\n";
+            echo "   GET    /api/" . strtolower($name) . "s/{id}      (Obtener uno)\n";
+            echo "   POST   /api/" . strtolower($name) . "s           (Crear nuevo)\n";
+            echo "   PUT    /api/" . strtolower($name) . "s/{id}      (Actualizar)\n";
+            echo "   DELETE /api/" . strtolower($name) . "s/{id}      (Eliminar)\n";
+        }
+        
+        // Mostrar rutas web si se crearon
+        if ($withViews && $this->canCreateWebFiles()) {
+            echo "\n🌐 Rutas web creadas:\n";
+            echo "   GET    /" . strtolower($name) . "s              (Listar todos)\n";
+            echo "   GET    /" . strtolower($name) . "s/create       (Formulario crear)\n";
+            echo "   POST   /" . strtolower($name) . "s              (Guardar nuevo)\n";
+            echo "   GET    /" . strtolower($name) . "s/{id}/edit    (Formulario editar)\n";
+            echo "   PUT    /" . strtolower($name) . "s/{id}         (Actualizar)\n";
+            echo "   DELETE /" . strtolower($name) . "s/{id}         (Eliminar)\n";
+        }
+        
+        // Recordatorio sobre el tipo de proyecto
+        echo "\n💡 Tipo de proyecto actual: " . strtoupper($projectConfig['project_type']) . "\n";
+        if ($projectConfig['project_type'] !== 'full') {
+            echo "   Usa 'php maker project full' para habilitar funcionalidad completa\n";
+        }
+    }
+    
+    private function getProjectConfig() {
+        if (!file_exists('.project-config')) {
+            return ['project_type' => 'full', 'features' => []];
+        }
+        
+        return json_decode(file_get_contents('.project-config'), true);
+    }
+    
+    private function canCreateWebFiles() {
+        $config = $this->getProjectConfig();
+        return in_array('views', $config['features']) || $config['project_type'] === 'full';
+    }
+    
+    private function canCreateApiFiles() {
+        $config = $this->getProjectConfig();
+        return in_array('api_controllers', $config['features']) || $config['project_type'] === 'full';
+    }
+}
+```
+
+## EJEMPLOS DE USO DE COMANDOS DE PROYECTO
+
+### **Escenario 1: Crear API para aplicación móvil**
+```bash
+# 1. Configurar proyecto solo para API
+php maker project api --only
+
+# 2. Crear modelos con API (detección automática)
+php maker crud User --interactive    # Detecta API-only → genera solo API
+php maker crud Product              # Detecta API-only → genera solo API
+php maker crud Category             # Detecta API-only → genera solo API
+
+# Salida clara en cada comando:
+# 🚀 Proyecto API detectado - generando solo funcionalidad API
+# ✅ Controlador API creado: app/Controllers/Api/ProductController.php
+# ✅ Rutas API agregadas: routes/api.php
+
+# Resultado: Proyecto ligero, solo archivos necesarios para API
+```
+
+### **Escenario 2: Crear aplicación web tradicional**
+```bash
+# 1. Configurar proyecto solo para WEB
+php maker project web --only
+
+# 2. Crear modelos con vistas (detección automática)
+php maker crud User --interactive    # Detecta WEB-only → genera solo WEB
+php maker crud Product              # Detecta WEB-only → genera solo WEB
+php maker crud Category             # Detecta WEB-only → genera solo WEB
+
+# Salida clara en cada comando:
+# 🌐 Proyecto WEB detectado - generando solo funcionalidad web
+# ✅ Controlador web creado: app/Controllers/ProductController.php
+# ✅ Vistas creadas: app/Views/products/
+
+# Resultado: Proyecto ligero, solo archivos necesarios para WEB
+```
+
+### **Escenario 3: Proyecto híbrido (necesita ambos)**
+```bash
+# 1. Mantener funcionalidad completa
+php maker project full
+
+# 2. Crear recursos específicos según necesidad
+php maker crud User --with-views --api    # Usuario: WEB + API (explícito)
+php maker crud Product --api               # Producto: solo API (explícito)
+php maker crud Category --with-views       # Categoría: solo WEB (explícito)
+php maker crud News                        # Noticias: WEB por defecto
+
+# En proyecto FULL, los comandos sin flags generan WEB por defecto:
+# 🔄 Proyecto COMPLETO detectado - generando funcionalidad web (default)
+# ℹ️  Usa --api para API o --with-views --api para ambos
+
+# Resultado: Flexibilidad total según necesidades específicas
+```
+
+### **Escenario 4: Cambiar de WEB a API**
+```bash
+# Tienes proyecto WEB y necesitas agregar API
+php maker project full               # Restaura funcionalidad API
+php maker crud Product --api         # Agrega endpoints API a productos existentes
+```
+
+### **Escenario 5: Optimizar proyecto existente**
+```bash
+# Limpiar archivos no utilizados
+php maker project optimize
+
+# Ejemplo de salida:
+# 📋 Archivos no utilizados encontrados:
+#   - app/Controllers/Api/
+#   - core/Middleware/CorsMiddleware.php
+# ¿Eliminar archivos no utilizados? (y/n):
+```
+
+## DETECCIÓN AUTOMÁTICA DE TIPO DE PROYECTO
+
+El framework detecta automáticamente el tipo de proyecto mediante el archivo `.project-config`:
+
+**Para proyecto WEB-only:**
+```json
+{
+    "project_type": "web",
+    "created_at": "2025-10-28 10:30:00",
+    "features": ["views", "blade_engine", "web_controllers", "assets"]
+}
+```
+
+**Para proyecto API-only:**
+```json
+{
+    "project_type": "api", 
+    "created_at": "2025-10-28 10:30:00",
+    "features": ["api_controllers", "cors", "json_responses", "api_routes"]
+}
+```
+
+**Para proyecto completo:**
+```json
+{
+    "project_type": "full",
+    "created_at": "2025-10-28 10:30:00", 
+    "features": ["views", "blade_engine", "web_controllers", "assets", "api_controllers", "cors", "json_responses", "api_routes"]
+}
+```
+
+## VENTAJAS DEL SISTEMA DE OPTIMIZACIÓN
+
+### 🎯 **Rendimiento mejorado:**
+- **WEB-only**: Sin archivos CORS, sin procesamiento API
+- **API-only**: Sin motor de vistas, sin assets, sin plantillas
+- **Menos memoria**: Solo carga clases necesarias
+
+### 📦 **Tamaño reducido:**
+- **WEB-only**: ~40% menos archivos
+- **API-only**: ~50% menos archivos  
+- **Deployment**: Paquetes más pequeños
+
+### 🚀 **Desarrollo enfocado:**
+- **Comandos inteligentes**: Detectan automáticamente el tipo y muestran mensajes claros
+- **Prevención de errores**: No puedes crear vistas en proyecto API-only (con mensaje útil)
+- **Guías contextuales**: Muestra solo endpoints relevantes según configuración
+- **Mensajes educativos**: Explica qué está haciendo y por qué en cada paso
+
+### 🔄 **Flexibilidad:**
+- **Cambio fácil**: Un comando para cambiar de tipo
+- **Restauración**: Siempre puedes volver a full
+- **Optimización**: Limpia automáticamente archivos no usados
+
+================================================================================
+                   RESUMEN COMPLETO DEL FRAMEWORK OPTIMIZADO
+================================================================================
+
+### 🏗️ **ARQUITECTURA MODULAR:**
+- **Proyecto WEB-only**: Solo MVC tradicional con vistas
+- **Proyecto API-only**: Solo endpoints REST con JSON
+- **Proyecto FULL**: Funcionalidad completa WEB + API
+
+### 🛠️ **COMANDOS INTELIGENTES:**
+```bash
+# Configuración de proyecto (una sola vez)
+php maker project web --only        # Especializar en funcionalidad web
+php maker project api --only        # Especializar en funcionalidad API  
+php maker project full              # Mantener funcionalidad completa
+php maker project optimize          # Limpiar archivos no usados
+
+# CRUD automático (detecta tipo y se adapta)
+php maker crud Product              # Se comporta según configuración del proyecto
+php maker crud User --interactive   # Asistente completo que respeta configuración
+
+# En proyecto WEB-only:
+php maker crud Product              # → Genera solo web (automático)
+php maker crud Product --api        # → Error con mensaje útil
+
+# En proyecto API-only:  
+php maker crud Product              # → Genera solo API (automático)
+php maker crud Product --with-views # → Error con mensaje útil
+
+# En proyecto FULL:
+php maker crud Product              # → Genera web por defecto
+php maker crud Product --api        # → Genera solo API
+php maker crud Product --with-views --api # → Genera ambos
+```
+
+### 🎯 **DETECCIÓN AUTOMÁTICA:**
+- **Configuración inicial**: `php maker project [web|api|full] --only`
+- **Comandos adaptativos**: `php maker crud Product` se comporta según configuración
+- **Mensajes claros**: Siempre explica qué va a generar y por qué
+- **Prevención inteligente**: Bloquea operaciones incompatibles con mensajes útiles
+- **Guías contextuales**: Muestra endpoints relevantes según tipo de proyecto
+
+### 📋 **FLUJO DE COMANDOS INTELIGENTES:**
+
+```bash
+# Proyecto API-only:
+$ php maker crud Product
+🚀 Proyecto API detectado - generando solo funcionalidad API
+✅ Controlador API creado: app/Controllers/Api/ProductController.php
+✅ Rutas API agregadas: routes/api.php
+🚀 API endpoints creados:
+   GET    /api/products           (Listar todos)
+   POST   /api/products           (Crear nuevo)
+💡 Tipo de proyecto actual: API
+
+# Proyecto WEB-only:
+$ php maker crud Product
+🌐 Proyecto WEB detectado - generando solo funcionalidad web
+✅ Controlador web creado: app/Controllers/ProductController.php
+✅ Vistas creadas: app/Views/products/
+🌐 Rutas web creadas:
+   GET    /products              (Listar todos)
+   GET    /products/create       (Formulario crear)
+💡 Tipo de proyecto actual: WEB
+
+# Proyecto FULL:
+$ php maker crud Product
+🔄 Proyecto COMPLETO detectado - generando funcionalidad web (default)
+ℹ️  Usa --api para API o --with-views --api para ambos
+✅ Controlador web creado: app/Controllers/ProductController.php
+✅ Vistas creadas: app/Views/products/
+💡 Tipo de proyecto actual: FULL
+
+# Error inteligente:
+$ php maker crud Product --api     # En proyecto WEB-only
+❌ ERROR: No se pueden crear archivos API (proyecto configurado como WEB-only)
+💡 Usa: php maker project full  (para habilitar funcionalidad API)
+```
+
+### 🚀 **BENEFICIOS:**
+✅ **Rendimiento**: Solo carga archivos necesarios (40-50% reducción según tipo)
+✅ **Simplicidad**: Comandos que detectan contexto y se adaptan automáticamente
+✅ **Transparencia**: Mensajes claros que explican qué se está generando y por qué
+✅ **Prevención**: Errores bloqueados con mensajes educativos y soluciones
+✅ **Flexibilidad**: Cambio fácil entre tipos sin perder trabajo previo
+✅ **Educativo**: Enseña decisiones arquitectónicas y buenas prácticas
+✅ **Profesional**: Preparado para proyectos reales con optimizaciones inteligentes
+
+**¡Framework PHP MVC completo con optimización automática y detección inteligente!** 🎉
+
+================================================================================
+                         MEJORAS DE CLARIDAD Y TRANSPARENCIA
+================================================================================
+
+### 🎯 **PRINCIPIOS DE DISEÑO:**
+
+**1. Transparencia total:**
+- Todos los comandos explican qué van a hacer antes de hacerlo
+- Mensajes claros sobre por qué se toma cada decisión
+- Salida detallada de qué archivos se crean y dónde
+
+**2. Detección inteligente:**
+- El framework detecta la configuración del proyecto automáticamente
+- Los comandos se adaptan sin "magia" confusa
+- Siempre muestra el tipo de proyecto detectado
+
+**3. Prevención educativa:**
+- Los errores incluyen explicaciones claras del problema
+- Cada error incluye la solución específica para resolverlo
+- Mensajes que enseñan sobre arquitectura y decisiones técnicas
+
+**4. Flujo predecible:**
+- Configuración inicial explícita: `php maker project [tipo] --only`
+- Comportamiento consistente según configuración
+- Posibilidad de cambio fácil entre tipos
+
+### 📚 **VALOR EDUCATIVO:**
+
+Este sistema enseña a los estudiantes:
+- **Arquitecturas reales**: Web tradicional vs API REST vs Híbrido
+- **Toma de decisiones**: Cuándo usar cada tipo de proyecto
+- **Optimización**: Por qué es importante cargar solo lo necesario
+- **Buenas prácticas**: Separación de responsabilidades y claridad en comandos
+- **Profesionalismo**: Herramientas que se comportan de manera predecible
+
+El framework no solo genera código, sino que **educa en el proceso** 🎓
