@@ -1,5 +1,6 @@
+````markdown
 <div align="center">
-  <img src="logo.jpeg" alt="NatanPHP Logo" width="200"/>
+  <img src="public/logo.jpeg" alt="NatanPHP Logo" width="200"/>
   
   # NatanPHP Framework
   
@@ -10,7 +11,85 @@
   [![Educational](https://img.shields.io/badge/Purpose-Educational-orange)](https://github.com/jhonatanfdez/natan-php)
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
+  
+  📍 **Estado actual: v0.1.0** — Framework base con estructura Web/API, 20+ helpers funcionales, autoloading PSR-4, y preparado para desarrollo de clases core.
+  
+  • **Changelog**: ver [v0.1.0 en CHANGELOG.md](CHANGELOG.md#v010---2025-10-28) · **Tag**: [v0.1.0](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.0)
 </div>
+
+---
+
+## 📰 **Novedades Recientes**
+
+- **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers con 20+ funciones (dd(), env(), config(), asset(), url(), csrf_token(), str_slug(), etc.), comando CLI `natan` preparado.
+- **Helpers completos**: Debugging (dd), configuración (env, config), URLs (asset, url), seguridad (csrf_token, csrf_field), utilidades de strings (str_slug, str_limit), y más funciones esenciales.
+- **Arquitectura innovadora**: Separación clara entre Web y API, estructura educativa con core/ visible, filosofía "Simplicidad con Propósito".
+- **Base sólida**: Composer con PSR-4, dependencias instaladas, entorno DDEV configurado, git inicializado.
+
+## ⚡ **Funcionalidades Actuales (v0.1.0)**
+
+### 🏗️ **Infraestructura Base**
+- **Autoloading PSR-4** ✅ Completo
+  - Namespaces `Core\` y `App\` configurados
+  - Carga automática de helpers globales
+  - Integración con Composer
+
+- **Estructura Innovadora Web/API** ✅ Completo
+  - Separación clara: `app/Web/`, `app/Api/`, `app/Shared/`
+  - Organización por función, no por tipo de archivo
+  - Escalabilidad desde proyectos pequeños hasta complejos
+
+### 🛠️ **Sistema de Helpers (20+ funciones)**
+- **Debugging** ✅ Funcional
+  - `dd($var)` - Debug elegante con var_dump y salida
+  
+- **Configuración** ✅ Funcional
+  - `env($key, $default)` - Variables de entorno
+  - `config($key, $default)` - Configuración de aplicación
+  
+- **URLs y Assets** ✅ Funcional
+  - `asset($path)` - URLs de recursos estáticos
+  - `url($path)` - URLs absolutas de la aplicación
+  
+- **Seguridad** ✅ Funcional
+  - `csrf_token()` - Generación de tokens CSRF
+  - `csrf_field()` - Campo HTML con token
+  
+- **Utilidades de String** ✅ Funcional
+  - `str_slug($string)` - Conversión a URL amigable
+  - `str_limit($string, $limit)` - Limitar longitud de texto
+  - `str_random($length)` - Generar cadena aleatoria
+  
+- **Utilidades Generales** ✅ Funcional
+  - `collect($array)` - Wrapper para arrays
+  - `now()` - Fecha/hora actual
+  - `today()` - Fecha actual
+  - `blank($value)` - Verificar si está vacío
+  - `filled($value)` - Verificar si tiene contenido
+
+### 📁 **Gestión de Proyecto**
+- **Entorno de Desarrollo** ✅ DDEV configurado
+  - Base de datos MySQL lista
+  - PHP 8.0+ configurado
+  - Variables de entorno (.env.example)
+  
+- **Control de Versiones** ✅ Git inicializado
+  - Repositorio configurado
+  - .gitignore optimizado para PHP
+  - Commits en español con convención
+
+### ⚙️ **Comando CLI `natan`**
+- **Base preparada** ✅ Script ejecutable
+  - Comando `php natan` listo para extensión
+  - Estructura para comandos de generación
+  - Sistema de ayuda implementable
+
+### 🔜 **Próximo en Desarrollo**
+**PASO 8: Implementar Core/Request.php**
+- Clase para manejo de peticiones HTTP (GET, POST, PUT, DELETE)
+- Métodos para acceder a parámetros, headers, archivos
+- Validación de entrada y sanitización
+- Base para el sistema de routing que viene después
 
 ---
 
@@ -116,41 +195,59 @@ php natan field add Product
 php natan table describe Product
 ```
 
-## 🚀 **Estado Actual de Desarrollo**
+## 🚀 **Roadmap de Desarrollo**
 
-### ✅ **v0.1.0 - Estructura Inicial (Completado)**
-- Estructura de carpetas Web/API implementada
-- Autoloading PSR-4 configurado
-- Dependencias instaladas y funcionando
-- Comando CLI `natan` preparado
+### ✅ **v0.1.0 - Estructura Base (Completado)**
+- **Infraestructura** ✅ Estructura de carpetas Web/API implementada
+- **Autoloading** ✅ PSR-4 configurado y funcionando
+- **Helpers** ✅ 20+ funciones esenciales implementadas
+- **Entorno** ✅ DDEV, Composer, dependencias instaladas
+- **CLI** ✅ Comando `natan` base preparado
 
-### 🔄 **En Desarrollo Activo**
-- **Core/helpers.php** ✅ Completado (20+ funciones)
-- **Core/Request.php** 🔄 Próximo
-- **Core/Router.php** ⏳ Pendiente
-- **Core/View.php** ⏳ Pendiente
-- **Core/Database.php** ⏳ Pendiente
+### 🔄 **v0.2.0 - Core Classes (En Desarrollo)**
+- **Core/Request.php** 🔄 **PRÓXIMO** - Manejo de peticiones HTTP
+- **Core/Router.php** ⏳ Pendiente - Sistema de rutas dinámico
+- **Core/View.php** ⏳ Pendiente - Motor de plantillas tipo Blade
+- **Core/Database.php** ⏳ Pendiente - ORM y Query Builder
 
-### 📋 **Funciones Helpers Disponibles**
+### 📋 **v0.3.0 - Sistema CLI (Planificado)**
+- **Generadores de Código** ⏳ CRUDs automáticos
+- **Comandos de BD** ⏳ Migraciones y seeds
+- **Utilidades** ⏳ Optimización y limpieza
+
+### 🎯 **v1.0.0 - Framework Completo (Meta)**
+- **Todas las características** ⏳ Framework funcional completo
+- **Documentación** ⏳ Guías y ejemplos completos
+- **Testing** ⏳ Suite de pruebas automatizadas
+
+### 📋 **Funciones Helpers Implementadas (v0.1.0)**
 ```php
-// Debugging
-dd($variable);                          // Debug elegante
+// Debugging ✅ FUNCIONANDO
+dd($variable);                          // Debug elegante con var_dump y exit
 
-// Configuración  
-env('APP_NAME');                        // Variables entorno
-config('app.name');                     // Configuración
+// Configuración ✅ FUNCIONANDO
+env('APP_NAME', 'NatanPHP');           // Variables de entorno con default
+config('app.name', 'Framework');       // Configuración de aplicación
 
-// URLs
-asset('css/app.css');                   // Assets
-url('/productos');                      // URLs absolutas
+// URLs y Assets ✅ FUNCIONANDO
+asset('css/app.css');                   // Assets: /public/assets/css/app.css
+url('/productos');                      // URLs absolutas de la aplicación
 
-// Seguridad
-csrf_token();                           // Token CSRF
-csrf_field();                           // Campo HTML
+// Seguridad ✅ FUNCIONANDO
+csrf_token();                           // Token CSRF único por sesión
+csrf_field();                           // Campo HTML: <input type="hidden" name="_token" value="...">
 
-// Utilidades
-str_slug('Mi Título');                  // mi-titulo
-str_limit($texto, 100);                 // Limitar texto
+// Utilidades de String ✅ FUNCIONANDO
+str_slug('Mi Título Genial');           // Resultado: "mi-titulo-genial"
+str_limit($texto, 100, '...');          // Limitar texto con sufijo
+str_random(16);                         // Cadena aleatoria segura
+
+// Utilidades Generales ✅ FUNCIONANDO
+collect([1, 2, 3]);                     // Wrapper para arrays con métodos útiles
+now();                                  // DateTime actual
+today();                                // DateTime solo fecha
+blank($value);                          // true si es null, '', 0, [], false
+filled($value);                         // Opuesto de blank()
 ```
 
 ## 🚀 **Inicio Rápido**
