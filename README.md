@@ -1,4 +1,3 @@
-````markdown
 <div align="center">
   <img src="public/logo.jpeg" alt="NatanPHP Logo" width="200"/>
   
@@ -505,6 +504,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 ---
 
 <div align="center">
+  
   
   **⭐ Si te gusta NatanPHP, ¡dale una estrella! ⭐**
   
