@@ -116,6 +116,43 @@ php natan field add Product
 php natan table describe Product
 ```
 
+## 🚀 **Estado Actual de Desarrollo**
+
+### ✅ **v0.1.0 - Estructura Inicial (Completado)**
+- Estructura de carpetas Web/API implementada
+- Autoloading PSR-4 configurado
+- Dependencias instaladas y funcionando
+- Comando CLI `natan` preparado
+
+### 🔄 **En Desarrollo Activo**
+- **Core/helpers.php** ✅ Completado (20+ funciones)
+- **Core/Request.php** 🔄 Próximo
+- **Core/Router.php** ⏳ Pendiente
+- **Core/View.php** ⏳ Pendiente
+- **Core/Database.php** ⏳ Pendiente
+
+### 📋 **Funciones Helpers Disponibles**
+```php
+// Debugging
+dd($variable);                          // Debug elegante
+
+// Configuración  
+env('APP_NAME');                        // Variables entorno
+config('app.name');                     // Configuración
+
+// URLs
+asset('css/app.css');                   // Assets
+url('/productos');                      // URLs absolutas
+
+// Seguridad
+csrf_token();                           // Token CSRF
+csrf_field();                           // Campo HTML
+
+// Utilidades
+str_slug('Mi Título');                  // mi-titulo
+str_limit($texto, 100);                 // Limitar texto
+```
+
 ## 🚀 **Inicio Rápido**
 
 ### 1. **Instalación**
