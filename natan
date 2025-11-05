@@ -2,39 +2,26 @@
 <?php
 
 /**
- * NatanPHP Framework - CLI Command Line Interface
+ * NatanPHP Framework - CLI Command Line Interface - Windows Compatible
  * 
  * Proporciona comandos útiles para el desarrollo con NatanPHP Framework.
- * Incluye comandos para iniciar el servidor de desarrollo, gestionar la base
- * de datos, limpiar caché y otras tareas de desarrollo.
+ * Compatible con Windows, macOS y Linux.
  * 
  * Comandos disponibles:
- * - serve: Inicia el servidor de desarrollo PHP built-in
- * - version: Muestra la versión actual del framework
- * - help: Muestra ayuda sobre comandos disponibles
+ * - serve: Iniciar servidor de desarrollo
+ * - version: Mostrar versión del framework 
+ * - help: Mostrar ayuda
  * 
- * @package NatanPHP\Console
+ * @package NatanPHP
  * @author Natan PHP Framework
+ * @version v0.1.5
  */
 
-// Verificar que estamos en la raíz del proyecto
-if (!file_exists(__DIR__ . '/composer.json')) {
-    echo "❌ Error: Ejecuta este comando desde la raíz del proyecto NatanPHP.\n";
-    exit(1);
-}
-
-// Cargar autoloader y helpers
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/core/helpers.php';
-
-// Cargar variables de entorno
-if (file_exists(__DIR__ . '/.env')) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-}
+// Cargar bootstrap del framework
+require_once __DIR__ . '/bootstrap.php';
 
 /**
- * Clase principal para manejar comandos CLI
+ * Clase principal del CLI
  */
 class NatanCLI
 {
@@ -76,12 +63,28 @@ class NatanCLI
      */
     private function serve()
     {
+        // Detectar si estamos en DDEV
+        $isDDEV = isset($_ENV['DDEV_PROJECT']) || file_exists('/var/www/html/.ddev');
+        
         // Obtener configuración del .env
-        $host = $this->args[0] ?? $this->getEnvHost();
+        $originalHost = $this->args[0] ?? $this->getEnvHost();
         $port = $this->args[1] ?? $this->getEnvPort();
         
+        // Si estamos en DDEV, usar 0.0.0.0 para que sea accesible desde el host
+        $serverHost = $isDDEV && $originalHost === 'localhost' ? '0.0.0.0' : $originalHost;
+        
         echo "🚀 Iniciando NatanPHP Framework...\n";
-        echo "📍 Servidor: http://{$host}:{$port}\n";
+        
+        if ($isDDEV) {
+            echo "🐳 Detectado entorno DDEV\n";
+            echo "📍 Servidor interno: http://{$serverHost}:{$port}\n";
+            echo "🌐 URLs accesibles:\n";
+            echo "   • https://natanphp-framework.ddev.site:8081 (recomendado)\n";
+            echo "   • http://natanphp-framework.ddev.site:8080\n";
+        } else {
+            echo "📍 Servidor: http://{$originalHost}:{$port}\n";
+        }
+        
         echo "📁 Directorio: " . __DIR__ . "\n";
         echo "🔧 Versión: " . version() . "\n";
         echo "⚡ Router: router.php\n";
@@ -91,7 +94,13 @@ class NatanCLI
         $this->checkAndFreePort($port);
         
         echo "💡 Presiona Ctrl+C para detener el servidor\n";
-        echo "🌐 Abre http://{$host}:{$port} en tu navegador\n";
+        
+        if ($isDDEV) {
+            echo "🌐 Abre https://natanphp-framework.ddev.site:8081 en tu navegador\n";
+        } else {
+            echo "🌐 Abre http://{$originalHost}:{$port} en tu navegador\n";
+        }
+        
         echo str_repeat("=", 50) . "\n";
 
         // Cambiar al directorio public para encontrar router.php
@@ -104,7 +113,7 @@ class NatanCLI
         
         // Cambiar al directorio public y ejecutar servidor
         chdir($publicDir);
-        $command = "php -S {$host}:{$port} router.php";
+        $command = "php -S {$serverHost}:{$port} router.php";
         echo "🔄 Ejecutando: {$command}\n";
         echo "📂 Directorio: " . getcwd() . "\n";
         echo str_repeat("=", 50) . "\n";
@@ -114,30 +123,53 @@ class NatanCLI
 
     /**
      * Verificar si un puerto está en uso y liberarlo si es necesario
+     * Compatible con Windows, macOS y Linux
      */
     private function checkAndFreePort($port)
     {
         echo "🔍 Verificando puerto {$port}...\n";
         
-        // Intentar múltiples métodos para encontrar procesos
-        $commands = [
-            "lsof -ti:{$port} 2>/dev/null",
-            "fuser -n tcp {$port} 2>/dev/null",
-            "netstat -tlnp 2>/dev/null | grep :{$port} | awk '{print \$7}' | cut -d'/' -f1"
-        ];
+        // Detectar sistema operativo
+        $isWindows = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
         
         $pids = [];
-        foreach ($commands as $command) {
+        
+        if ($isWindows) {
+            // Comandos para Windows
+            $command = "netstat -ano | findstr :{$port}";
             $output = shell_exec($command);
+            
             if (!empty(trim($output ?? ''))) {
-                $foundPids = array_filter(explode("\n", trim($output ?? '')));
-                foreach ($foundPids as $pid) {
-                    $pid = trim($pid);
-                    if (!empty($pid) && is_numeric($pid)) {
-                        $pids[] = $pid;
+                $lines = explode("\n", trim($output ?? ''));
+                foreach ($lines as $line) {
+                    if (preg_match('/\s+(\d+)$/', trim($line), $matches)) {
+                        $pid = $matches[1];
+                        if (!empty($pid) && is_numeric($pid) && $pid != '0') {
+                            $pids[] = $pid;
+                        }
                     }
                 }
-                break; // Si encontramos PIDs con un método, no necesitamos probar otros
+            }
+        } else {
+            // Comandos para Unix/Linux/macOS
+            $commands = [
+                "lsof -ti:{$port} 2>/dev/null",
+                "fuser -n tcp {$port} 2>/dev/null",
+                "netstat -tlnp 2>/dev/null | grep :{$port} | awk '{print \$7}' | cut -d'/' -f1"
+            ];
+            
+            foreach ($commands as $command) {
+                $output = shell_exec($command);
+                if (!empty(trim($output ?? ''))) {
+                    $foundPids = array_filter(explode("\n", trim($output ?? '')));
+                    foreach ($foundPids as $pid) {
+                        $pid = trim($pid);
+                        if (!empty($pid) && is_numeric($pid)) {
+                            $pids[] = $pid;
+                        }
+                    }
+                    break; // Si encontramos PIDs con un método, no necesitamos probar otros
+                }
             }
         }
         
@@ -146,7 +178,14 @@ class NatanCLI
             
             foreach ($pids as $pid) {
                 echo "🔄 Terminando proceso PID: {$pid}\n";
-                exec("kill -9 {$pid} 2>/dev/null");
+                
+                if ($isWindows) {
+                    // Comando para Windows
+                    exec("taskkill /PID {$pid} /F 2>nul");
+                } else {
+                    // Comando para Unix/Linux/macOS
+                    exec("kill -9 {$pid} 2>/dev/null");
+                }
             }
             
             // Esperar un momento para que los puertos se liberen
@@ -203,6 +242,12 @@ class NatanCLI
         echo "  - API Info: http://{$exampleHost}:{$examplePort}/api\n";
         echo "  - Versión:  http://{$exampleHost}:{$examplePort}/api/version\n";
         echo "  - Health:   http://{$exampleHost}:{$examplePort}/api/health\n\n";
+        
+        echo "🖥️  Compatibilidad:\n";
+        echo "  ✅ Windows (taskkill)\n";
+        echo "  ✅ macOS (lsof/kill)\n";
+        echo "  ✅ Linux (fuser/netstat/kill)\n";
+        echo "  ✅ DDEV (auto-detección)\n\n";
     }
 
     /**
