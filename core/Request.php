@@ -3,15 +3,13 @@
 namespace Core;
 
 /**
- * NatanPHP Framework - Clase Request
+ * Request - Manejo de peticiones HTTP del framework NatanPHP
  * 
- * Maneja las peticiones HTTP entrantes de forma unificada.
- * Proporciona acceso seguro a datos GET, POST, archivos subidos,
- * headers y otra información de la petición.
+ * Proporciona una interfaz unificada para acceder a todos los datos
+ * de las peticiones HTTP de forma segura y conveniente.
  * 
  * @package NatanPHP\Core
- * @version 0.1.2
- * @author Jhonatan Fernández
+ * @author Natan PHP Framework
  */
 class Request
 {

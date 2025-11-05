@@ -59,6 +59,9 @@
   - `blank($value)` - Verificar si está vacío (null, '', arrays vacíos, espacios)
   - `filled($value)` - Verificar si tiene contenido (opuesto de blank)
 
+- **Información del Framework** ✅ Funcional
+  - `version()` - Obtener la versión actual del framework
+
 **📝 Nota**: Funciones adicionales se agregarán incrementalmente según necesidades del desarrollo.
 
 ### 🌐 **Sistema de Peticiones HTTP (Request.php)**

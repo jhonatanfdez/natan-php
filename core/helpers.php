@@ -1,16 +1,23 @@
 <?php
 
 /**
- * NatanPHP Framework - Helpers Esenciales
- * 
- * Funciones auxiliares básicas disponibles en toda la aplicación.
- * Solo incluye las funciones más prioritarias para el desarrollo inicial.
- * Se irán agregando más funciones según se necesiten.
+ * Helpers del Framework NatanPHP
+ * Funciones utilitarias esenciales para el funcionamiento del framework
  * 
  * @package NatanPHP\Core
- * @version 0.1.2
- * @author Jhonatan Fernández
+ * @version 0.1.3
+ * @author Natan PHP Framework
  */
+
+/**
+ * Obtener la versión actual del framework
+ * 
+ * @return string Versión del framework
+ */
+function version(): string 
+{
+    return '0.1.3';
+}
 
 // =============================================================================
 // DEBUGGING - Funciones para depuración durante desarrollo
