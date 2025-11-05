@@ -7,11 +7,17 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+### Próximo
+- Implementación de `core/Request.php` para manejo de peticiones HTTP
+
+## [v0.1.1] - 2025-11-04
+
 ### Cambiado
 - Simplificación de `core/helpers.php` de 20+ funciones a 8 funciones esenciales
 - Reorganización en secciones claras: Debugging, Configuración, URLs, Strings, Utilidades
 - Mejora significativa de documentación con comentarios detallados y ejemplos
 - Estrategia incremental: agregar funciones solo cuando se necesiten
+- Actualización de README.md y documentación reflejando cambios reales
 
 ### Funciones Mantenidas
 - **Debugging**: `dd()` - Debug con var_dump y terminación
@@ -23,6 +29,11 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ### Eliminado
 - Funciones no prioritarias que se agregarán según necesidades
 - Backup mantenido en `helpers_backup.php`
+
+### Mejorado
+- Documentación precisa y honesta del estado real del framework
+- Comentarios PHPDoc detallados con ejemplos de uso
+- Estrategia de desarrollo incremental establecida
 
 ## [v0.1.0] - 2025-10-28
 
