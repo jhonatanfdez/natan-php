@@ -14,9 +14,10 @@
  * 
  * @return string Versión del framework
  */
-    function version() {
-        return 'v0.1.4';
-    }
+function version(): string 
+{
+    return '0.1.3';
+}
 
 // =============================================================================
 // DEBUGGING - Funciones para depuración durante desarrollo

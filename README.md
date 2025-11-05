@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.3** — Router.php implementado (sistema completo de rutas), Request.php funcional (20+ métodos HTTP), helpers optimizados con gestión centralizada de versiones.
+  📍 **Estado actual: v0.1.4** — Sistema de URLs dinámicas implementado, comando CLI `natan` funcional, detección automática Web/API mejorada, funcionamiento perfecto en DDEV y PHP built-in server.
   
-  • **Changelog**: ver [v0.1.3 en CHANGELOG.md](CHANGELOG.md#v013---2025-11-04) · **Tag**: [v0.1.3](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.3)
+  • **Changelog**: ver [v0.1.4 en CHANGELOG.md](CHANGELOG.md#v014---2025-11-04) · **Tag**: [v0.1.4](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.4)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.4**: 🌐 **Sistema de URLs Dinámicas + CLI** - URLs completamente adaptables automáticamente a cualquier entorno (DDEV/PHP built-in/Apache), comando `natan serve` funcional, detección mejorada de controladores Web vs API, eliminación de URLs hardcodeadas, configuración zero-configuration.
 - **v0.1.3**: 🛣️ **Router.php implementado** - Sistema completo de rutas dinámico con métodos HTTP (GET/POST/PUT/DELETE/PATCH), parámetros dinámicos {id}/{slug}, grupos con prefijos/middleware, resolución automática Web vs API, inyección de parámetros, patrón Fluent Interface, gestión centralizada de versiones.
 - **v0.1.2**: 🌐 **Request.php implementado** - Clase completa para manejo de peticiones HTTP con 20+ métodos, soporte para GET/POST/archivos/headers, detección de AJAX/JSON, integración con helpers del framework.
 - **v0.1.1**: 🔧 **Optimización de helpers** - Simplificación de 20+ funciones a 8 esenciales con documentación detallada, estrategia incremental establecida, y sincronización completa de documentación con código real.
@@ -28,7 +29,33 @@
 - **Arquitectura innovadora**: Separación clara entre Web y API, estructura educativa con core/ visible, filosofía "Simplicidad con Propósito".
 - **Base sólida**: Composer con PSR-4, dependencias instaladas, entorno DDEV configurado, git inicializado.
 
-## ⚡ **Funcionalidades Actuales (v0.1.3)**
+## ⚡ **Funcionalidades Actuales (v0.1.4)**
+
+### 🌐 **Sistema de URLs Dinámicas** ✅ **NUEVO**
+- **Detección Automática de Entorno** ✅ Completo
+  - Auto-detección de protocolo (HTTP/HTTPS) desde `$_SERVER['HTTPS']`
+  - Detección automática de host y puerto del servidor actual
+  - Compatibilidad total con DDEV, PHP built-in server, Apache, etc.
+  - URLs que se adaptan automáticamente sin configuración manual
+
+- **Helpers URL Inteligentes** ✅ Completo
+  - `url($path)` - URLs dinámicas que funcionan en cualquier entorno
+  - `asset($path)` - Recursos estáticos con URLs automáticas
+  - `route($name, $params)` - Base para named routes (preparado)
+  - Zero-configuration: funciona desde el primer momento
+
+### 🚀 **Comando CLI `natan`** ✅ **NUEVO**  
+- **Servidor de Desarrollo** ✅ Funcional
+  - `php natan serve` - Inicia servidor con configuración del .env
+  - `php natan serve localhost 3000` - Host y puerto personalizados
+  - Configuración automática desde `APP_URL` en .env
+  - URLs dinámicas en ayuda según configuración actual
+
+- **Utilidades de Framework** ✅ Funcional
+  - `php natan version` - Versión del framework y PHP
+  - `php natan help` - Ayuda completa con ejemplos
+  - Archivo ejecutable (`chmod +x natan`)
+  - Documentación integrada
 
 ### 🏗️ **Infraestructura Base**
 - **Autoloading PSR-4** ✅ Completo
@@ -117,15 +144,24 @@
   - Sistema de ayuda implementable
 
 ### 🔜 **Próximo en Desarrollo**
-**PASO 10: Implementar Controladores de Ejemplo**
-- Controladores Web y API para demostrar Router.php
-- HomeController y UsuariosController con métodos CRUD
-- Ejemplos prácticos de inyección de parámetros
-- Documentación de patrones de controladores
 
-**PASO 11: Sistema de Vistas/Templates**
+**✅ COMPLETADO v0.1.4**: Sistema de URLs Dinámicas y CLI
+- ✅ URLs adaptables automáticamente a cualquier entorno
+- ✅ Comando `natan serve` funcional con configuración .env  
+- ✅ Detección mejorada de controladores Web vs API
+- ✅ Fix crítico: `/api` usa controlador API correctamente
+
+**PASO 10: Implementar Sistema de Vistas/Templates**
 - Motor de plantillas simple e intuitivo
-- Separación entre lógica y presentación
+- Herencia de plantillas (layouts)
+- Componentes reutilizables
+- Integración con controladores existentes
+
+**PASO 11: Sistema de Base de Datos**
+- Query Builder básico pero potente
+- Migraciones simples
+- Seeding de datos de prueba
+- Integración con helpers existentes
 
 ---
 
