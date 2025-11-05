@@ -27,7 +27,7 @@
 - **Arquitectura innovadora**: Separación clara entre Web y API, estructura educativa con core/ visible, filosofía "Simplicidad con Propósito".
 - **Base sólida**: Composer con PSR-4, dependencias instaladas, entorno DDEV configurado, git inicializado.
 
-## ⚡ **Funcionalidades Actuales (v0.1.0)**
+## ⚡ **Funcionalidades Actuales (v0.1.2)**
 
 ### 🏗️ **Infraestructura Base**
 - **Autoloading PSR-4** ✅ Completo
