@@ -24,6 +24,11 @@ class ComposerStaticInitcbb9b1702fbeb0880ac1fc540ee0a2b4
         array (
             'PhpOption\\' => 10,
         ),
+        'N' => 
+        array (
+            'NatanPHP\\Core\\' => 14,
+            'NatanPHP\\App\\' => 13,
+        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -31,14 +36,6 @@ class ComposerStaticInitcbb9b1702fbeb0880ac1fc540ee0a2b4
         'D' => 
         array (
             'Dotenv\\' => 7,
-        ),
-        'C' => 
-        array (
-            'Core\\' => 5,
-        ),
-        'A' => 
-        array (
-            'App\\' => 4,
         ),
     );
 
@@ -59,6 +56,14 @@ class ComposerStaticInitcbb9b1702fbeb0880ac1fc540ee0a2b4
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
+        'NatanPHP\\Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core',
+        ),
+        'NatanPHP\\App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
+        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
@@ -66,14 +71,6 @@ class ComposerStaticInitcbb9b1702fbeb0880ac1fc540ee0a2b4
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
-        ),
-        'Core\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/core',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 
