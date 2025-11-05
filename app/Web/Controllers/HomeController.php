@@ -33,17 +33,34 @@ class HomeController extends Controller
      * Mostrar la página principal del sitio web
      * 
      * Renderiza la vista de bienvenida con información del framework,
-     * versión actual y enlaces disponibles.
+     * versión actual y enlaces disponibles. Genera URLs dinámicamente
+     * basadas en la petición actual para garantizar funcionamiento
+     * tanto en DDEV como en servidor PHP built-in.
+     * 
+     * Características de la página:
+     * - URLs completamente dinámicas según el servidor actual
+     * - Información de versión obtenida de helpers centralizados
+     * - Enlaces a API que funcionan en cualquier entorno
+     * - Diseño responsive con TailwindCSS
+     * - Animaciones y efectos visuales modernos
      * 
      * @return string Vista HTML de la página principal
      */
     public function index(): string
     {
+        // Detectar la URL base dinámicamente según la petición actual
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
+        $baseUrl = $protocol . '://' . $host;
+        
         $data = [
             'title' => 'Bienvenido a NatanPHP Framework',
-            'version' => version(),
+            'version' => version(), // Versión centralizada desde helpers
             'message' => 'Framework PHP MVC Simple, Moderno e Innovador',
-            'apiUrl' => url('/api'),
+            'baseUrl' => $baseUrl, // URL base dinámica
+            'apiUrl' => $baseUrl . '/api', // URL API dinámica
+            'versionUrl' => $baseUrl . '/api/version', // URL versión dinámica
+            'healthUrl' => $baseUrl . '/api/health', // URL health dinámica
         ];
         
         return $this->view('home/index', $data);

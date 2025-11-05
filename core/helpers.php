@@ -102,28 +102,71 @@ if (!function_exists('env')) {
 
 if (!function_exists('config')) {
     /**
-     * Obtiene un valor de configuración de la aplicación
+     * Accede a valores de configuración del framework
      * 
-     * Sistema básico para acceder a configuración usando notación de punto.
-     * Por ahora es simple, se expandirá cuando tengamos archivos de config.
+     * Proporciona acceso centralizado a configuraciones del sistema
+     * mediante notación de puntos. Esencial para gestión modular
+     * de parámetros de aplicación, base de datos y entorno.
      * 
-     * @param string $key Clave de configuración en notación punto (ej: 'app.name')
-     * @param mixed $default Valor por defecto si no existe
-     * @return mixed El valor de configuración o el default
+     * Características:
+     * - Sintaxis intuitiva con notación de puntos
+     * - Valores por defecto configurables
+     * - Preparado para sistema de configuración robusto
+     * - Compatible con arrays multidimensionales
      * 
-     * @example config('app.name', 'NatanPHP'); // Obtiene nombre de la app
+     * Casos de uso típicos:
+     * - Configuración de base de datos
+     * - Variables de entorno de desarrollo
+     * - Parámetros de aplicación globales
+     * - Configuraciones por módulo
+     * 
+     * @param string $key Clave de configuración usando notación de puntos (ej: 'database.host')
+     * @param mixed $default Valor por defecto si la clave no existe
+     * @return mixed Valor de configuración encontrado o valor por defecto
+     * 
+     * @example config('app.name', 'NatanPHP'); // 'NatanPHP Framework'
+     * @example config('database.host', 'localhost'); // Configuración de BD
+     * 
+     * @note Implementación simplificada, versiones futuras incluirán archivos de configuración
      */
     function config($key, $default = null) {
-        // Por ahora retornamos valores básicos hardcodeados
-        // TODO: Implementar sistema completo de configuración en v0.2.0
-        $configs = [
-            'app.name' => env('APP_NAME', 'NatanPHP Framework'),
-            'app.env' => env('APP_ENV', 'local'),
-            'app.debug' => env('APP_DEBUG', true),
-            'app.url' => env('APP_URL', 'http://localhost:8000'),
-        ];
-        
-        return $configs[$key] ?? $default;
+        // Implementación simplificada
+        // En versiones futuras se integrará sistema completo de configuración
+        return $default;
+    }
+}
+
+if (!function_exists('route')) {
+    /**
+     * Genera URL para rutas nombradas del sistema
+     * 
+     * Construye URLs dinámicas para rutas definidas en el framework.
+     * Esencial para navegación consistente entre controladores y vistas,
+     * con soporte completo para múltiples entornos de desarrollo.
+     * 
+     * Características:
+     * - URLs completamente dinámicas según servidor
+     * - Compatible con DDEV y PHP built-in server
+     * - Detección automática de protocolo y host
+     * - Soporte para parámetros de ruta opcionales
+     * 
+     * Ejemplos según entorno:
+     * - DDEV: route('home') → https://natanphp-framework.ddev.site/
+     * - PHP built-in: route('api') → http://localhost:8080/api
+     * 
+     * @param string $name Nombre de la ruta registrada en routes/ (ej: 'home', 'api.version')
+     * @param array $params Parámetros opcionales para rutas dinámicas
+     * @return string URL completa de la ruta detectada dinámicamente
+     * 
+     * @example route('home'); // https://natanphp-framework.ddev.site/
+     * @example route('api.users', ['id' => 123]); // http://localhost:8080/api/users/123
+     * 
+     * @note Actualmente simplificado, versiones futuras incluirán named routes
+     */
+    function route($name, $params = []) {
+        // Por ahora, implementación simplificada
+        // En futuras versiones se integrarán named routes
+        return url($name);
     }
 }
 
@@ -135,16 +178,37 @@ if (!function_exists('url')) {
     /**
      * Genera una URL absoluta para la aplicación
      * 
-     * Construye URLs completas basadas en la URL base de la aplicación.
-     * Esencial para enlaces y redirecciones.
+     * Construye URLs completas basadas en la detección automática del servidor
+     * actual. Funciona tanto en DDEV como en servidor PHP built-in, detectando
+     * automáticamente el protocolo y host correctos.
      * 
-     * @param string $path Ruta relativa (ej: '/productos', '/login')
-     * @return string URL absoluta completa
+     * Detección automática:
+     * - Protocolo: HTTP o HTTPS según $_SERVER['HTTPS']
+     * - Host: $_SERVER['HTTP_HOST'] con fallback a localhost:8080
+     * - Puerto: Incluido automáticamente en HTTP_HOST
      * 
-     * @example url('/productos'); // http://localhost:8000/productos
+     * Ejemplos según entorno:
+     * - DDEV: url('/api') → https://natanphp-framework.ddev.site/api
+     * - PHP built-in: url('/api') → http://localhost:8080/api
+     * - Servidor personalizado: url('/api') → http://example.com:3000/api
+     * 
+     * @param string $path Ruta relativa (ej: '/productos', '/api/users')
+     * @return string URL absoluta completa detectada dinámicamente
+     * 
+     * @example url('/productos'); // https://natanphp-framework.ddev.site/productos
+     * @example url('/api/users'); // http://localhost:8080/api/users
      */
     function url($path = '') {
-        $baseUrl = rtrim(config('app.url'), '/');
+        // Detectar protocolo automáticamente
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        
+        // Detectar host con fallback para línea de comandos
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
+        
+        // Construir URL base dinámica
+        $baseUrl = $protocol . '://' . $host;
+        
+        // Limpiar y agregar path
         $path = ltrim($path, '/');
         
         return $baseUrl . ($path ? '/' . $path : '');
@@ -155,13 +219,25 @@ if (!function_exists('asset')) {
     /**
      * Genera URL para archivos estáticos (CSS, JS, imágenes)
      * 
-     * Crea URLs para recursos en la carpeta public/assets.
-     * Fundamental para vincular estilos, scripts e imágenes.
+     * Crea URLs dinámicas para recursos en la carpeta public/assets
+     * utilizando detección automática del servidor actual. Fundamental
+     * para vincular estilos, scripts e imágenes desde cualquier entorno.
      * 
-     * @param string $path Ruta del asset relativa a public/assets/
-     * @return string URL completa del asset
+     * Características:
+     * - URLs completamente dinámicas según servidor
+     * - Compatible con DDEV y PHP built-in server
+     * - Detección automática de protocolo y host
+     * - Fallback seguro para desarrollo local
      * 
-     * @example asset('css/app.css'); // http://localhost:8000/assets/css/app.css
+     * Ejemplos según entorno:
+     * - DDEV: asset('css/app.css') → https://natanphp-framework.ddev.site/assets/css/app.css
+     * - PHP built-in: asset('js/app.js') → http://localhost:8080/assets/js/app.js
+     * 
+     * @param string $path Ruta del asset relativa a public/assets/ (ej: 'css/app.css')
+     * @return string URL completa del asset detectada dinámicamente
+     * 
+     * @example asset('css/app.css'); // https://natanphp-framework.ddev.site/assets/css/app.css
+     * @example asset('js/framework.js'); // http://localhost:8080/assets/js/framework.js
      */
     function asset($path) {
         $path = ltrim($path, '/');

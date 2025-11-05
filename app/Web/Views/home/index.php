@@ -15,11 +15,21 @@
     - Colores de marca personalizados
     - Efectos hover y transiciones suaves
     
-    Variables disponibles:
+    Variables disponibles (pasadas desde HomeController):
     - $title: Título de la página
-    - $version: Versión actual del framework
-    - $message: Mensaje descriptivo
-    - $apiUrl: URL del endpoint API
+    - $version: Versión actual del framework (desde function version())
+    - $message: Mensaje descriptivo del framework
+    - $baseUrl: URL base dinámica (detectada automáticamente)
+    - $apiUrl: URL completa del endpoint API principal
+    - $versionUrl: URL del endpoint de versión (/api/version)
+    - $healthUrl: URL del endpoint de health check (/api/health)
+    
+    Características del sistema de URLs:
+    - URLs completamente dinámicas según servidor actual
+    - Funciona tanto en DDEV (https://natanphp-framework.ddev.site)
+    - Como en servidor PHP built-in (http://localhost:8080)
+    - Detección automática de protocolo HTTP/HTTPS
+    - Host detection para generar enlaces correctos
     
     @package NatanPHP\App\Web\Views
     @author Natan PHP Framework
@@ -136,7 +146,7 @@
                     Info General
                 </a>
                 
-                <a href="<?= url('/api/version') ?>" 
+                <a href="<?= $versionUrl ?>" 
                    target="_blank"
                    class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 text-sm">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +155,7 @@
                     Versión
                 </a>
                 
-                <a href="<?= url('/api/health') ?>" 
+                <a href="<?= $healthUrl ?>" 
                    target="_blank"
                    class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 text-sm">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
