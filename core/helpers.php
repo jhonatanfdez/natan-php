@@ -5,7 +5,7 @@
  * Funciones utilitarias esenciales para el funcionamiento del framework
  * 
  * @package NatanPHP\Core
- * @version 0.1.3
+ * @version 0.1.4
  * @author Natan PHP Framework
  */
 
@@ -16,7 +16,7 @@
  */
 function version(): string 
 {
-    return '0.1.3';
+    return 'v0.1.4';
 }
 
 // =============================================================================
