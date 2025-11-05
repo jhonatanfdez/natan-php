@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.5** — CLI robusto con gestión inteligente de puertos, auto-liberación de procesos ocupados, compatibilidad PHP 8.2+, comando `natan serve` completamente automático y profesional.
+  📍 **Estado actual: v0.1.6** — CLI multiplataforma con compatibilidad completa Windows/macOS/Linux, auto-detección de SO, comandos nativos para cada plataforma, UX mejorado sin confusión técnica.
   
-  • **Changelog**: ver [v0.1.5 en CHANGELOG.md](CHANGELOG.md#v015---2025-11-04) · **Tag**: [v0.1.5](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.5)
+  • **Changelog**: ver [v0.1.6 en CHANGELOG.md](CHANGELOG.md#v016---2025-11-04) · **Tag**: [v0.1.6](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.6)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.6**: 🖥️ **CLI Multiplataforma** - Compatibilidad completa Windows/macOS/Linux con auto-detección de SO, comandos nativos para cada plataforma (netstat/taskkill en Windows, lsof/kill en Unix), UX mejorado sin confusión técnica, mensajes claros con URLs útiles en lugar de 0.0.0.0.
 - **v0.1.5**: 🛠️ **CLI Robusto** - Comando `natan serve` con gestión inteligente de puertos (auto-detección con lsof/fuser/netstat), terminación automática de procesos ocupados, liberación inteligente de puertos, manejo automático de directorios, compatibilidad PHP 8.2+ (fix warnings trim), CLI completamente automático y profesional.
 - **v0.1.4**: 🌐 **Sistema de URLs Dinámicas + CLI** - URLs completamente adaptables automáticamente a cualquier entorno (DDEV/PHP built-in/Apache), comando `natan serve` funcional, detección mejorada de controladores Web vs API, eliminación de URLs hardcodeadas, configuración zero-configuration.
 - **v0.1.3**: 🛣️ **Router.php implementado** - Sistema completo de rutas dinámico con métodos HTTP (GET/POST/PUT/DELETE/PATCH), parámetros dinámicos {id}/{slug}, grupos con prefijos/middleware, resolución automática Web vs API, inyección de parámetros, patrón Fluent Interface, gestión centralizada de versiones.
@@ -27,9 +28,20 @@
 - **v0.1.1**: 🔧 **Optimización de helpers** - Simplificación de 20+ funciones a 8 esenciales con documentación detallada, estrategia incremental establecida, y sincronización completa de documentación con código real.
 - **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers esenciales con 8 funciones básicas (dd(), env(), config(), asset(), url(), str_slug(), blank(), filled()), comando CLI `natan` preparado.
 
-## ⚡ **Funcionalidades Actuales (v0.1.5)**
+## ⚡ **Funcionalidades Actuales (v0.1.6)**
 
-### 🛠️ **CLI Robusto** ✅ **NUEVO v0.1.5**
+### �️ **CLI Multiplataforma** ✅ **NUEVO v0.1.6**
+- **Compatibilidad Completa Windows/macOS/Linux** ✅ Completo
+  - Auto-detección de sistema operativo con `PHP_OS`
+  - Comandos nativos Windows: `netstat -ano | findstr :puerto` y `taskkill /PID /F`
+  - Comandos Unix/Linux/macOS: `lsof -ti:puerto`, `fuser -n tcp`, `kill -9`
+  - Zero-configuration: funciona automáticamente en cualquier SO
+
+- **UX Mejorado Sin Confusión Técnica** ✅ Completo
+  - URLs claras y útiles en lugar de `0.0.0.0` confuso
+  - Recomendaciones específicas para entorno DDEV vs normal
+  - Información de compatibilidad en comando `help`
+  - Mensajes técnicos separados de información útil para usuario
 - **Comando `natan serve` Completamente Automático** ✅ Completo
   - Auto-detección de puertos ocupados con múltiples métodos (lsof, fuser, netstat)
   - Terminación automática de procesos que usan puertos

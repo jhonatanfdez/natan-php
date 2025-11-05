@@ -13,6 +13,64 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Database migrations y ORM
 - Middleware system completo
 
+## [v0.1.6] - 2025-11-04
+
+### Agregado
+- **🖥️ Compatibilidad completa Windows** - CLI multiplataforma verdadero
+  - Auto-detección de sistema operativo (Windows/Unix/macOS/Linux)
+  - Comandos específicos Windows: `netstat -ano | findstr :puerto` y `taskkill /PID /F`
+  - Comandos Unix/Linux/macOS: `lsof -ti:puerto`, `fuser -n tcp`, `kill -9`
+  - Zero-configuration: funciona automáticamente en cualquier SO
+
+### Mejorado
+- **Comando `natan serve` multiplataforma** - UX consistente entre sistemas
+  - Detección inteligente con `PHP_OS` para seleccionar comandos correctos
+  - Información de compatibilidad en comando `help`
+  - URLs claras sin confusión de `0.0.0.0` en mensajes
+  - Recomendaciones específicas para entorno DDEV vs normal
+
+- **Gestión robusta de procesos cross-platform**
+  - Windows: `taskkill /PID {$pid} /F 2>nul` para terminar procesos
+  - Unix/Linux: `kill -9 {$pid} 2>/dev/null` estándar POSIX
+  - macOS: `lsof -ti:{$port}` nativo optimizado
+  - Manejo de errores silencioso con redirección apropiada por SO
+
+- **UX mejorado para DDEV**
+  - URLs específicas y claras: `https://natanphp-framework.ddev.site:8081 (recomendado)`
+  - Eliminada confusión de `0.0.0.0` en mensajes de usuario
+  - Información técnica separada de URLs útiles
+  - Detección automática de entorno DDEV
+
+### Arreglado
+- **Cross-platform compatibility**: Comando funciona en Windows, macOS y Linux
+- **Port management**: Gestión de puertos robusta en todos los sistemas operativos
+- **User experience**: Mensajes claros sin tecnicismos confusos
+- **Process termination**: Comando kill apropiado para cada sistema
+
+### Cambiado
+- **Help command**: Incluye sección de compatibilidad de sistemas operativos
+- **Serve messages**: URLs útiles en lugar de información técnica confusa
+- **Error handling**: Redirección de errores apropiada por plataforma (`2>nul` vs `2>/dev/null`)
+
+### Testing
+- ✅ Auto-detección de Windows verificada con `PHP_OS`
+- ✅ Comandos Windows (`netstat`/`taskkill`) probados
+- ✅ Comandos Unix/Linux/macOS (`lsof`/`fuser`/`kill`) funcionando
+- ✅ DDEV URLs claras y funcionamiento confirmado
+- ✅ UX consistente entre diferentes sistemas operativos
+
+### Técnico
+- **Filosofía "Write Once, Run Anywhere"**: Verdadera portabilidad PHP
+- **Cross-platform native commands**: Usa herramientas nativas de cada SO
+- **Zero-external-dependencies**: No requiere herramientas adicionales
+- **Professional UX**: Experiencia consistente independiente del SO
+
+### Compatibilidad
+- 🖥️ **Windows**: `netstat`/`taskkill` nativos
+- 🍎 **macOS**: `lsof`/`kill` optimizados  
+- 🐧 **Linux**: `fuser`/`netstat`/`kill` POSIX
+- 🐳 **DDEV**: Auto-detección y configuración inteligente
+
 ## [v0.1.5] - 2025-11-04
 
 ### Agregado

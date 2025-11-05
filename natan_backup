@@ -1,0 +1,276 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * NatanPHP Framework - CLI Command Line Interface - Windows Compatible
+ * 
+ * Proporciona comandos útiles para el desarrollo con NatanPHP Framework.
+ * Compatible con Windows, macOS y Linux.
+ * 
+ * Comandos disponibles:
+ * - serve: Iniciar servidor de desarrollo
+ * - version: Mostrar versión del framework 
+ * - help: Mostrar ayuda
+ * 
+ * @package NatanPHP
+ * @author Natan PHP Framework
+ * @version v0.1.5
+ */
+
+// Cargar bootstrap del framework
+require_once __DIR__ . '/bootstrap.php';
+
+/**
+ * Clase principal del CLI
+ */
+class NatanCLI
+{
+    private $command;
+    private $args;
+
+    public function __construct($argv)
+    {
+        $this->command = $argv[1] ?? 'help';
+        $this->args = array_slice($argv, 2);
+    }
+
+    /**
+     * Ejecutar el comando solicitado
+     */
+    public function run()
+    {
+        switch ($this->command) {
+            case 'serve':
+                $this->serve();
+                break;
+            case 'version':
+                $this->version();
+                break;
+            case 'help':
+            case '--help':
+            case '-h':
+                $this->help();
+                break;
+            default:
+                echo "❌ Comando desconocido: {$this->command}\n";
+                echo "💡 Usa 'php natan help' para ver comandos disponibles.\n";
+                exit(1);
+        }
+    }
+
+    /**
+     * Comando serve: Iniciar servidor de desarrollo
+     */
+    private function serve()
+    {
+        // Detectar si estamos en DDEV
+        $isDDEV = isset($_ENV['DDEV_PROJECT']) || file_exists('/var/www/html/.ddev');
+        
+        // Obtener configuración del .env
+        $originalHost = $this->args[0] ?? $this->getEnvHost();
+        $port = $this->args[1] ?? $this->getEnvPort();
+        
+        // Si estamos en DDEV, usar 0.0.0.0 para que sea accesible desde el host
+        $serverHost = $isDDEV && $originalHost === 'localhost' ? '0.0.0.0' : $originalHost;
+        
+        echo "🚀 Iniciando NatanPHP Framework...\n";
+        
+        if ($isDDEV) {
+            echo "🐳 Detectado entorno DDEV\n";
+            echo "📍 Servidor interno: http://{$serverHost}:{$port}\n";
+            echo "🌐 URLs accesibles:\n";
+            echo "   • https://natanphp-framework.ddev.site:8081 (recomendado)\n";
+            echo "   • http://natanphp-framework.ddev.site:8080\n";
+        } else {
+            echo "📍 Servidor: http://{$originalHost}:{$port}\n";
+        }
+        
+        echo "📁 Directorio: " . __DIR__ . "\n";
+        echo "🔧 Versión: " . version() . "\n";
+        echo "⚡ Router: router.php\n";
+        echo "\n";
+        
+        // Verificar si el puerto está en uso y liberarlo
+        $this->checkAndFreePort($port);
+        
+        echo "💡 Presiona Ctrl+C para detener el servidor\n";
+        
+        if ($isDDEV) {
+            echo "🌐 Abre https://natanphp-framework.ddev.site:8081 en tu navegador\n";
+        } else {
+            echo "🌐 Abre http://{$originalHost}:{$port} en tu navegador\n";
+        }
+        
+        echo str_repeat("=", 50) . "\n";
+
+        // Cambiar al directorio public para encontrar router.php
+        $publicDir = __DIR__ . '/public';
+        if (!is_dir($publicDir)) {
+            echo "❌ Error: No se encuentra el directorio public/\n";
+            echo "💡 Asegúrate de ejecutar desde la raíz del proyecto.\n";
+            exit(1);
+        }
+        
+        // Cambiar al directorio public y ejecutar servidor
+        chdir($publicDir);
+        $command = "php -S {$serverHost}:{$port} router.php";
+        echo "🔄 Ejecutando: {$command}\n";
+        echo "📂 Directorio: " . getcwd() . "\n";
+        echo str_repeat("=", 50) . "\n";
+        
+        passthru($command);
+    }
+
+    /**
+     * Verificar si un puerto está en uso y liberarlo si es necesario
+     * Compatible con Windows, macOS y Linux
+     */
+    private function checkAndFreePort($port)
+    {
+        echo "🔍 Verificando puerto {$port}...\n";
+        
+        // Detectar sistema operativo
+        $isWindows = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+        
+        $pids = [];
+        
+        if ($isWindows) {
+            // Comandos para Windows
+            $command = "netstat -ano | findstr :{$port}";
+            $output = shell_exec($command);
+            
+            if (!empty(trim($output ?? ''))) {
+                $lines = explode("\n", trim($output ?? ''));
+                foreach ($lines as $line) {
+                    if (preg_match('/\s+(\d+)$/', trim($line), $matches)) {
+                        $pid = $matches[1];
+                        if (!empty($pid) && is_numeric($pid) && $pid != '0') {
+                            $pids[] = $pid;
+                        }
+                    }
+                }
+            }
+        } else {
+            // Comandos para Unix/Linux/macOS
+            $commands = [
+                "lsof -ti:{$port} 2>/dev/null",
+                "fuser -n tcp {$port} 2>/dev/null",
+                "netstat -tlnp 2>/dev/null | grep :{$port} | awk '{print \$7}' | cut -d'/' -f1"
+            ];
+            
+            foreach ($commands as $command) {
+                $output = shell_exec($command);
+                if (!empty(trim($output ?? ''))) {
+                    $foundPids = array_filter(explode("\n", trim($output ?? '')));
+                    foreach ($foundPids as $pid) {
+                        $pid = trim($pid);
+                        if (!empty($pid) && is_numeric($pid)) {
+                            $pids[] = $pid;
+                        }
+                    }
+                    break; // Si encontramos PIDs con un método, no necesitamos probar otros
+                }
+            }
+        }
+        
+        if (!empty($pids)) {
+            echo "⚠️  Puerto {$port} está en uso por " . count($pids) . " proceso(s)\n";
+            
+            foreach ($pids as $pid) {
+                echo "🔄 Terminando proceso PID: {$pid}\n";
+                
+                if ($isWindows) {
+                    // Comando para Windows
+                    exec("taskkill /PID {$pid} /F 2>nul");
+                } else {
+                    // Comando para Unix/Linux/macOS
+                    exec("kill -9 {$pid} 2>/dev/null");
+                }
+            }
+            
+            // Esperar un momento para que los puertos se liberen
+            echo "⏳ Esperando que el puerto se libere...\n";
+            sleep(3);
+            echo "✅ Puerto {$port} debería estar disponible ahora\n";
+        } else {
+            echo "✅ Puerto {$port} disponible\n";
+        }
+        
+        echo "\n";
+    }
+
+    /**
+     * Comando version: Mostrar versión del framework
+     */
+    private function version()
+    {
+        echo "🔖 NatanPHP Framework " . version() . "\n";
+        echo "📅 PHP " . PHP_VERSION . "\n";
+        echo "🏗️  Framework educativo MVC con separación Web/API\n";
+        echo "📚 Filosofía: Simplicidad con Propósito\n";
+    }
+
+    /**
+     * Comando help: Mostrar ayuda
+     */
+    private function help()
+    {
+        echo "🎯 NatanPHP Framework - CLI Commands\n";
+        echo str_repeat("=", 40) . "\n";
+        echo "\n";
+        echo "📋 Comandos disponibles:\n\n";
+        
+        echo "  🚀 serve [host] [port]     Iniciar servidor de desarrollo\n";
+        echo "                             host: IP del servidor (default: desde .env)\n";
+        echo "                             port: Puerto del servidor (default: desde .env)\n";
+        echo "                             Ejemplo: php natan serve localhost 8080\n\n";
+        
+        echo "  🔖 version                 Mostrar versión del framework\n\n";
+        
+        echo "  ❓ help                    Mostrar esta ayuda\n\n";
+        
+        echo "💡 Ejemplos de uso:\n\n";
+        echo "  php natan serve            # Usar configuración del .env\n";
+        echo "  php natan serve 0.0.0.0    # Acceso desde cualquier IP\n";
+        echo "  php natan serve localhost 3000  # Puerto personalizado\n";
+        echo "  php natan version          # Ver versión del framework\n\n";
+        
+        echo "🌐 URLs del proyecto:\n";
+        $exampleHost = $this->getEnvHost();
+        $examplePort = $this->getEnvPort();
+        echo "  - Homepage: http://{$exampleHost}:{$examplePort}/\n";
+        echo "  - API Info: http://{$exampleHost}:{$examplePort}/api\n";
+        echo "  - Versión:  http://{$exampleHost}:{$examplePort}/api/version\n";
+        echo "  - Health:   http://{$exampleHost}:{$examplePort}/api/health\n\n";
+        
+        echo "🖥️  Compatibilidad:\n";
+        echo "  ✅ Windows (taskkill)\n";
+        echo "  ✅ macOS (lsof/kill)\n";
+        echo "  ✅ Linux (fuser/netstat/kill)\n";
+        echo "  ✅ DDEV (auto-detección)\n\n";
+    }
+
+    /**
+     * Obtener host desde .env o usar default
+     */
+    private function getEnvHost(): string
+    {
+        $appUrl = $_ENV['APP_URL'] ?? 'http://localhost:8000';
+        $parsed = parse_url($appUrl);
+        return $parsed['host'] ?? 'localhost';
+    }
+
+    /**
+     * Obtener puerto desde .env o usar default
+     */
+    private function getEnvPort(): string
+    {
+        $appUrl = $_ENV['APP_URL'] ?? 'http://localhost:8000';
+        $parsed = parse_url($appUrl);
+        return $parsed['port'] ?? '8000';
+    }
+}
+
+// Ejecutar CLI
+$cli = new NatanCLI($argv);
+$cli->run();
