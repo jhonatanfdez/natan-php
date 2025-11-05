@@ -17,9 +17,12 @@ use NatanPHP\Core\Router;
 // RUTAS API PRINCIPALES
 // =============================================================================
 
-// Información general del framework
+// Información general del framework (con y sin barra final)
 Router::get('/api', 'HomeController@index')
     ->name('api.home');
+
+Router::get('/api/', 'HomeController@index')
+    ->name('api.home.slash');
 
 // Versión específica del framework
 Router::get('/api/version', 'HomeController@version')

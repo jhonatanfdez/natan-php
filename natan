@@ -1,0 +1,166 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * NatanPHP Framework - CLI Command Line Interface
+ * 
+ * Proporciona comandos útiles para el desarrollo con NatanPHP Framework.
+ * Incluye comandos para iniciar el servidor de desarrollo, gestionar la base
+ * de datos, limpiar caché y otras tareas de desarrollo.
+ * 
+ * Comandos disponibles:
+ * - serve: Inicia el servidor de desarrollo PHP built-in
+ * - version: Muestra la versión actual del framework
+ * - help: Muestra ayuda sobre comandos disponibles
+ * 
+ * @package NatanPHP\Console
+ * @author Natan PHP Framework
+ */
+
+// Verificar que estamos en la raíz del proyecto
+if (!file_exists(__DIR__ . '/composer.json')) {
+    echo "❌ Error: Ejecuta este comando desde la raíz del proyecto NatanPHP.\n";
+    exit(1);
+}
+
+// Cargar autoloader y helpers
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/core/helpers.php';
+
+// Cargar variables de entorno
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+}
+
+/**
+ * Clase principal para manejar comandos CLI
+ */
+class NatanCLI
+{
+    private $command;
+    private $args;
+
+    public function __construct($argv)
+    {
+        $this->command = $argv[1] ?? 'help';
+        $this->args = array_slice($argv, 2);
+    }
+
+    /**
+     * Ejecutar el comando solicitado
+     */
+    public function run()
+    {
+        switch ($this->command) {
+            case 'serve':
+                $this->serve();
+                break;
+            case 'version':
+                $this->version();
+                break;
+            case 'help':
+            case '--help':
+            case '-h':
+                $this->help();
+                break;
+            default:
+                echo "❌ Comando desconocido: {$this->command}\n";
+                echo "💡 Usa 'php natan help' para ver comandos disponibles.\n";
+                exit(1);
+        }
+    }
+
+    /**
+     * Comando serve: Iniciar servidor de desarrollo
+     */
+    private function serve()
+    {
+        // Obtener configuración del .env
+        $host = $this->args[0] ?? $this->getEnvHost();
+        $port = $this->args[1] ?? $this->getEnvPort();
+        
+        echo "🚀 Iniciando NatanPHP Framework...\n";
+        echo "📍 Servidor: http://{$host}:{$port}\n";
+        echo "📁 Directorio: " . __DIR__ . "\n";
+        echo "🔧 Versión: " . version() . "\n";
+        echo "⚡ Router: router.php\n";
+        echo "\n";
+        echo "💡 Presiona Ctrl+C para detener el servidor\n";
+        echo "🌐 Abre http://{$host}:{$port} en tu navegador\n";
+        echo str_repeat("=", 50) . "\n";
+
+        // Iniciar servidor PHP built-in
+        $command = "php -S {$host}:{$port} router.php";
+        passthru($command);
+    }
+
+    /**
+     * Comando version: Mostrar versión del framework
+     */
+    private function version()
+    {
+        echo "🔖 NatanPHP Framework " . version() . "\n";
+        echo "📅 PHP " . PHP_VERSION . "\n";
+        echo "🏗️  Framework educativo MVC con separación Web/API\n";
+        echo "📚 Filosofía: Simplicidad con Propósito\n";
+    }
+
+    /**
+     * Comando help: Mostrar ayuda
+     */
+    private function help()
+    {
+        echo "🎯 NatanPHP Framework - CLI Commands\n";
+        echo str_repeat("=", 40) . "\n";
+        echo "\n";
+        echo "📋 Comandos disponibles:\n\n";
+        
+        echo "  🚀 serve [host] [port]     Iniciar servidor de desarrollo\n";
+        echo "                             host: IP del servidor (default: desde .env)\n";
+        echo "                             port: Puerto del servidor (default: desde .env)\n";
+        echo "                             Ejemplo: php natan serve localhost 8080\n\n";
+        
+        echo "  🔖 version                 Mostrar versión del framework\n\n";
+        
+        echo "  ❓ help                    Mostrar esta ayuda\n\n";
+        
+        echo "💡 Ejemplos de uso:\n\n";
+        echo "  php natan serve            # Usar configuración del .env\n";
+        echo "  php natan serve 0.0.0.0    # Acceso desde cualquier IP\n";
+        echo "  php natan serve localhost 3000  # Puerto personalizado\n";
+        echo "  php natan version          # Ver versión del framework\n\n";
+        
+        echo "🌐 URLs del proyecto:\n";
+        $exampleHost = $this->getEnvHost();
+        $examplePort = $this->getEnvPort();
+        echo "  - Homepage: http://{$exampleHost}:{$examplePort}/\n";
+        echo "  - API Info: http://{$exampleHost}:{$examplePort}/api\n";
+        echo "  - Versión:  http://{$exampleHost}:{$examplePort}/api/version\n";
+        echo "  - Health:   http://{$exampleHost}:{$examplePort}/api/health\n\n";
+    }
+
+    /**
+     * Obtener host desde .env o usar default
+     */
+    private function getEnvHost(): string
+    {
+        $appUrl = $_ENV['APP_URL'] ?? 'http://localhost:8000';
+        $parsed = parse_url($appUrl);
+        return $parsed['host'] ?? 'localhost';
+    }
+
+    /**
+     * Obtener puerto desde .env o usar default
+     */
+    private function getEnvPort(): string
+    {
+        $appUrl = $_ENV['APP_URL'] ?? 'http://localhost:8000';
+        $parsed = parse_url($appUrl);
+        return $parsed['port'] ?? '8000';
+    }
+}
+
+// Ejecutar CLI
+$cli = new NatanCLI($argv);
+$cli->run();

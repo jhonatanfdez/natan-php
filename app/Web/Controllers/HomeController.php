@@ -33,12 +33,12 @@ class HomeController extends Controller
      * Mostrar la página principal del sitio web
      * 
      * Renderiza la vista de bienvenida con información del framework,
-     * versión actual y enlaces disponibles. Genera URLs dinámicamente
-     * basadas en la petición actual para garantizar funcionamiento
-     * tanto en DDEV como en servidor PHP built-in.
+     * versión actual y enlaces disponibles. Utiliza las funciones helper
+     * de URLs dinámicas para garantizar que todos los enlaces funcionen
+     * correctamente tanto en DDEV como en servidor PHP built-in.
      * 
      * Características de la página:
-     * - URLs completamente dinámicas según el servidor actual
+     * - URLs generadas con función url() helper
      * - Información de versión obtenida de helpers centralizados
      * - Enlaces a API que funcionan en cualquier entorno
      * - Diseño responsive con TailwindCSS
@@ -48,19 +48,14 @@ class HomeController extends Controller
      */
     public function index(): string
     {
-        // Detectar la URL base dinámicamente según la petición actual
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
-        $baseUrl = $protocol . '://' . $host;
-        
         $data = [
             'title' => 'Bienvenido a NatanPHP Framework',
             'version' => version(), // Versión centralizada desde helpers
             'message' => 'Framework PHP MVC Simple, Moderno e Innovador',
-            'baseUrl' => $baseUrl, // URL base dinámica
-            'apiUrl' => $baseUrl . '/api', // URL API dinámica
-            'versionUrl' => $baseUrl . '/api/version', // URL versión dinámica
-            'healthUrl' => $baseUrl . '/api/health', // URL health dinámica
+            'baseUrl' => url(''), // URL base usando helper
+            'apiUrl' => url('api'), // URL API usando helper
+            'versionUrl' => url('api/version'), // URL versión usando helper
+            'healthUrl' => url('api/health'), // URL health usando helper
         ];
         
         return $this->view('home/index', $data);

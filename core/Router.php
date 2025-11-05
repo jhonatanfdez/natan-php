@@ -345,6 +345,8 @@ class Router
      * 1. Ejecuta middleware asociado a la ruta (preparado para implementación futura)
      * 2. Parsea la acción para separar controlador y método
      * 3. Determina el namespace correcto (Web vs API) basado en la petición
+     *    - API: URLs que empiecen por /api o /api/ + peticiones que quieren JSON
+     *    - Web: Todas las demás peticiones
      * 4. Verifica que la clase del controlador exista
      * 5. Instancia el controlador y verifica que el método exista
      * 6. Ejecuta el método inyectando automáticamente los parámetros de la ruta
@@ -374,7 +376,10 @@ class Router
         [$controller, $method] = explode('@', $action);
         
         // Determinar el namespace del controlador
-        $isApiRequest = static::$request->wantsJson() || strpos(static::$request->uri(), '/api/') === 0;
+        $uri = static::$request->uri();
+        $isApiRequest = static::$request->wantsJson() || 
+                       strpos($uri, '/api/') === 0 || 
+                       $uri === '/api';
         $namespace = $isApiRequest ? 'NatanPHP\\App\\Api\\Controllers\\' : 'NatanPHP\\App\\Web\\Controllers\\';
         
         $controllerClass = $namespace . $controller;
