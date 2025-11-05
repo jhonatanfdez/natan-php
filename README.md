@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.2** — Request.php implementado (20+ métodos HTTP), helpers optimizados, y preparado para Router.php.
+  📍 **Estado actual: v0.1.3** — Router.php implementado (sistema completo de rutas), Request.php funcional (20+ métodos HTTP), helpers optimizados con gestión centralizada de versiones.
   
-  • **Changelog**: ver [v0.1.2 en CHANGELOG.md](CHANGELOG.md#v012---2025-11-04) · **Tag**: [v0.1.2](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.2)
+  • **Changelog**: ver [v0.1.3 en CHANGELOG.md](CHANGELOG.md#v013---2025-11-04) · **Tag**: [v0.1.3](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.3)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.3**: 🛣️ **Router.php implementado** - Sistema completo de rutas dinámico con métodos HTTP (GET/POST/PUT/DELETE/PATCH), parámetros dinámicos {id}/{slug}, grupos con prefijos/middleware, resolución automática Web vs API, inyección de parámetros, patrón Fluent Interface, gestión centralizada de versiones.
 - **v0.1.2**: 🌐 **Request.php implementado** - Clase completa para manejo de peticiones HTTP con 20+ métodos, soporte para GET/POST/archivos/headers, detección de AJAX/JSON, integración con helpers del framework.
 - **v0.1.1**: 🔧 **Optimización de helpers** - Simplificación de 20+ funciones a 8 esenciales con documentación detallada, estrategia incremental establecida, y sincronización completa de documentación con código real.
 - **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers esenciales con 8 funciones básicas (dd(), env(), config(), asset(), url(), str_slug(), blank(), filled()), comando CLI `natan` preparado.
@@ -266,7 +267,7 @@ php natan table describe Product
 - **Documentación** ⏳ Guías y ejemplos completos
 - **Testing** ⏳ Suite de pruebas automatizadas
 
-### 📋 **Funciones Helpers Implementadas (v0.1.0)**
+### 📋 **Funciones Helpers Implementadas (v0.1.3)**
 ```php
 // Debugging ✅ FUNCIONANDO
 dd($usuario, $productos);               // Debug elegante con var_dump y exit
