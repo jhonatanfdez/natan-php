@@ -8,32 +8,45 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Próximo
-- Implementación de sistema de configuración completo
-- Named routes con parámetros dinámicos
-- Sistema de middleware robusto
+- Implementación de named routes en Router.php
+- Sistema de configuración avanzado
 
 ## [v0.1.4] - 2025-11-04
 
 ### Agregado
-- Sistema de generación de URLs dinámicas completamente funcional
-  - Función `url()` con detección automática de protocolo y host
-  - Soporte multi-entorno: DDEV (HTTPS) y PHP built-in server (HTTP)
-  - URLs dinámicas en HomeController para enlaces API
-  - Homepage con enlaces que se adaptan automáticamente al entorno
-- Función `route()` preparatoria para named routes
-- Documentación PHPDoc completa y detallada para todas las funciones helper
-- Ejemplos reales de uso en diferentes entornos de desarrollo
+- **Sistema de URLs dinámicas** - Detección automática de entorno
+  - Auto-detección de protocolo (HTTP/HTTPS) desde `$_SERVER`
+  - Detección automática de host y puerto del servidor actual
+  - Compatibilidad total con DDEV y PHP built-in server
+  - URLs que se adaptan automáticamente sin configuración manual
 
 ### Mejorado
-- Función `asset()` ahora utiliza el sistema de URLs dinámicas
-- Función `config()` con documentación expandida
-- HomeController pasa URLs dinámicas a la vista
-- Vista home/index.php utiliza variables dinámicas en lugar de URLs hardcodeadas
+- **Función `url()`** en helpers.php
+  - Detección inteligente de protocolo usando `$_SERVER['HTTPS']`
+  - Auto-detección de `HTTP_HOST` con fallback a `SERVER_NAME`
+  - Soporte para puertos no estándar automáticamente
+  - Funciona en cualquier entorno sin configuración
+- **Función `asset()`** actualizada para usar URLs dinámicas
+- **Función `route()`** preparada para named routes con URLs dinámicas
+- **HomeController** Web con URLs dinámicas pasadas a vista
+- **Vista homepage** con links API generados dinámicamente
+
+### Cambiado
+- Homepage ya no usa URLs hardcodeadas (`localhost:8080`)
+- Todas las URLs se generan dinámicamente según el entorno actual
+- Documentación extendida en helpers.php con ejemplos por entorno
+
+### Arreglado
+- **Problema crítico**: Links API en homepage mostraban localhost:8080 incluso en DDEV
+- URLs ahora funcionan correctamente en:
+  - DDEV: `https://natanphp-framework.ddev.site`
+  - PHP built-in server: `http://localhost:8080`
+  - Cualquier configuración de servidor
 
 ### Técnico
-- Detección automática de $_SERVER['HTTP_HOST'] y $_SERVER['REQUEST_SCHEME']
-- Fallbacks seguros para entornos de desarrollo local
-- Compatible con proxy reverso y configuraciones de contenedor
+- Filosofía "Simplicidad con Propósito": Framework que se adapta automáticamente
+- Zero-configuration: URLs funcionan sin setup manual
+- Environment-agnostic: Compatible con cualquier servidor
 
 ## [v0.1.3] - 2025-11-04
 
