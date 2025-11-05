@@ -8,7 +8,31 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Próximo
-- Implementación de `core/Router.php` para sistema de rutas dinámico
+- Implementación de controladores de ejemplo para probar Router.php
+
+## [v0.1.3] - 2025-11-04
+
+### Agregado
+- Implementación completa de `core/Router.php` - Sistema de rutas dinámico
+  - Soporte para métodos HTTP: GET, POST, PUT, DELETE, PATCH, MATCH, ANY
+  - Parámetros dinámicos en rutas: `/usuario/{id}`, `/posts/{slug}`
+  - Grupos de rutas con prefijos y middleware compartido
+  - Resolución automática de controladores Web vs API
+  - Inyección automática de parámetros en métodos de controladores
+  - Patrón Fluent Interface para configuración avanzada
+  - RouteRegistrar para middleware y nombres de rutas
+  - Comentarios educativos extensos para facilitar aprendizaje
+
+### Cambiado
+- Centralización de gestión de versiones del framework
+  - Nueva función `version()` en helpers.php como única fuente
+  - Eliminadas versiones hardcodeadas de archivos individuales
+  - Garantizada consistencia de versión en todo el framework
+
+### Mejorado
+- Documentación de helpers en README.md con función `version()`
+- Comentarios más detallados y educativos en todo el código Router.php
+- Mejor organización de código con Single Source of Truth para versiones
 
 ## [v0.1.2] - 2025-11-04
 

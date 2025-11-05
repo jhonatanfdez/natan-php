@@ -27,7 +27,7 @@
 - **Arquitectura innovadora**: Separación clara entre Web y API, estructura educativa con core/ visible, filosofía "Simplicidad con Propósito".
 - **Base sólida**: Composer con PSR-4, dependencias instaladas, entorno DDEV configurado, git inicializado.
 
-## ⚡ **Funcionalidades Actuales (v0.1.2)**
+## ⚡ **Funcionalidades Actuales (v0.1.3)**
 
 ### 🏗️ **Infraestructura Base**
 - **Autoloading PSR-4** ✅ Completo
@@ -79,6 +79,25 @@
 
 **🔗 Integración**: Usa helpers del framework y prepara base para Router y Controladores.
 
+### 🛣️ **Sistema de Rutas (Router.php)**
+- **Registro de Rutas** ✅ Funcional
+  - `Router::get()`, `Router::post()`, `Router::put()`, `Router::delete()` - Métodos HTTP
+  - `Router::match()`, `Router::any()` - Múltiples métodos para una ruta
+  - Parámetros dinámicos: `/usuario/{id}`, `/posts/{slug}/comentarios`
+  
+- **Grupos y Organización** ✅ Funcional
+  - `Router::group()` - Agrupación con prefijos y middleware compartido
+  - Resolución automática Web vs API controllers
+  - Inyección automática de parámetros en métodos
+  
+- **Funcionalidades Avanzadas** ✅ Funcional
+  - Patrón Fluent Interface: `->middleware()->name()`
+  - RouteRegistrar para configuración encadenada
+  - Manejo robusto de errores 404 con excepciones descriptivas
+  - Extracción inteligente de parámetros con expresiones regulares
+
+**🔗 Integración**: Usa Request.php para análisis de peticiones y prepara base para Controladores.
+
 ### 📁 **Gestión de Proyecto**
 - **Entorno de Desarrollo** ✅ DDEV configurado
   - Base de datos MySQL lista
@@ -97,11 +116,15 @@
   - Sistema de ayuda implementable
 
 ### 🔜 **Próximo en Desarrollo**
-**PASO 9: Implementar Core/Router.php**
-- Sistema de rutas dinámico con parámetros y métodos HTTP
-- Integración con Request.php para enrutamiento inteligente
-- Soporte para middleware y grupos de rutas
-- Base para conectar URLs con Controladores
+**PASO 10: Implementar Controladores de Ejemplo**
+- Controladores Web y API para demostrar Router.php
+- HomeController y UsuariosController con métodos CRUD
+- Ejemplos prácticos de inyección de parámetros
+- Documentación de patrones de controladores
+
+**PASO 11: Sistema de Vistas/Templates**
+- Motor de plantillas simple e intuitivo
+- Separación entre lógica y presentación
 
 ---
 
@@ -218,9 +241,20 @@ php natan table describe Product
 
 ### 🔄 **v0.2.0 - Core Classes (En Desarrollo)**
 - **Core/Request.php** ✅ **COMPLETADO** - Manejo de peticiones HTTP (20+ métodos)
-- **Core/Router.php** 🔄 **PRÓXIMO** - Sistema de rutas dinámico
+- **Core/Router.php** ✅ **COMPLETADO** - Sistema de rutas dinámico (v0.1.3)
+- **Controladores Ejemplo** 🔄 **PRÓXIMO** - HomeController y UsuariosController 
 - **Core/View.php** ⏳ Pendiente - Motor de plantillas tipo Blade
 - **Core/Database.php** ⏳ Pendiente - ORM y Query Builder
+
+### ✅ **v0.1.3 - Router Implementado (Completado)**
+- **Core/Router.php** ✅ Sistema completo de rutas dinámico
+  - Métodos HTTP: GET, POST, PUT, DELETE, PATCH, MATCH, ANY
+  - Parámetros dinámicos: `/usuario/{id}`, `/posts/{slug}`
+  - Grupos de rutas con prefijos y middleware
+  - Resolución automática Web vs API controllers
+  - Inyección automática de parámetros
+  - Patrón Fluent Interface y RouteRegistrar
+- **Gestión de Versiones** ✅ Centralizada con función `version()`
 
 ### 📋 **v0.3.0 - Sistema CLI (Planificado)**
 - **Generadores de Código** ⏳ CRUDs automáticos
