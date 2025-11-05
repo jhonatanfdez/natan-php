@@ -8,7 +8,7 @@
  * Se irán agregando más funciones según se necesiten.
  * 
  * @package NatanPHP\Core
- * @version 0.1.1
+ * @version 0.1.2
  * @author Jhonatan Fernández
  */
 

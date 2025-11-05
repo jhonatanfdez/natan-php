@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.1** — Helpers esenciales optimizados (8 funciones), documentación sincronizada, y preparado para implementar Request.php.
+  📍 **Estado actual: v0.1.2** — Request.php implementado (20+ métodos HTTP), helpers optimizados, y preparado para Router.php.
   
-  • **Changelog**: ver [v0.1.1 en CHANGELOG.md](CHANGELOG.md#v011---2025-11-04) · **Tag**: [v0.1.1](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.1)
+  • **Changelog**: ver [v0.1.2 en CHANGELOG.md](CHANGELOG.md#v012---2025-11-04) · **Tag**: [v0.1.2](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.2)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.2**: 🌐 **Request.php implementado** - Clase completa para manejo de peticiones HTTP con 20+ métodos, soporte para GET/POST/archivos/headers, detección de AJAX/JSON, integración con helpers del framework.
 - **v0.1.1**: 🔧 **Optimización de helpers** - Simplificación de 20+ funciones a 8 esenciales con documentación detallada, estrategia incremental establecida, y sincronización completa de documentación con código real.
 - **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers esenciales con 8 funciones básicas (dd(), env(), config(), asset(), url(), str_slug(), blank(), filled()), comando CLI `natan` preparado.
 - **Helpers optimizados**: Solo funciones prioritarias - Debugging (dd), configuración (env, config), URLs (asset, url), utilidades de strings (str_slug), validación (blank, filled) con documentación detallada.

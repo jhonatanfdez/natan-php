@@ -7,6 +7,11 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+### Próximo
+- Implementación de `core/Router.php` para sistema de rutas dinámico
+
+## [v0.1.2] - 2025-11-04
+
 ### Agregado
 - Implementación completa de `core/Request.php` para manejo de peticiones HTTP
 - Más de 20 métodos públicos para acceso a datos de peticiones
@@ -16,8 +21,9 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Manejo seguro de archivos subidos con validación
 - Soporte para proxies y load balancers en detección de IP
 
-### Próximo
-- Implementación de `core/Router.php` para sistema de rutas dinámico
+### Mejorado
+- Documentación del framework actualizada con funcionalidades de Request.php
+- Roadmap actualizado reflejando progreso en clases core
 
 ## [v0.1.1] - 2025-11-04
 

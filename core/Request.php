@@ -10,7 +10,7 @@ namespace Core;
  * headers y otra información de la petición.
  * 
  * @package NatanPHP\Core
- * @version 0.1.1
+ * @version 0.1.2
  * @author Jhonatan Fernández
  */
 class Request
