@@ -86,13 +86,78 @@ class NatanCLI
         echo "🔧 Versión: " . version() . "\n";
         echo "⚡ Router: router.php\n";
         echo "\n";
+        
+        // Verificar si el puerto está en uso y liberarlo
+        $this->checkAndFreePort($port);
+        
         echo "💡 Presiona Ctrl+C para detener el servidor\n";
         echo "🌐 Abre http://{$host}:{$port} en tu navegador\n";
         echo str_repeat("=", 50) . "\n";
 
-        // Iniciar servidor PHP built-in
+        // Cambiar al directorio public para encontrar router.php
+        $publicDir = __DIR__ . '/public';
+        if (!is_dir($publicDir)) {
+            echo "❌ Error: No se encuentra el directorio public/\n";
+            echo "💡 Asegúrate de ejecutar desde la raíz del proyecto.\n";
+            exit(1);
+        }
+        
+        // Cambiar al directorio public y ejecutar servidor
+        chdir($publicDir);
         $command = "php -S {$host}:{$port} router.php";
+        echo "🔄 Ejecutando: {$command}\n";
+        echo "📂 Directorio: " . getcwd() . "\n";
+        echo str_repeat("=", 50) . "\n";
+        
         passthru($command);
+    }
+
+    /**
+     * Verificar si un puerto está en uso y liberarlo si es necesario
+     */
+    private function checkAndFreePort($port)
+    {
+        echo "🔍 Verificando puerto {$port}...\n";
+        
+        // Intentar múltiples métodos para encontrar procesos
+        $commands = [
+            "lsof -ti:{$port} 2>/dev/null",
+            "fuser -n tcp {$port} 2>/dev/null",
+            "netstat -tlnp 2>/dev/null | grep :{$port} | awk '{print \$7}' | cut -d'/' -f1"
+        ];
+        
+        $pids = [];
+        foreach ($commands as $command) {
+            $output = shell_exec($command);
+            if (!empty(trim($output ?? ''))) {
+                $foundPids = array_filter(explode("\n", trim($output ?? '')));
+                foreach ($foundPids as $pid) {
+                    $pid = trim($pid);
+                    if (!empty($pid) && is_numeric($pid)) {
+                        $pids[] = $pid;
+                    }
+                }
+                break; // Si encontramos PIDs con un método, no necesitamos probar otros
+            }
+        }
+        
+        if (!empty($pids)) {
+            echo "⚠️  Puerto {$port} está en uso por " . count($pids) . " proceso(s)\n";
+            
+            foreach ($pids as $pid) {
+                echo "🔄 Terminando proceso PID: {$pid}\n";
+                exec("kill -9 {$pid} 2>/dev/null");
+            }
+            
+            // Esperar un momento para que los puertos se liberen
+            echo "⏳ Esperando que el puerto se libere...\n";
+            sleep(3);
+            echo "✅ Puerto {$port} debería estar disponible ahora\n";
+        } else {
+            echo "✅ Puerto {$port} disponible\n";
+        }
+        
+        echo "\n";
     }
 
     /**
