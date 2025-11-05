@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace NatanPHP\Core;
 
 /**
  * Request - Manejo de peticiones HTTP del framework NatanPHP
