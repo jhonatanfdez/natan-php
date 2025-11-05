@@ -7,8 +7,17 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+### Agregado
+- Implementación completa de `core/Request.php` para manejo de peticiones HTTP
+- Más de 20 métodos públicos para acceso a datos de peticiones
+- Soporte completo para GET, POST, FILES, headers y detección de métodos HTTP
+- Integración con helpers existentes del framework (`filled()`)
+- Detección automática de peticiones AJAX y JSON para APIs
+- Manejo seguro de archivos subidos con validación
+- Soporte para proxies y load balancers en detección de IP
+
 ### Próximo
-- Implementación de `core/Request.php` para manejo de peticiones HTTP
+- Implementación de `core/Router.php` para sistema de rutas dinámico
 
 ## [v0.1.1] - 2025-11-04
 

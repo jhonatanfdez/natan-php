@@ -60,6 +60,21 @@
 
 **📝 Nota**: Funciones adicionales se agregarán incrementalmente según necesidades del desarrollo.
 
+### 🌐 **Sistema de Peticiones HTTP (Request.php)**
+- **Manejo Completo de Peticiones** ✅ Funcional
+  - `method()`, `isGet()`, `isPost()` - Detección de métodos HTTP
+  - `uri()`, `fullUrl()` - Acceso a URLs con y sin query strings
+  - `get()`, `post()`, `input()` - Acceso seguro a datos de entrada
+  - `all()`, `only()`, `except()` - Filtrado flexible de datos
+  
+- **Funcionalidades Avanzadas** ✅ Funcional
+  - `has()`, `filled()` - Validación de existencia y contenido
+  - `file()`, `hasFile()` - Manejo de archivos subidos
+  - `header()`, `ip()`, `userAgent()` - Información de petición
+  - `isAjax()`, `wantsJson()` - Detección para APIs modernas
+
+**🔗 Integración**: Usa helpers del framework y prepara base para Router y Controladores.
+
 ### 📁 **Gestión de Proyecto**
 - **Entorno de Desarrollo** ✅ DDEV configurado
   - Base de datos MySQL lista
@@ -78,11 +93,11 @@
   - Sistema de ayuda implementable
 
 ### 🔜 **Próximo en Desarrollo**
-**PASO 8: Implementar Core/Request.php**
-- Clase para manejo de peticiones HTTP (GET, POST, PUT, DELETE)
-- Métodos para acceder a parámetros, headers, archivos
-- Validación de entrada y sanitización
-- Base para el sistema de routing que viene después
+**PASO 9: Implementar Core/Router.php**
+- Sistema de rutas dinámico con parámetros y métodos HTTP
+- Integración con Request.php para enrutamiento inteligente
+- Soporte para middleware y grupos de rutas
+- Base para conectar URLs con Controladores
 
 ---
 
@@ -198,8 +213,8 @@ php natan table describe Product
 - **CLI** ✅ Comando `natan` base preparado
 
 ### 🔄 **v0.2.0 - Core Classes (En Desarrollo)**
-- **Core/Request.php** 🔄 **PRÓXIMO** - Manejo de peticiones HTTP
-- **Core/Router.php** ⏳ Pendiente - Sistema de rutas dinámico
+- **Core/Request.php** ✅ **COMPLETADO** - Manejo de peticiones HTTP (20+ métodos)
+- **Core/Router.php** 🔄 **PRÓXIMO** - Sistema de rutas dinámico
 - **Core/View.php** ⏳ Pendiente - Motor de plantillas tipo Blade
 - **Core/Database.php** ⏳ Pendiente - ORM y Query Builder
 
