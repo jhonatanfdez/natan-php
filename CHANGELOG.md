@@ -10,8 +10,59 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ### Próximo
 - Implementación de named routes en Router.php
 - Sistema de configuración avanzado
-- Middleware system completo
 - Database migrations y ORM
+- Middleware system completo
+
+## [v0.1.5] - 2025-11-04
+
+### Agregado
+- **Comando CLI `natan serve` robusto** - Gestión inteligente de puertos
+  - Auto-detección de puertos ocupados con múltiples métodos (lsof, fuser, netstat)
+  - Terminación automática de procesos que usan puertos
+  - Liberación inteligente de puertos antes de iniciar servidor
+  - Manejo automático de directorios (cambio a public/)
+  - Verificación multi-método para máxima compatibilidad en diferentes sistemas
+
+### Mejorado
+- **Función `checkAndFreePort()`** - Gestión robusta de puertos
+  - Soporte para múltiples comandos de detección de procesos
+  - Mejor feedback al usuario sobre estado de puertos
+  - Manejo de errores mejorado con múltiples fallbacks
+  - Espera inteligente para liberación de puertos
+
+- **Compatibilidad PHP 8.2+**
+  - Fix de warnings "trim(): Passing null deprecated"
+  - Manejo seguro de valores null en operaciones de string
+  - Código compatible con versiones modernas de PHP
+
+- **Documentación del proyecto**
+  - Historial extendido en comandos_ejecutados.txt
+  - Documentación de correcciones post-release v0.1.4
+  - Procedimientos de verificación y testing actualizados
+
+### Arreglado
+- **Problema crítico**: Puerto ocupado impedía iniciar servidor de desarrollo
+- **PHP 8.2 warnings**: Eliminados warnings de deprecación en trim()
+- **Manejo de directorios**: Cambio automático al directorio correcto (public/)
+- **Detección de procesos**: Múltiples métodos para diferentes sistemas operativos
+
+### Cambiado
+- **Comando `natan serve`**: Ahora es completamente automático y robusto
+- **Feedback del usuario**: Información más detallada sobre el estado del servidor
+- **Gestión de errores**: Manejo elegante de puertos ocupados
+
+### Testing
+- ✅ Comando natan serve funcional en puertos libres
+- ✅ Auto-detección de puertos ocupados verificada
+- ✅ Liberación automática de puertos probada
+- ✅ Compatibilidad PHP 8.2+ confirmada
+- ✅ Manejo de directorios correcto (public/public)
+
+### Técnico
+- **Filosofía "Simplicidad con Propósito"**: CLI que funciona sin configuración
+- **Zero-friction development**: Servidor que se inicia automáticamente
+- **Cross-platform compatibility**: Múltiples métodos de detección de procesos
+- **Professional UX**: Feedback claro y útil para desarrolladores
 
 ## [v0.1.4] - 2025-11-04
 

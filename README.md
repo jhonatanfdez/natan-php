@@ -11,27 +11,47 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.4** — Sistema de URLs dinámicas implementado, comando CLI `natan` funcional, detección automática Web/API mejorada, funcionamiento perfecto en DDEV y PHP built-in server.
+  📍 **Estado actual: v0.1.5** — CLI robusto con gestión inteligente de puertos, auto-liberación de procesos ocupados, compatibilidad PHP 8.2+, comando `natan serve` completamente automático y profesional.
   
-  • **Changelog**: ver [v0.1.4 en CHANGELOG.md](CHANGELOG.md#v014---2025-11-04) · **Tag**: [v0.1.4](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.4)
+  • **Changelog**: ver [v0.1.5 en CHANGELOG.md](CHANGELOG.md#v015---2025-11-04) · **Tag**: [v0.1.5](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.5)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.5**: 🛠️ **CLI Robusto** - Comando `natan serve` con gestión inteligente de puertos (auto-detección con lsof/fuser/netstat), terminación automática de procesos ocupados, liberación inteligente de puertos, manejo automático de directorios, compatibilidad PHP 8.2+ (fix warnings trim), CLI completamente automático y profesional.
 - **v0.1.4**: 🌐 **Sistema de URLs Dinámicas + CLI** - URLs completamente adaptables automáticamente a cualquier entorno (DDEV/PHP built-in/Apache), comando `natan serve` funcional, detección mejorada de controladores Web vs API, eliminación de URLs hardcodeadas, configuración zero-configuration.
 - **v0.1.3**: 🛣️ **Router.php implementado** - Sistema completo de rutas dinámico con métodos HTTP (GET/POST/PUT/DELETE/PATCH), parámetros dinámicos {id}/{slug}, grupos con prefijos/middleware, resolución automática Web vs API, inyección de parámetros, patrón Fluent Interface, gestión centralizada de versiones.
 - **v0.1.2**: 🌐 **Request.php implementado** - Clase completa para manejo de peticiones HTTP con 20+ métodos, soporte para GET/POST/archivos/headers, detección de AJAX/JSON, integración con helpers del framework.
 - **v0.1.1**: 🔧 **Optimización de helpers** - Simplificación de 20+ funciones a 8 esenciales con documentación detallada, estrategia incremental establecida, y sincronización completa de documentación con código real.
 - **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers esenciales con 8 funciones básicas (dd(), env(), config(), asset(), url(), str_slug(), blank(), filled()), comando CLI `natan` preparado.
-- **Helpers optimizados**: Solo funciones prioritarias - Debugging (dd), configuración (env, config), URLs (asset, url), utilidades de strings (str_slug), validación (blank, filled) con documentación detallada.
-- **Arquitectura innovadora**: Separación clara entre Web y API, estructura educativa con core/ visible, filosofía "Simplicidad con Propósito".
-- **Base sólida**: Composer con PSR-4, dependencias instaladas, entorno DDEV configurado, git inicializado.
 
-## ⚡ **Funcionalidades Actuales (v0.1.4)**
+## ⚡ **Funcionalidades Actuales (v0.1.5)**
 
-### 🌐 **Sistema de URLs Dinámicas** ✅ **NUEVO**
+### 🛠️ **CLI Robusto** ✅ **NUEVO v0.1.5**
+- **Comando `natan serve` Completamente Automático** ✅ Completo
+  - Auto-detección de puertos ocupados con múltiples métodos (lsof, fuser, netstat)
+  - Terminación automática de procesos que usan puertos
+  - Liberación inteligente de puertos antes de iniciar servidor
+  - Manejo automático de directorios (cambio a public/)
+  - Compatibilidad cross-platform con múltiples sistemas operativos
+
+- **Gestión Robusta de Procesos** ✅ Completo
+  - Función `checkAndFreePort()` con múltiples métodos de detección
+  - Mejor feedback al usuario sobre estado de puertos
+  - Manejo de errores con múltiples fallbacks
+  - Espera inteligente para liberación de puertos
+  - Professional UX con información detallada
+
+### 🔧 **Compatibilidad PHP 8.2+** ✅ **NUEVO v0.1.5**
+- **Fix de Warnings PHP 8.2** ✅ Completo
+  - Eliminados warnings "trim(): Passing null deprecated"
+  - Manejo seguro de valores null en operaciones de string
+  - Código compatible con versiones modernas de PHP
+  - Zero-friction development experience
+
+### 🌐 **Sistema de URLs Dinámicas** ✅ **ESTABLE**
 - **Detección Automática de Entorno** ✅ Completo
   - Auto-detección de protocolo (HTTP/HTTPS) desde `$_SERVER['HTTPS']`
   - Detección automática de host y puerto del servidor actual
