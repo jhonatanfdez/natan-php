@@ -8,7 +8,32 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Próximo
-- Implementación de controladores de ejemplo para probar Router.php
+- Implementación de sistema de configuración completo
+- Named routes con parámetros dinámicos
+- Sistema de middleware robusto
+
+## [v0.1.4] - 2025-11-04
+
+### Agregado
+- Sistema de generación de URLs dinámicas completamente funcional
+  - Función `url()` con detección automática de protocolo y host
+  - Soporte multi-entorno: DDEV (HTTPS) y PHP built-in server (HTTP)
+  - URLs dinámicas en HomeController para enlaces API
+  - Homepage con enlaces que se adaptan automáticamente al entorno
+- Función `route()` preparatoria para named routes
+- Documentación PHPDoc completa y detallada para todas las funciones helper
+- Ejemplos reales de uso en diferentes entornos de desarrollo
+
+### Mejorado
+- Función `asset()` ahora utiliza el sistema de URLs dinámicas
+- Función `config()` con documentación expandida
+- HomeController pasa URLs dinámicas a la vista
+- Vista home/index.php utiliza variables dinámicas en lugar de URLs hardcodeadas
+
+### Técnico
+- Detección automática de $_SERVER['HTTP_HOST'] y $_SERVER['REQUEST_SCHEME']
+- Fallbacks seguros para entornos de desarrollo local
+- Compatible con proxy reverso y configuraciones de contenedor
 
 ## [v0.1.3] - 2025-11-04
 
