@@ -7,15 +7,22 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
-### Agregado
-- Implementación de `core/helpers.php` con 20+ funciones globales
-- Funciones de debugging: `dd()`
-- Funciones de configuración: `env()`, `config()`
-- Funciones de URL: `asset()`, `url()`, `redirect()`
-- Funciones de seguridad: `csrf_token()`, `csrf_field()`, `method_field()`
-- Funciones de utilidades: `str_slug()`, `str_limit()`, `old()`
-- Funciones de rutas: `app_path()`, `storage_path()`, `public_path()`
-- Funciones de respuesta: `json_response()`, `view()`
+### Cambiado
+- Simplificación de `core/helpers.php` de 20+ funciones a 8 funciones esenciales
+- Reorganización en secciones claras: Debugging, Configuración, URLs, Strings, Utilidades
+- Mejora significativa de documentación con comentarios detallados y ejemplos
+- Estrategia incremental: agregar funciones solo cuando se necesiten
+
+### Funciones Mantenidas
+- **Debugging**: `dd()` - Debug con var_dump y terminación
+- **Configuración**: `env()`, `config()` - Variables y configuración
+- **URLs**: `url()`, `asset()` - URLs absolutas y assets
+- **Strings**: `str_slug()` - Conversión a slug
+- **Utilidades**: `blank()`, `filled()` - Validación de contenido
+
+### Eliminado
+- Funciones no prioritarias que se agregarán según necesidades
+- Backup mantenido en `helpers_backup.php`
 
 ## [v0.1.0] - 2025-10-28
 

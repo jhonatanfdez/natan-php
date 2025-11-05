@@ -11,7 +11,7 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.0** — Framework base con estructura Web/API, 20+ helpers funcionales, autoloading PSR-4, y preparado para desarrollo de clases core.
+  📍 **Estado actual: v0.1.0** — Framework base con estructura Web/API, 8 helpers esenciales optimizados, autoloading PSR-4, y preparado para desarrollo de clases core.
   
   • **Changelog**: ver [v0.1.0 en CHANGELOG.md](CHANGELOG.md#v010---2025-10-28) · **Tag**: [v0.1.0](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.0)
 </div>
@@ -20,8 +20,8 @@
 
 ## 📰 **Novedades Recientes**
 
-- **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers con 20+ funciones (dd(), env(), config(), asset(), url(), csrf_token(), str_slug(), etc.), comando CLI `natan` preparado.
-- **Helpers completos**: Debugging (dd), configuración (env, config), URLs (asset, url), seguridad (csrf_token, csrf_field), utilidades de strings (str_slug, str_limit), y más funciones esenciales.
+- **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers esenciales con 8 funciones básicas (dd(), env(), config(), asset(), url(), str_slug(), blank(), filled()), comando CLI `natan` preparado.
+- **Helpers optimizados**: Solo funciones prioritarias - Debugging (dd), configuración (env, config), URLs (asset, url), utilidades de strings (str_slug), validación (blank, filled) con documentación detallada.
 - **Arquitectura innovadora**: Separación clara entre Web y API, estructura educativa con core/ visible, filosofía "Simplicidad con Propósito".
 - **Base sólida**: Composer con PSR-4, dependencias instaladas, entorno DDEV configurado, git inicializado.
 
@@ -38,33 +38,26 @@
   - Organización por función, no por tipo de archivo
   - Escalabilidad desde proyectos pequeños hasta complejos
 
-### 🛠️ **Sistema de Helpers (20+ funciones)**
+### 🛠️ **Sistema de Helpers (8 funciones esenciales)**
 - **Debugging** ✅ Funcional
-  - `dd($var)` - Debug elegante con var_dump y salida
+  - `dd(...$vars)` - Debug elegante con var_dump y terminación de script
   
 - **Configuración** ✅ Funcional
-  - `env($key, $default)` - Variables de entorno
-  - `config($key, $default)` - Configuración de aplicación
+  - `env($key, $default)` - Variables de entorno con conversión de tipos
+  - `config($key, $default)` - Configuración de aplicación con notación punto
   
 - **URLs y Assets** ✅ Funcional
-  - `asset($path)` - URLs de recursos estáticos
   - `url($path)` - URLs absolutas de la aplicación
-  
-- **Seguridad** ✅ Funcional
-  - `csrf_token()` - Generación de tokens CSRF
-  - `csrf_field()` - Campo HTML con token
+  - `asset($path)` - URLs de recursos estáticos (CSS, JS, imágenes)
   
 - **Utilidades de String** ✅ Funcional
-  - `str_slug($string)` - Conversión a URL amigable
-  - `str_limit($string, $limit)` - Limitar longitud de texto
-  - `str_random($length)` - Generar cadena aleatoria
+  - `str_slug($string, $separator)` - Conversión a slug amigable para URLs
   
-- **Utilidades Generales** ✅ Funcional
-  - `collect($array)` - Wrapper para arrays
-  - `now()` - Fecha/hora actual
-  - `today()` - Fecha actual
-  - `blank($value)` - Verificar si está vacío
-  - `filled($value)` - Verificar si tiene contenido
+- **Utilidades de Validación** ✅ Funcional
+  - `blank($value)` - Verificar si está vacío (null, '', arrays vacíos, espacios)
+  - `filled($value)` - Verificar si tiene contenido (opuesto de blank)
+
+**📝 Nota**: Funciones adicionales se agregarán incrementalmente según necesidades del desarrollo.
 
 ### 📁 **Gestión de Proyecto**
 - **Entorno de Desarrollo** ✅ DDEV configurado
@@ -222,32 +215,25 @@ php natan table describe Product
 ### 📋 **Funciones Helpers Implementadas (v0.1.0)**
 ```php
 // Debugging ✅ FUNCIONANDO
-dd($variable);                          // Debug elegante con var_dump y exit
+dd($usuario, $productos);               // Debug elegante con var_dump y exit
 
 // Configuración ✅ FUNCIONANDO
-env('APP_NAME', 'NatanPHP');           // Variables de entorno con default
-config('app.name', 'Framework');       // Configuración de aplicación
+env('APP_NAME', 'NatanPHP');           // Variables de entorno con conversión de tipos
+config('app.name', 'Framework');       // Configuración con notación punto
 
 // URLs y Assets ✅ FUNCIONANDO
-asset('css/app.css');                   // Assets: /public/assets/css/app.css
-url('/productos');                      // URLs absolutas de la aplicación
-
-// Seguridad ✅ FUNCIONANDO
-csrf_token();                           // Token CSRF único por sesión
-csrf_field();                           // Campo HTML: <input type="hidden" name="_token" value="...">
+url('/productos');                      // URLs absolutas: http://localhost:8000/productos
+asset('css/app.css');                   // Assets: http://localhost:8000/assets/css/app.css
 
 // Utilidades de String ✅ FUNCIONANDO
 str_slug('Mi Título Genial');           // Resultado: "mi-titulo-genial"
-str_limit($texto, 100, '...');          // Limitar texto con sufijo
-str_random(16);                         // Cadena aleatoria segura
 
-// Utilidades Generales ✅ FUNCIONANDO
-collect([1, 2, 3]);                     // Wrapper para arrays con métodos útiles
-now();                                  // DateTime actual
-today();                                // DateTime solo fecha
-blank($value);                          // true si es null, '', 0, [], false
-filled($value);                         // Opuesto de blank()
+// Utilidades de Validación ✅ FUNCIONANDO
+blank($value);                          // true si es null, '', array vacío, espacios
+filled($value);                         // true si tiene contenido (opuesto de blank)
 ```
+
+**💡 Estrategia Incremental**: Las funciones se van agregando según necesidades reales del desarrollo.
 
 ## 🚀 **Inicio Rápido**
 
