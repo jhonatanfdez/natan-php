@@ -1,0 +1,12 @@
+First (NatanPHP\Tests\Unit\First)
+ [x] Version function exists
+ [x] Version returns valid string
+
+Helpers (NatanPHP\Tests\Unit\Helpers)
+ [x] Env function exists
+ [x] Env returns default
+ [x] Str slug function exists
+ [x] Str slug basic conversion
+ [x] Blank function works
+ [x] Filled function works
+

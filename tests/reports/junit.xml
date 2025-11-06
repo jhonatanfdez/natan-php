@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="CLI Arguments" tests="8" assertions="13" errors="0" failures="0" skipped="0" time="0.012671">
+    <testsuite name="NatanPHP\Tests\Unit\FirstTest" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/FirstTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.009984">
+      <testcase name="testVersionFunctionExists" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/FirstTest.php" line="27" class="NatanPHP\Tests\Unit\FirstTest" classname="NatanPHP.Tests.Unit.FirstTest" assertions="1" time="0.008506"/>
+      <testcase name="testVersionReturnsValidString" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/FirstTest.php" line="37" class="NatanPHP\Tests\Unit\FirstTest" classname="NatanPHP.Tests.Unit.FirstTest" assertions="2" time="0.001478"/>
+    </testsuite>
+    <testsuite name="NatanPHP\Tests\Unit\HelpersTest" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" tests="6" assertions="10" errors="0" failures="0" skipped="0" time="0.002687">
+      <testcase name="testStrSlugBasicConversion" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" line="50" class="NatanPHP\Tests\Unit\HelpersTest" classname="NatanPHP.Tests.Unit.HelpersTest" assertions="1" time="0.000889"/>
+      <testcase name="testEnvFunctionExists" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" line="25" class="NatanPHP\Tests\Unit\HelpersTest" classname="NatanPHP.Tests.Unit.HelpersTest" assertions="1" time="0.000299"/>
+      <testcase name="testEnvReturnsDefault" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" line="33" class="NatanPHP\Tests\Unit\HelpersTest" classname="NatanPHP.Tests.Unit.HelpersTest" assertions="1" time="0.000261"/>
+      <testcase name="testFilledFunctionWorks" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" line="69" class="NatanPHP\Tests\Unit\HelpersTest" classname="NatanPHP.Tests.Unit.HelpersTest" assertions="3" time="0.000641"/>
+      <testcase name="testStrSlugFunctionExists" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" line="42" class="NatanPHP\Tests\Unit\HelpersTest" classname="NatanPHP.Tests.Unit.HelpersTest" assertions="1" time="0.000276"/>
+      <testcase name="testBlankFunctionWorks" file="/Users/prueba/Desktop/docker/NatanPHP-Framework/docroot/tests/Unit/HelpersTest.php" line="59" class="NatanPHP\Tests\Unit\HelpersTest" classname="NatanPHP.Tests.Unit.HelpersTest" assertions="3" time="0.000321"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
