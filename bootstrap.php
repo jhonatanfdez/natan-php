@@ -36,27 +36,29 @@ $dotenv->safeLoad();
 
 // Los helpers ya se cargan automáticamente por Composer
 
-// Importar clases principales
+// Importar clases principales (siempre disponibles)
 use NatanPHP\Core\Router;
 use NatanPHP\Core\Request;
 
-// Crear instancia de Request
-$request = new Request();
+// Solo ejecutar router web si NO estamos en modo CLI
+if (php_sapi_name() !== 'cli') {
+    // Crear instancia de Request
+    $request = new Request();
 
-try {
-    // Cargar rutas web
-    require_once __DIR__ . '/routes/web.php';
-    
-    // Cargar rutas API
-    require_once __DIR__ . '/routes/api.php';
-    
-    // Resolver la ruta actual y ejecutar el controlador
-    $response = Router::resolve($request);
-    
-    // Si el controlador retorna contenido, mostrarlo
-    if ($response) {
-        echo $response;
-    }
+    try {
+        // Cargar rutas web
+        require_once __DIR__ . '/routes/web.php';
+        
+        // Cargar rutas API
+        require_once __DIR__ . '/routes/api.php';
+        
+        // Resolver la ruta actual y ejecutar el controlador
+        $response = Router::resolve($request);
+        
+        // Si el controlador retorna contenido, mostrarlo
+        if ($response) {
+            echo $response;
+        }
     
 } catch (Exception $e) {
     // Manejo básico de errores
@@ -95,3 +97,4 @@ try {
 </html>';
     }
 }
+} // Fin del if (php_sapi_name() !== 'cli')
