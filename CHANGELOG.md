@@ -13,6 +13,63 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Database migrations y ORM
 - Middleware system completo
 
+## [v0.1.7] - 2025-11-05
+
+### Agregado
+- **📋 .gitignore profesional** - Configuración completa para proyectos PHP
+  - Ignorar archivos de documentación local (comandos_ejecutados.txt)
+  - Exclusión de archivos sensibles (.env, configuraciones locales)
+  - Reglas para dependencias (vendor/, node_modules/)
+  - Archivos de caché y temporales excluidos
+  - Archivos de sistema operativo y IDEs ignorados
+  - Configuración lista para desarrollo colaborativo
+
+- **📖 Documentación de instalación mejorada**
+  - Instrucciones claras para `composer install`
+  - Pasos específicos para configuración inicial
+  - Comandos detallados para verificar instalación
+  - Información sobre estructura de directorios (docroot/)
+
+### Mejorado
+- **Gestión de archivos de documentación**
+  - Consolidación de comandos_ejecutados.txt en ubicación correcta
+  - Archivo de comandos ignorado por git para mantener historial local
+  - Organización limpia entre código y documentación
+
+- **README.md con instrucciones de instalación**
+  - Sección "Inicio Rápido" completamente reescrita
+  - Comandos específicos para clonar, instalar dependencias y configurar
+  - Información sobre cómo verificar la instalación correcta
+  - URLs actualizadas para servidor de desarrollo
+
+### Arreglado
+- **Organización de archivos**: Eliminada duplicación de comandos_ejecutados.txt
+- **Control de versiones**: .gitignore previene subida de archivos innecesarios
+- **Documentación**: Instrucciones de instalación precisas y completas
+
+### Cambiado
+- **Versión del framework**: Actualizada a v0.1.7 en helpers.php
+- **README.md**: Estado actual y novedades actualizadas
+- **CHANGELOG.md**: Nueva entrada para v0.1.7 con cambios organizacionales
+
+### Configuración
+- **.gitignore**: Creado con reglas completas para desarrollo PHP profesional
+- **Documentación**: Comandos de instalación actualizados y verificados
+- **Gestión de archivos**: Estrategia clara para archivos que deben/no deben subir a git
+
+### Beneficios
+- 🔧 **Instalación simplificada**: Comandos claros y directos
+- 📁 **Proyecto organizado**: Separación adecuada código/documentación
+- 🚀 **Desarrollo colaborativo**: .gitignore profesional
+- 📖 **Documentación precisa**: Instrucciones que funcionan
+- 🎯 **Foco en funcionalidad**: Framework listo para usar tras instalación
+
+### Compatibilidad
+- ✅ **Todas las versiones anteriores**: Sin breaking changes
+- ✅ **CLI multiplataforma**: Mantiene compatibilidad Windows/macOS/Linux
+- ✅ **DDEV y desarrollo local**: Configuración preservada
+- ✅ **Composer**: Autoloading y dependencias funcionando
+
 ## [v0.1.6] - 2025-11-04
 
 ### Agregado

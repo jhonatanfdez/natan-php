@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.6** — CLI multiplataforma con compatibilidad completa Windows/macOS/Linux, auto-detección de SO, comandos nativos para cada plataforma, UX mejorado sin confusión técnica.
+  📍 **Estado actual: v0.1.7** — Framework consolidado con CLI multiplataforma, gestión completa de archivos y documentación organizada. Instalación simplificada con instrucciones claras para composer install.
   
-  • **Changelog**: ver [v0.1.6 en CHANGELOG.md](CHANGELOG.md#v016---2025-11-04) · **Tag**: [v0.1.6](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.6)
+  • **Changelog**: ver [v0.1.7 en CHANGELOG.md](CHANGELOG.md#v017---2025-11-05) · **Tag**: [v0.1.7](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.7)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.7**: 📋 **Organización y Documentación** - Gestión completa de archivos con .gitignore profesional, documentación de instalación mejorada con composer install, consolidación de archivos de comandos ejecutados, instrucciones claras para configuración inicial y estructura de proyecto optimizada.
 - **v0.1.6**: 🖥️ **CLI Multiplataforma** - Compatibilidad completa Windows/macOS/Linux con auto-detección de SO, comandos nativos para cada plataforma (netstat/taskkill en Windows, lsof/kill en Unix), UX mejorado sin confusión técnica, mensajes claros con URLs útiles en lugar de 0.0.0.0.
 - **v0.1.5**: 🛠️ **CLI Robusto** - Comando `natan serve` con gestión inteligente de puertos (auto-detección con lsof/fuser/netstat), terminación automática de procesos ocupados, liberación inteligente de puertos, manejo automático de directorios, compatibilidad PHP 8.2+ (fix warnings trim), CLI completamente automático y profesional.
 - **v0.1.4**: 🌐 **Sistema de URLs Dinámicas + CLI** - URLs completamente adaptables automáticamente a cualquier entorno (DDEV/PHP built-in/Apache), comando `natan serve` funcional, detección mejorada de controladores Web vs API, eliminación de URLs hardcodeadas, configuración zero-configuration.
@@ -366,12 +367,33 @@ filled($value);                         // true si tiene contenido (opuesto de b
 git clone https://github.com/jhonatanfdez/natan-php.git
 cd natan-php
 
-# Instalar dependencias
+# Cambiar al directorio docroot (donde está el framework)
+cd docroot
+
+# Instalar dependencias con Composer
 composer install
 
-# Configurar entorno
+# Configurar archivo de entorno
 cp .env.example .env
-php natan install
+
+# Hacer ejecutable el comando CLI (macOS/Linux)
+chmod +x natan
+
+# Verificar instalación
+php natan version
+```
+
+### 2. **Iniciar servidor de desarrollo**
+```bash
+# Iniciar servidor en puerto por defecto (8080)
+php natan serve
+
+# O especificar host y puerto
+php natan serve localhost 3000
+
+# Visitar la aplicación
+# Local: http://localhost:8080
+# DDEV: https://natanphp-framework.ddev.site
 ```
 
 ### 2. **Configurar Base de Datos**
