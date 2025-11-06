@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.7** — Framework consolidado con CLI multiplataforma, gestión completa de archivos y documentación organizada. Instalación simplificada con instrucciones claras para composer install.
+  📍 **Estado actual: v0.1.8** — Framework con sistema de testing completo PHPUnit integrado, calidad garantizada con tests automatizados, documentación de testing y comandos de verificación. Testing incremental con 8 tests y 13 assertions validando funcionalidades principales.
   
-  • **Changelog**: ver [v0.1.7 en CHANGELOG.md](CHANGELOG.md#v017---2025-11-05) · **Tag**: [v0.1.7](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.7)
+  • **Changelog**: ver [v0.1.8 en CHANGELOG.md](CHANGELOG.md#v018---2025-11-05) · **Tag**: [v0.1.8](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.8)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.8**: 🧪 **Sistema de Testing Completo** - Framework de pruebas automatizadas con PHPUnit 10.5.58, tests unitarios fundamentales (8 tests, 13 assertions), estructura incremental con FirstTest.php y HelpersTest.php, scripts de testing en composer, bootstrap minimalista, documentación completa de comandos de testing.
 - **v0.1.7**: 📋 **Organización y Documentación** - Gestión completa de archivos con .gitignore profesional, documentación de instalación mejorada con composer install, consolidación de archivos de comandos ejecutados, instrucciones claras para configuración inicial y estructura de proyecto optimizada.
 - **v0.1.6**: 🖥️ **CLI Multiplataforma** - Compatibilidad completa Windows/macOS/Linux con auto-detección de SO, comandos nativos para cada plataforma (netstat/taskkill en Windows, lsof/kill en Unix), UX mejorado sin confusión técnica, mensajes claros con URLs útiles en lugar de 0.0.0.0.
 - **v0.1.5**: 🛠️ **CLI Robusto** - Comando `natan serve` con gestión inteligente de puertos (auto-detección con lsof/fuser/netstat), terminación automática de procesos ocupados, liberación inteligente de puertos, manejo automático de directorios, compatibilidad PHP 8.2+ (fix warnings trim), CLI completamente automático y profesional.
@@ -56,6 +57,31 @@
   - Manejo de errores con múltiples fallbacks
   - Espera inteligente para liberación de puertos
   - Professional UX con información detallada
+
+### 🧪 **Sistema de Testing (PHPUnit)** ✅ **NUEVO v0.1.8**
+- **Framework de Testing Completo** ✅ PHPUnit 10.5.58 integrado
+  - Configuración phpunit.xml optimizada con bootstrap personalizado
+  - symfony/var-dumper ^6.0 para debugging avanzado en tests
+  - Tests organizados en tests/Unit/ con estructura escalable
+  - Bootstrap minimalista: solo carga autoloader del framework
+
+- **Tests Unitarios Fundamentales** ✅ 8 tests, 13 assertions
+  - FirstTest.php: Validación de functions básicas del framework (2 tests)
+  - HelpersTest.php: Testing de helper functions principales (6 tests)
+  - Cobertura: version(), env(), str_slug(), blank(), filled()
+  - Todos los tests pasando ✅ con output descriptivo --testdox
+
+- **Scripts de Testing en Composer** ✅ Comandos integrados
+  - `composer test` - Ejecutar todos los tests
+  - `composer test-unit` - Solo tests unitarios  
+  - `composer test-feature` - Tests de funcionalidad (preparado)
+  - `composer test-coverage` - Reportes de cobertura (preparado)
+
+- **Comandos PHPUnit Directos** ✅ Control granular
+  - `./vendor/bin/phpunit tests/Unit/` - Todos los tests unitarios
+  - `./vendor/bin/phpunit tests/Unit/ --testdox` - Output descriptivo
+  - `./vendor/bin/phpunit tests/Unit/FirstTest.php` - Tests específicos
+  - Approach incremental: cada nueva función → nuevos tests
 
 ### 🔧 **Compatibilidad PHP 8.2+** ✅ **NUEVO v0.1.5**
 - **Fix de Warnings PHP 8.2** ✅ Completo
@@ -408,7 +434,21 @@ DB_PASS=contraseña
 php natan migrate
 ```
 
-### 3. **Crear tu primer módulo**
+### 4. **Ejecutar tests (verificar instalación)**
+```bash
+# Ejecutar todos los tests unitarios
+./vendor/bin/phpunit tests/Unit/
+
+# Ver detalles descriptivos de cada test
+./vendor/bin/phpunit tests/Unit/ --testdox
+
+# Usar scripts de composer 
+composer test
+
+# Resultado esperado: ✅ OK (8 tests, 13 assertions)
+```
+
+### 5. **Crear tu primer módulo**
 ```bash
 # CRUD completo para web
 php natan create crud Product --web

@@ -8,10 +8,112 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Próximo
-- Implementación de named routes en Router.php
 - Sistema de configuración avanzado
 - Database migrations y ORM
 - Middleware system completo
+- Coverage testing reports
+
+## [v0.1.8] - 2025-11-05
+
+### Agregado
+- **🧪 Sistema de Testing PHPUnit completo** - Framework de pruebas automatizadas
+  - PHPUnit 10.5.58 configurado con dependencias modernas
+  - symfony/var-dumper ^6.0 para debugging avanzado
+  - Configuración phpunit.xml optimizada con bootstrap personalizado
+  - Estructura de tests organizada en tests/Unit/ para pruebas unitarias
+  - Sistema incremental: "solo funciones esenciales, crecimiento controlado"
+
+- **📋 Tests Unitarios Fundamentales**
+  - FirstTest.php: Validación de funciones básicas del framework (2 tests, 3 assertions)
+  - HelpersTest.php: Testing de funciones helper principales (6 tests, 10 assertions)
+  - Cobertura: version(), env(), str_slug(), blank(), filled()
+  - Total: 8 tests ejecutándose con 13 assertions ✅
+
+- **⚙️ Scripts de Testing en Composer**
+  - `composer test` - Ejecutar todos los tests
+  - `composer test-unit` - Solo tests unitarios
+  - `composer test-feature` - Tests de funcionalidad (preparado)
+  - `composer test-coverage` - Reportes de cobertura (preparado)
+
+- **📚 Bootstrap Minimalista**
+  - tests/bootstrap.php simplificado: solo carga autoloader
+  - Filosofía "bridge between PHPUnit and framework"
+  - Eliminada complejidad innecesaria tras experiencia v0.1.7
+  - Approach incremental validado: funciona perfectamente
+
+### Mejorado
+- **Comando CLI para Testing**
+  - Documentación completa de comandos PHPUnit disponibles
+  - Instrucciones específicas: ./vendor/bin/phpunit tests/Unit/
+  - Formato --testdox para output descriptivo y claro
+  - Compatibilidad total con estructura existente del framework
+
+- **Documentación de Testing**
+  - README.md actualizado con sección de testing
+  - Comandos específicos para ejecutar tests
+  - Instrucciones paso a paso para desarrollo con tests
+  - Ejemplos de output esperado y troubleshooting
+
+- **Control de Calidad**
+  - Validación automática de funciones críticas del framework
+  - Prevención de regresiones en funcionalidades básicas
+  - Testing incremental: nuevas funciones → nuevos tests
+  - Documentación completa del proceso en comandos_ejecutados.txt
+
+### Arreglado
+- **Testing setup simplificado**: Eliminada complejidad que causaba "risky tests"
+- **Bootstrap issues**: Approach minimalista resuelve problemas de buffer
+- **Dependency conflicts**: PHPUnit 10.5.58 compatible con symfony/var-dumper 6.0
+- **Path resolution**: Tests encuentran funciones helper automáticamente
+
+### Cambiado
+- **Versión del framework**: Actualizada a v0.1.8 en helpers.php
+- **README.md**: Nueva sección completa de testing con comandos
+- **Composer.json**: Dependencies actualizadas con testing requirements
+- **Estrategia de testing**: Approach incremental vs setup complejo inicial
+
+### Configuración
+- **phpunit.xml**: Configuración working con bootstrap correcto
+- **tests/bootstrap.php**: Minimalista, solo essentials
+- **Autoload-dev**: Namespace NatanPHP\Tests configurado
+- **Git tracking**: Tests incluidos en control de versiones
+
+### Testing Validado
+- ✅ **FirstTest**: version() function existence and validity
+- ✅ **HelpersTest**: env(), str_slug(), blank(), filled() functionality
+- ✅ **PHPUnit Integration**: 8 tests, 13 assertions passing
+- ✅ **Incremental Growth**: Adding tests maintains green status
+- ✅ **Framework Stability**: Core functions protected by automated tests
+
+### Comandos de Testing
+```bash
+# Ejecutar todos los tests
+./vendor/bin/phpunit tests/Unit/
+
+# Ver detalles descriptivos
+./vendor/bin/phpunit tests/Unit/ --testdox
+
+# Ejecutar tests específicos
+./vendor/bin/phpunit tests/Unit/FirstTest.php
+
+# Usando composer scripts
+composer test
+composer test-unit
+```
+
+### Beneficios
+- 🔬 **Calidad garantizada**: Tests automáticos previenen regresiones
+- 📈 **Desarrollo incremental**: Cada nueva función viene con sus tests
+- 🛡️ **Confianza**: Cambios seguros con validación automática
+- 📚 **Educativo**: Aprender testing mientras desarrollas framework
+- 🚀 **Profesional**: Standard de la industria implementado desde el inicio
+
+### Compatibilidad
+- ✅ **PHP 8.0+**: Compatible con todas las versiones soportadas
+- ✅ **Framework v0.1.7**: Tests validan funcionalidad existente
+- ✅ **CLI existente**: Comando natan serve no afectado
+- ✅ **DDEV**: Tests ejecutan perfectamente en entorno desarrollo
+- ✅ **Cross-platform**: Testing funciona en Windows/macOS/Linux
 
 ## [v0.1.7] - 2025-11-05
 

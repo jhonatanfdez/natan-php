@@ -5,7 +5,7 @@
  * NatanPHP Framework - Funciones Helper Esenciales
  * 
  * @package NatanPHP\Core
- * @version 0.1.7
+ * @version 0.1.8
  * @author Natan PHP Framework
  */
 
@@ -16,7 +16,7 @@
  */
 function version(): string
 {
-    return 'v0.1.7';
+    return 'v0.1.8';
 }// =============================================================================
 // DEBUGGING - Funciones para depuración durante desarrollo
 // =============================================================================
