@@ -1,0 +1,156 @@
+# ================================================================================
+# GITIGNORE - NATANPHP FRAMEWORK
+# ================================================================================
+# Archivo de configuración para ignorar archivos que no deben subir al repositorio
+
+# ================================================================================
+# DOCUMENTACIÓN Y LOGS DE DESARROLLO
+# ================================================================================
+comandos_ejecutados.txt
+*.log
+*.logs
+logs/
+*.md~
+*.bak
+*.backup
+
+# ================================================================================
+# ARCHIVOS DE CONFIGURACIÓN SENSIBLES
+# ================================================================================
+.env
+.env.local
+.env.production
+.env.staging
+config/local.php
+config/production.php
+
+# ================================================================================
+# DEPENDENCIAS Y PAQUETES
+# ================================================================================
+/vendor/
+node_modules/
+composer.phar
+package-lock.json
+yarn.lock
+
+# ================================================================================
+# ARCHIVOS DE CACHÉ Y TEMPORALES
+# ================================================================================
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+/storage/tmp/
+/storage/sessions/
+*.cache
+.cache/
+tmp/
+temp/
+
+# ================================================================================
+# ARCHIVOS DEL SISTEMA OPERATIVO
+# ================================================================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+# ================================================================================
+# IDE Y EDITORES
+# ================================================================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PhpStorm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Atom
+.atom/
+
+# ================================================================================
+# COMPILACIÓN Y BUILD
+# ================================================================================
+/build/
+/dist/
+/public/build/
+/public/mix-manifest.json
+/public/hot
+/public/storage
+*.compiled
+
+# ================================================================================
+# ARCHIVOS DE DESARROLLO Y TESTING
+# ================================================================================
+/coverage/
+.phpunit.result.cache
+.phpunit.cache
+phpunit.xml
+.php_cs.cache
+.php-cs-fixer.cache
+
+# ================================================================================
+# ARCHIVOS DE RESPALDO Y VERSIONADO
+# ================================================================================
+*.orig
+*.rej
+*.diff
+*.patch
+natan_backup
+*_backup
+*_old
+*.old
+
+# ================================================================================
+# ARCHIVOS DE BASE DE DATOS
+# ================================================================================
+*.sqlite
+*.sqlite3
+*.db
+database.sqlite
+/storage/database.sqlite
+
+# ================================================================================
+# ARCHIVOS DE DOCKER Y CONTENEDORES
+# ================================================================================
+docker-compose.override.yml
+.docker/
+.devcontainer/
+
+# ================================================================================
+# OTROS ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ================================================================================
+# Archivos de configuración personal
+config.local.json
+settings.local.json
+
+# Archivos de documentación privada
+private_notes.txt
+todo_personal.txt
+notas_desarrollo.txt
