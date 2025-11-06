@@ -81,6 +81,105 @@ Resultado: ✅ Rutas web configuradas para navegación básica
 # Assertions: 13 total (3 + 10)
 # Enfoque: Simplicidad mantenida, crecimiento controlado validado
 
+# FASE 5: RELEASE v0.1.8 - COMMITS ORGANIZADOS Y NUEVA VERSIÓN
+# ==============================================================
+
+# COMMITS ORGANIZADOS:
+
+# 1. Configuración de testing (composer y PHPUnit)
+git add composer.json composer.lock
+git commit -m "feat: add PHPUnit testing framework and dependencies
+
+- Added PHPUnit ^10.0 as dev dependency
+- Added symfony/var-dumper for debugging support
+- Configured testing scripts in composer.json
+- Added tests namespace autoloading"
+
+# 2. Estructura de testing y tests básicos
+git add -f phpunit.xml tests/
+git commit -m "feat: add testing infrastructure and basic tests
+
+- Added phpunit.xml configuration
+- Created minimalist tests/bootstrap.php 
+- Added FirstTest.php for version() function validation
+- Added HelpersTest.php for helper functions testing
+- All tests passing: 8 tests, 13 assertions"
+
+# 3. Documentación de comandos ejecutados
+git add -f comandos_ejecutados.txt
+git commit -m "docs: add complete testing implementation documentation
+
+- Documented all commands executed during testing setup
+- Includes troubleshooting steps and solutions
+- Complete history from setup to final validation"
+
+# 4. Actualización de versión y documentación
+# - Versión framework: v0.1.7 → v0.1.8 en core/helpers.php
+# - CHANGELOG.md: Nueva entrada completa v0.1.8
+# - README.md: Sección de testing agregada con comandos
+git add core/helpers.php CHANGELOG.md README.md
+git commit -m "docs: update to v0.1.8 with comprehensive testing documentation
+
+- Updated framework version to v0.1.8 in core/helpers.php
+- Added complete v0.1.8 entry in CHANGELOG.md with testing features
+- Enhanced README.md with new testing section and commands
+- Documented PHPUnit integration and test execution instructions
+- Added testing commands to quick start guide"
+
+# 5. Creación de tag de versión
+git tag -a v0.1.8 -m "v0.1.8: Sistema de Testing Completo con PHPUnit
+
+🧪 Testing Framework Integrado:
+- PHPUnit 10.5.58 configurado y funcionando
+- 8 tests unitarios con 13 assertions pasando
+- Testing incremental: FirstTest.php + HelpersTest.php
+- Scripts de composer para testing automatizado
+
+📋 Documentación Completa:
+- README.md actualizado con sección de testing
+- Comandos de testing documentados paso a paso
+- CHANGELOG.md con detalles completos de v0.1.8
+- Instrucciones de verificación de instalación
+
+⚡ Calidad y Confiabilidad:
+- Tests automáticos previenen regresiones
+- Cobertura de funciones principales del framework
+- Approach incremental validado y documentado
+- Framework listo para desarrollo seguro"
+
+# VERIFICACIÓN FINAL:
+git tag --list | tail -3
+# Resultado: v0.1.5, v0.1.6, v0.1.8 ✅
+
+git log --oneline -5
+# Resultado: Commits organizados con mensajes descriptivos ✅
+
+./vendor/bin/phpunit tests/Unit/ --testdox
+# Resultado: 8 tests, 13 assertions - TODOS PASANDO ✅
+
+# ============================================================
+# 🎉 RELEASE v0.1.8 COMPLETADO EXITOSAMENTE
+# ============================================================
+
+# LOGROS:
+# ✅ Sistema de testing PHPUnit completamente integrado
+# ✅ 8 tests unitarios ejecutándose perfectamente (13 assertions)
+# ✅ Documentación completa de testing en README.md
+# ✅ Scripts de composer para testing automatizado
+# ✅ Commits organizados por tema/funcionalidad
+# ✅ Tag v0.1.8 creado con mensaje descriptivo
+# ✅ CHANGELOG.md actualizado con detalles completos
+# ✅ Versión del framework actualizada a v0.1.8
+
+# COMANDOS DE TESTING DISPONIBLES:
+# - ./vendor/bin/phpunit tests/Unit/ (todos los tests)
+# - ./vendor/bin/phpunit tests/Unit/ --testdox (output descriptivo)
+# - ./vendor/bin/phpunit tests/Unit/FirstTest.php (tests específicos)
+# - composer test (script automatizado)
+
+# ESTADO: ✅ FRAMEWORK ESTABLE CON TESTING AUTOMÁTICO
+# SIGUIENTE: Expandir tests o implementar nuevas funcionalidades
+
 ================================ FASE 5: CLI BÁSICO ================================
 [29/10/2025 - 09:00] - IMPLEMENTACIÓN: Sistema CLI inicial
 Comando ejecutado: Implementar core/Console.php con comandos básicos
