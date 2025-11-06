@@ -115,6 +115,13 @@ phpunit.xml
 .php_cs.cache
 .php-cs-fixer.cache
 
+# Reports de testing
+tests/reports/
+*.xml
+/tests/reports/*.xml
+/tests/reports/*.html
+/tests/reports/*.txt
+
 # ================================================================================
 # ARCHIVOS DE RESPALDO Y VERSIONADO
 # ================================================================================
