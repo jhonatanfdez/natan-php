@@ -13,6 +13,52 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Middleware system completo
 - Coverage testing reports
 
+## [v0.1.9] - 2025-11-05
+
+### Arreglado
+- **Optimización del repositorio** - Limpieza completa siguiendo mejores prácticas PHP
+  - Eliminado vendor/ del tracking de git (95 archivos, 12K líneas)
+  - Solo composer.json y composer.lock versionados para dependencies
+  - Repository más eficiente y clones más rápidos para colaboradores
+  - Zero conflictos en vendor/ entre diferentes setups de desarrollo
+
+- **Configuración inteligente de .gitignore**
+  - phpunit.xml principal PERMITIDO para configuración compartida del equipo
+  - phpunit.*.xml variants IGNORADOS para configuraciones locales
+  - tests/reports/ automáticamente ignorados (archivos generados)
+  - Soporte para desarrollo colaborativo con configs personalizadas
+
+### Mejorado
+- **Gestión profesional de archivos de testing**
+  - phpunit.xml trackeable para configuración consistente del equipo
+  - Documentación añadida: "NatanPHP Framework Testing Configuration"
+  - Flexible para variants locales (phpunit.local.xml, phpunit.dev.xml)
+  - Sigue estándares de Laravel, Symfony y frameworks modernos
+
+- **Repository siguiendo best practices**
+  - Sin bloat de dependencies en control de versiones
+  - Focus en código fuente, no archivos generados
+  - Setup simplificado: git clone → composer install
+  - Professional development environment estándar
+
+### Verificado
+- ✅ **Tests siguen funcionando**: 8 tests, 13 assertions pasando
+- ✅ **Composer commands**: install/update no afectan phpunit.xml
+- ✅ **Gitignore rules**: Probadas con archivos reales
+- ✅ **Collaborative setup**: Configuración lista para múltiples developers
+
+### Beneficios
+- 🚀 **Repository más eficiente**: 95 archivos menos, clones más rápidos
+- 👥 **Desarrollo colaborativo**: Configuración compartida + personalización local
+- 🧹 **Workspace limpio**: git status solo muestra archivos relevantes
+- 📊 **Standard compliance**: Mejores prácticas PHP implementadas
+
+### Configuración
+- **Archivos trackeados**: phpunit.xml (configuración principal)
+- **Archivos ignorados**: phpunit.*.xml, tests/reports/, vendor/
+- **Approach**: Shared configuration + local flexibility
+- **Compatibility**: Zero breaking changes en funcionalidad existente
+
 ## [v0.1.8] - 2025-11-05
 
 ### Agregado

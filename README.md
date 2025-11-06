@@ -11,17 +11,17 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.8** — Framework con sistema de testing completo PHPUnit integrado, calidad garantizada con tests automatizados, documentación de testing y comandos de verificación. Testing incremental con 8 tests y 13 assertions validando funcionalidades principales.
+  📍 **Estado actual: v0.1.9** — Framework optimizado con repository limpio siguiendo mejores prácticas PHP, gestión inteligente de configuraciones de testing, vendor/ excluido del tracking y setup colaborativo profesional.
   
-  • **Changelog**: ver [v0.1.8 en CHANGELOG.md](CHANGELOG.md#v018---2025-11-05) · **Tag**: [v0.1.8](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.8)
+  • **Changelog**: ver [v0.1.9 en CHANGELOG.md](CHANGELOG.md#v019---2025-11-05) · **Tag**: [v0.1.9](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.9)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.1.9**: 🧹 **Repository Optimizado** - Limpieza completa siguiendo mejores prácticas PHP, vendor/ excluido del tracking (95 archivos menos), configuración inteligente de .gitignore para testing, phpunit.xml trackeable con variants ignorados, setup colaborativo profesional.
 - **v0.1.8**: 🧪 **Sistema de Testing Completo** - Framework de pruebas automatizadas con PHPUnit 10.5.58, tests unitarios fundamentales (8 tests, 13 assertions), estructura incremental con FirstTest.php y HelpersTest.php, scripts de testing en composer, bootstrap minimalista, documentación completa de comandos de testing.
-- **v0.1.7**: 📋 **Organización y Documentación** - Gestión completa de archivos con .gitignore profesional, documentación de instalación mejorada con composer install, consolidación de archivos de comandos ejecutados, instrucciones claras para configuración inicial y estructura de proyecto optimizada.
 - **v0.1.6**: 🖥️ **CLI Multiplataforma** - Compatibilidad completa Windows/macOS/Linux con auto-detección de SO, comandos nativos para cada plataforma (netstat/taskkill en Windows, lsof/kill en Unix), UX mejorado sin confusión técnica, mensajes claros con URLs útiles en lugar de 0.0.0.0.
 - **v0.1.5**: 🛠️ **CLI Robusto** - Comando `natan serve` con gestión inteligente de puertos (auto-detección con lsof/fuser/netstat), terminación automática de procesos ocupados, liberación inteligente de puertos, manejo automático de directorios, compatibilidad PHP 8.2+ (fix warnings trim), CLI completamente automático y profesional.
 - **v0.1.4**: 🌐 **Sistema de URLs Dinámicas + CLI** - URLs completamente adaptables automáticamente a cualquier entorno (DDEV/PHP built-in/Apache), comando `natan serve` funcional, detección mejorada de controladores Web vs API, eliminación de URLs hardcodeadas, configuración zero-configuration.
