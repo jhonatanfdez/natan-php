@@ -111,9 +111,14 @@ $RECYCLE.BIN/
 /coverage/
 .phpunit.result.cache
 .phpunit.cache
-phpunit.xml
 .php_cs.cache
 .php-cs-fixer.cache
+
+# PHPUnit configuration variants (allow main phpunit.xml to be tracked)
+phpunit.xml.dist
+phpunit.local.xml
+phpunit.*.xml
+!phpunit.xml
 
 # Reports de testing
 tests/reports/
