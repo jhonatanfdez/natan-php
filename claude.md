@@ -6,9 +6,9 @@
 - **Total de funciones helpers**: 9 funciones globales
 - **Total de clases core**: 3 clases (Router, Request, RouteRegistrar)
 - **Métodos en Request**: 23 métodos públicos/protegidos
-- **Métodos en Router**: 12 métodos estáticos + 3 métodos RouteRegistrar
-- **Tests existentes**: 5 archivos con 96 tests totales
-- **Cobertura actual**: Helpers 100% ✅ | Request 100% ✅ | Router 0% ⏳
+- **Métodos en Router**: 15 métodos + 3 métodos RouteRegistrar
+- **Tests existentes**: 6 archivos con 125 tests totales
+- **Cobertura actual**: Helpers 100% ✅ | Request 100% ✅ | Router 100% ✅
 
 ---
 

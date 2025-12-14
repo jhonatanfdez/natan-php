@@ -104,3 +104,34 @@ Request (NatanPHP\Tests\Unit\Request)
  [x] Is ajax detects ajax requests
  [x] Wants json detects json requests
 
+Router (NatanPHP\Tests\Unit\Router)
+ [x] Get registers get route
+ [x] Post registers post route
+ [x] Put registers put route
+ [x] Delete registers delete route
+ [x] Patch registers patch route
+ [x] Match registers multiple methods
+ [x] Any registers all http methods
+ [x] Route uris are normalized
+ [x] Empty uri becomes root
+ [x] Routes with parameters are registered
+ [x] Get parameters returns array
+ [x] Get parameter with default
+ [x] Group with prefix adds prefix
+ [x] Group with middleware applies middleware
+ [x] Group with prefix and middleware
+ [x] Nested groups accumulate prefixes
+ [x] Nested groups accumulate middleware
+ [x] Route middleware adds middleware
+ [x] Route middleware accepts array
+ [x] Route middleware is chainable
+ [x] Route name assigns name
+ [x] Route name and middleware can be combined
+ [x] Get routes returns all routes
+ [x] Get routes returns empty array when no routes
+ [x] Multiple routes are accumulated
+ [x] Same uri different methods coexist
+ [x] Parameters with descriptive names
+ [x] Route without middleware has empty array
+ [x] Group restores state after callback
+
