@@ -14,6 +14,20 @@
   📍 **Estado actual: v0.2.0** — Suite completa de testing con 140 tests y 320+ assertions, cobertura 100% del framework core, documentación exhaustiva en español, 4 fases completadas (Helpers, Request, Router, Integration).
   
   • **Changelog**: ver [v0.2.0 en CHANGELOG.md](CHANGELOG.md#v020---2024-12-14) · **Tag**: [v0.2.0](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.2.0)
+  
+  ---
+  
+  ## 📚 Documentación Completa
+  
+  **[📖 Ver Documentación en Vivo →](https://jhonatanfdez.github.io/natan-php/)**
+  
+  Documentación completa en español con 7 páginas, ~5,680 líneas, 150+ ejemplos de código:
+  - 🚀 [Instalación](https://jhonatanfdez.github.io/natan-php/#/installation)
+  - 🚪 [Routing](https://jhonatanfdez.github.io/natan-php/#/basics/routing) - Sistema de rutas (~850 líneas)
+  - 📨 [Request](https://jhonatanfdez.github.io/natan-php/#/basics/requests) - Manejo de peticiones (~1,180 líneas)
+  - 🛠️ [Helpers](https://jhonatanfdez.github.io/natan-php/#/digging-deeper/helpers) - 10 funciones auxiliares (~1,450 líneas)
+  - ⚙️ [Configuration](https://jhonatanfdez.github.io/natan-php/#/configuration) - Variables de entorno (~670 líneas)
+  - 📁 [Directory Structure](https://jhonatanfdez.github.io/natan-php/#/directory-structure) - Estructura de carpetas (~980 líneas)
 </div>
 
 ---

@@ -9,7 +9,15 @@
 
 ---
 
-## 👋 Bienvenido
+## �‍💻 Desarrollador
+
+**Creado por [Jhonatan Fernandez](https://github.com/jhonatanfdez)**
+
+[![GitHub](https://img.shields.io/badge/GitHub-jhonatanfdez-181717?logo=github)](https://github.com/jhonatanfdez)
+
+---
+
+## �👋 Bienvenido
 
 **NatanPHP** es un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro. Con una arquitectura simple pero poderosa, NatanPHP te permite construir aplicaciones web y APIs de forma rápida y educativa.
 
