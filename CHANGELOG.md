@@ -13,7 +13,7 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Middleware system completo
 - Coverage testing reports
 
-## [v0.2.0] - 2025-01-XX
+## [v0.2.0] - 2024-12-14
 
 ### ✨ Añadido - Suite Completa de Testing
 

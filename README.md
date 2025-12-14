@@ -11,15 +11,16 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.1.9** — Framework optimizado con repository limpio siguiendo mejores prácticas PHP, gestión inteligente de configuraciones de testing, vendor/ excluido del tracking y setup colaborativo profesional.
+  📍 **Estado actual: v0.2.0** — Suite completa de testing con 140 tests y 320+ assertions, cobertura 100% del framework core, documentación exhaustiva en español, 4 fases completadas (Helpers, Request, Router, Integration).
   
-  • **Changelog**: ver [v0.1.9 en CHANGELOG.md](CHANGELOG.md#v019---2025-11-05) · **Tag**: [v0.1.9](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.1.9)
+  • **Changelog**: ver [v0.2.0 en CHANGELOG.md](CHANGELOG.md#v020---2024-12-14) · **Tag**: [v0.2.0](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.2.0)
 </div>
 
 ---
 
 ## 📰 **Novedades Recientes**
 
+- **v0.2.0**: 🎉 **Suite Completa de Testing** - 140 tests totales (320+ assertions) con cobertura 100% del framework core en 4 fases: Helpers (54 tests), Request (34 tests), Router (29 tests), Integration (15 tests). Todos los tests con comentarios en español, casos edge documentados (blank(0) vs blank('0'), prioridad input(), grupos anidados), PHPUnit 10.5.58, documentación exhaustiva en comandos_ejecutados.txt y claude.md.
 - **v0.1.9**: 🧹 **Repository Optimizado** - Limpieza completa siguiendo mejores prácticas PHP, vendor/ excluido del tracking (95 archivos menos), configuración inteligente de .gitignore para testing, phpunit.xml trackeable con variants ignorados, setup colaborativo profesional.
 - **v0.1.8**: 🧪 **Sistema de Testing Completo** - Framework de pruebas automatizadas con PHPUnit 10.5.58, tests unitarios fundamentales (8 tests, 13 assertions), estructura incremental con FirstTest.php y HelpersTest.php, scripts de testing en composer, bootstrap minimalista, documentación completa de comandos de testing.
 - **v0.1.6**: 🖥️ **CLI Multiplataforma** - Compatibilidad completa Windows/macOS/Linux con auto-detección de SO, comandos nativos para cada plataforma (netstat/taskkill en Windows, lsof/kill en Unix), UX mejorado sin confusión técnica, mensajes claros con URLs útiles en lugar de 0.0.0.0.
@@ -30,9 +31,32 @@
 - **v0.1.1**: 🔧 **Optimización de helpers** - Simplificación de 20+ funciones a 8 esenciales con documentación detallada, estrategia incremental establecida, y sincronización completa de documentación con código real.
 - **v0.1.0**: 🎉 **Framework base establecido** - Estructura de carpetas Web/API implementada, autoloading PSR-4 configurado, sistema de helpers esenciales con 8 funciones básicas (dd(), env(), config(), asset(), url(), str_slug(), blank(), filled()), comando CLI `natan` preparado.
 
-## ⚡ **Funcionalidades Actuales (v0.1.6)**
+## ⚡ **Funcionalidades Actuales (v0.2.0)**
 
-### �️ **CLI Multiplataforma** ✅ **NUEVO v0.1.6**
+### 🧪 **Suite Completa de Testing (PHPUnit)** ✅ **NUEVO v0.2.0**
+
+- **140 Tests Totales** ✅ 320+ assertions, 100% cobertura framework core
+  - HelpersAdvancedTest.php: 21 tests (dd, dump, env, config, route, redirect, old, csrf, abort)
+  - HelpersExpandedTest.php: 33 tests (blank, filled, value, class_basename, e, str helpers, array_get)
+  - RequestTest.php: 34 tests (construcción, métodos HTTP, headers, input, query, cookies, path/URL, utilidades)
+  - RouterTest.php: 29 tests (rutas básicas, params dinámicos, middleware, grupos, resources, API resources)
+  - FrameworkIntegrationTest.php: 15 tests (Request+Router, Helpers+Request, Router+Middleware, escenarios complejos, API REST, formularios)
+  
+- **Calidad y Documentación** ✅ Completo
+  - Todos los tests con comentarios explicativos en español
+  - Casos edge documentados: blank(0) vs blank('0'), prioridad input() POST>GET, acumulación grupos
+  - Assertions descriptivas con mensajes claros
+  - Tiempo de ejecución: < 1 segundo
+  - PHPUnit 10.5.58 vía Composer
+
+- **Comandos de Testing**
+  ```bash
+  ./vendor/bin/phpunit                    # Ejecutar todos los tests
+  ./vendor/bin/phpunit --testdox          # Output descriptivo
+  composer test                           # Alias configurado
+  ```
+
+### �️ **CLI Multiplataforma** ✅ **v0.1.6**
 - **Compatibilidad Completa Windows/macOS/Linux** ✅ Completo
   - Auto-detección de sistema operativo con `PHP_OS`
   - Comandos nativos Windows: `netstat -ano | findstr :puerto` y `taskkill /PID /F`
@@ -58,32 +82,7 @@
   - Espera inteligente para liberación de puertos
   - Professional UX con información detallada
 
-### 🧪 **Sistema de Testing (PHPUnit)** ✅ **NUEVO v0.1.8**
-- **Framework de Testing Completo** ✅ PHPUnit 10.5.58 integrado
-  - Configuración phpunit.xml optimizada con bootstrap personalizado
-  - symfony/var-dumper ^6.0 para debugging avanzado en tests
-  - Tests organizados en tests/Unit/ con estructura escalable
-  - Bootstrap minimalista: solo carga autoloader del framework
-
-- **Tests Unitarios Fundamentales** ✅ 8 tests, 13 assertions
-  - FirstTest.php: Validación de functions básicas del framework (2 tests)
-  - HelpersTest.php: Testing de helper functions principales (6 tests)
-  - Cobertura: version(), env(), str_slug(), blank(), filled()
-  - Todos los tests pasando ✅ con output descriptivo --testdox
-
-- **Scripts de Testing en Composer** ✅ Comandos integrados
-  - `composer test` - Ejecutar todos los tests
-  - `composer test-unit` - Solo tests unitarios  
-  - `composer test-feature` - Tests de funcionalidad (preparado)
-  - `composer test-coverage` - Reportes de cobertura (preparado)
-
-- **Comandos PHPUnit Directos** ✅ Control granular
-  - `./vendor/bin/phpunit tests/Unit/` - Todos los tests unitarios
-  - `./vendor/bin/phpunit tests/Unit/ --testdox` - Output descriptivo
-  - `./vendor/bin/phpunit tests/Unit/FirstTest.php` - Tests específicos
-  - Approach incremental: cada nueva función → nuevos tests
-
-### 🔧 **Compatibilidad PHP 8.2+** ✅ **NUEVO v0.1.5**
+### 🔧 **Compatibilidad PHP 8.2+** ✅ **v0.1.5**
 - **Fix de Warnings PHP 8.2** ✅ Completo
   - Eliminados warnings "trim(): Passing null deprecated"
   - Manejo seguro de valores null en operaciones de string
