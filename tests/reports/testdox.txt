@@ -2,6 +2,23 @@ First (NatanPHP\Tests\Unit\First)
  [x] Version function exists
  [x] Version returns valid string
 
+Framework Integration (NatanPHP\Tests\Integration\FrameworkIntegration)
+ [x] Router and request work together
+ [x] Request detects api requests
+ [x] Router extracts parameters for request
+ [x] Url helper integrates with server
+ [x] Route helper exists for future integration
+ [x] Asset helper generates consistent urls
+ [x] Complete get request flow
+ [x] Complete post request flow
+ [x] File upload flow
+ [x] Route groups with middleware integration
+ [x] Api routes group with json detection
+ [x] Complete restful resource scenario
+ [x] Ajax request with json data
+ [x] Custom headers integration
+ [x] Auto detect web vs api environment
+
 Helpers (NatanPHP\Tests\Unit\Helpers)
  [x] Env function exists
  [x] Env returns default
