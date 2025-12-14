@@ -261,9 +261,10 @@ Desarrollado por [JhonatanFdez](https://github.com/jhonatanfdez) con el objetivo
 
 ---
 
-<div style="text-align: center; padding: 40px 0;">
-  <h3>¿Listo para empezar?</h3>
-  <p>
-    <a href="#/installation" style="display: inline-block; padding: 12px 30px; background: #4ecdc4; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">📦 Instalar NatanPHP</a>
-  </p>
+## ¿Listo para empezar?
+
+<div style="text-align: center; padding: 20px 0;">
+  
+### [📦 Instalar NatanPHP](installation.md)
+
 </div>
