@@ -7,8 +7,8 @@
 - **Total de clases core**: 3 clases (Router, Request, RouteRegistrar)
 - **Métodos en Request**: 23 métodos públicos/protegidos
 - **Métodos en Router**: 12 métodos estáticos + 3 métodos RouteRegistrar
-- **Tests existentes**: 2 archivos (FirstTest, HelpersTest) con 8 tests
-- **Cobertura actual estimada**: ~20% (solo helpers básicos)
+- **Tests existentes**: 5 archivos con 96 tests totales
+- **Cobertura actual**: Helpers 100% ✅ | Request 100% ✅ | Router 0% ⏳
 
 ---
 
@@ -170,11 +170,12 @@
 9. **filled()** - Casos adicionales
    - ✓ Test: Complemento de todos los casos de blank()
 
-**Total tests FASE 1: ~35 tests**
+**Total tests FASE 1: 54 tests** ✅ COMPLETADA (62 tests totales incluyendo previos)
+**Tiempo real FASE 1: ~2.5 horas**
 
 ---
 
-### **FASE 2: Tests Completos de Request** ⏱️ Estimado: 4-5 horas
+### **FASE 2: Tests Completos de Request** ✅ COMPLETADA
 
 #### Archivo: `tests/Unit/RequestTest.php`
 
@@ -224,7 +225,10 @@
 **Grupo 9: Content Negotiation (1 test)**
 - ✓ Test: `wantsJson()` detecta si espera JSON
 
-**Total tests FASE 2: ~26 tests**
+**Total tests FASE 2: 34 tests** ✅ COMPLETADA
+**Tests acumulados: 96 tests (167 assertions)**
+**Tiempo real FASE 2: ~1.5 horas**
+**Archivo creado: tests/Unit/RequestTest.php**
 
 ---
 

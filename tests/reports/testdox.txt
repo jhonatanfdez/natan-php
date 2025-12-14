@@ -68,3 +68,39 @@ Helpers Expanded (NatanPHP\Tests\Unit\HelpersExpanded)
  [x] Filled handles zero specially
  [x] Filled does not consider false as filled
 
+Request (NatanPHP\Tests\Unit\Request)
+ [x] Method returns correct http method
+ [x] Method returns default get
+ [x] Is method verifies http method
+ [x] Is get returns true for get requests
+ [x] Is post returns true for post requests
+ [x] Uri returns path without query string
+ [x] Uri returns slash by default
+ [x] Full url returns complete url
+ [x] Get returns get parameters
+ [x] Get returns default when not found
+ [x] Post returns post parameters
+ [x] Post returns default when not found
+ [x] Input checks post before get
+ [x] Input returns get when not in post
+ [x] Input returns default when not found
+ [x] All combines get and post
+ [x] Only returns specified fields
+ [x] Only does not include non existent keys
+ [x] Except excludes specified fields
+ [x] Has checks parameter existence
+ [x] Filled checks existence and content
+ [x] File returns file information
+ [x] File returns null when not found
+ [x] Has file verifies successful upload
+ [x] Header returns http headers
+ [x] Header returns default when not found
+ [x] Extract headers normalizes server headers
+ [x] Ip returns client ip address
+ [x] Ip handles multiple proxy ips
+ [x] Ip returns fallback when no ip
+ [x] User agent returns user agent string
+ [x] User agent returns empty string when not found
+ [x] Is ajax detects ajax requests
+ [x] Wants json detects json requests
+
