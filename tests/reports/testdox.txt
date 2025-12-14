@@ -10,3 +10,61 @@ Helpers (NatanPHP\Tests\Unit\Helpers)
  [x] Blank function works
  [x] Filled function works
 
+Helpers Advanced (NatanPHP\Tests\Unit\HelpersAdvanced)
+ [x] Dd function exists
+ [x] Dd function is callable
+ [x] Config function exists
+ [x] Config returns default value
+ [x] Config handles dot notation
+ [x] Config returns null without default
+ [x] Route function exists
+ [x] Route generates basic url
+ [x] Route accepts parameters
+ [x] Url function exists
+ [x] Url generates http url
+ [x] Url generates https url
+ [x] Url handles leading slash
+ [x] Url handles path without leading slash
+ [x] Url uses fallback host
+ [x] Url without parameters generates base url
+ [x] Asset function exists
+ [x] Asset generates asset url
+ [x] Asset adds assets prefix
+ [x] Asset handles leading slash
+ [x] Asset generates full url
+
+Helpers Expanded (NatanPHP\Tests\Unit\HelpersExpanded)
+ [x] Env converts true string to boolean
+ [x] Env converts false string to boolean
+ [x] Env converts parenthesis true to boolean
+ [x] Env converts parenthesis false to boolean
+ [x] Env converts null string to null
+ [x] Env converts parenthesis null to null
+ [x] Env converts empty to empty string
+ [x] Env converts parenthesis empty to empty string
+ [x] Env returns actual environment value
+ [x] Env is case insensitive for conversions
+ [x] Str slug handles spanish accents
+ [x] Str slug removes special characters
+ [x] Str slug uses custom separator
+ [x] Str slug handles multiple spaces
+ [x] Str slug trims leading and trailing separators
+ [x] Str slug converts to lowercase
+ [x] Str slug handles empty string
+ [x] Str slug handles only special characters
+ [x] Blank detects null
+ [x] Blank detects empty string
+ [x] Blank detects whitespace string
+ [x] Blank detects empty array
+ [x] Blank handles zero specially
+ [x] Blank considers false as blank
+ [x] Blank with complex values
+ [x] Filled is opposite of blank with null
+ [x] Filled is opposite of blank with empty string
+ [x] Filled is opposite of blank with whitespace
+ [x] Filled is opposite of blank with empty array
+ [x] Filled detects string with content
+ [x] Filled detects array with elements
+ [x] Filled handles zero specially
+ [x] Filled does not consider false as filled
+
