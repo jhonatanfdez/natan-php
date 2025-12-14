@@ -1,12 +1,12 @@
 # 📚 Documentación de NatanPHP Framework
 
-> Documentación completa en español para el framework PHP educativo NatanPHP v0.2.0
+> Documentación completa en español para el framework PHP educativo NatanPHP v0.2.2
 
 ---
 
 ## 🌐 Ver Documentación Online
 
-**GitHub Pages:** [https://jhonatanfdez.github.io/natan-php/docs/](https://jhonatanfdez.github.io/natan-php/docs/)
+**GitHub Pages:** [https://jhonatanfdez.github.io/natan-php/](https://jhonatanfdez.github.io/natan-php/)
 
 ---
 
@@ -19,6 +19,9 @@
 ### 📘 Conceptos Básicos
 - [**Routing**](basics/routing.md) - Sistema de rutas con parámetros dinámicos, grupos y middleware (~850 líneas)
 - [**Request**](basics/requests.md) - Manejo de peticiones HTTP, datos, archivos y headers (~1,180 líneas)
+- [**Controllers**](basics/controllers.md) - Controladores Web y API con ejemplos CRUD completos (~1,163 líneas) **✨ NUEVO**
+- [**Middleware**](basics/middleware.md) - Sistema de middleware con arquitectura y ejemplos (~1,450 líneas) **✨ NUEVO**
+- [**Responses**](basics/responses.md) - Respuestas JSON, HTML, redirects y códigos HTTP (~1,650 líneas) **✨ NUEVO**
 
 ### 🔧 Profundizando
 - [**Helpers**](digging-deeper/helpers.md) - 10 funciones auxiliares globales con ejemplos completos (~1,450 líneas)
@@ -31,11 +34,11 @@
 
 ## 📊 Estadísticas
 
-- **📄 7 páginas completas** de documentación
-- **📏 ~5,680 líneas** de contenido
-- **💻 150+ ejemplos** de código funcional
-- **📊 20+ tablas** de referencia
-- **🎯 15+ ejemplos completos** de casos reales
+- **📄 10 páginas completas** de documentación (+3 en v0.2.2)
+- **📏 ~9,943 líneas** de contenido (~4,263 líneas nuevas)
+- **💻 200+ ejemplos** de código funcional (+50 ejemplos nuevos)
+- **📊 30+ tablas** de referencia (+10 tablas nuevas)
+- **🎯 25+ ejemplos completos** de casos reales
 - **🌍 100% en español** (traducción al inglés planeada)
 
 ---

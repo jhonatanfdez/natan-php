@@ -13,6 +13,104 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Middleware system completo
 - Coverage testing reports
 
+## [v0.2.2] - 2024-12-14
+
+### 📚 Añadido - FASE 3: Páginas Adicionales de Documentación
+
+#### **3 Nuevas Páginas (~4,263 líneas totales)**
+
+**basics/controllers.md (1,163 líneas)**
+- ✅ Introducción a controladores (Web vs API)
+- ✅ Controladores Web: view(), response(), redirect()
+- ✅ Controladores API: successResponse(), errorResponse(), createdResponse(), noContentResponse()
+- ✅ Crear controladores paso a paso
+- ✅ Métodos RESTful completos (index, show, store, update, destroy)
+- ✅ CRUD completo con ejemplos de Products
+- ✅ Dependencias e inyección de servicios
+- ✅ Buenas prácticas (DOs y DON'Ts con ejemplos)
+- ✅ 2 ejemplos completos:
+  - Blog API REST completo con CRUD
+  - Dashboard Web con vistas y formularios
+- ✅ 25+ ejemplos de código funcionales
+- ✅ Tablas de referencia de métodos y convenciones REST
+- ✅ Formato de respuestas JSON documentado
+
+**basics/middleware.md (1,450 líneas)**
+- ✅ Introducción completa con diagrama de flujo ASCII
+- ✅ ¿Qué es Middleware? - Estructura básica y arquitectura
+- ✅ 6 casos de uso principales:
+  - Autenticación (verificar sesión)
+  - Autorización (verificar permisos)
+  - CORS (headers cross-origin)
+  - Logging (registro de peticiones)
+  - Rate Limiting (limitar peticiones)
+  - Transformación de datos (limpiar inputs)
+- ✅ Estado actual del framework (preparado en Router pero no implementado)
+- ✅ Arquitectura planificada:
+  - Interfaz MiddlewareInterface
+  - Clase Kernel para gestionar middleware
+  - Pipeline de ejecución
+- ✅ 6 ejemplos completos de middleware:
+  - AuthMiddleware (~40 líneas) - Autenticación con sesiones
+  - CorsMiddleware (~35 líneas) - Headers CORS configurables
+  - LoggingMiddleware (~50 líneas) - Log JSON de peticiones
+  - RateLimitMiddleware (~100 líneas) - Rate limiting con cache
+  - AdminMiddleware (~45 líneas) - Verificar rol de administrador
+  - TrimStringsMiddleware (~40 líneas) - Limpiar inputs recursivamente
+- ✅ Lista de 10 middleware comunes con tabla de referencia
+- ✅ Buenas prácticas detalladas (DOs y DON'Ts)
+- ✅ Roadmap detallado (v0.3.0, v0.4.0, v0.5.0)
+- ✅ 35+ ejemplos de código completos
+- ✅ Tabla de estado de features
+
+**basics/responses.md (1,650 líneas)**
+- ✅ Introducción a respuestas HTTP
+- ✅ Diagrama ASCII de tipos de respuestas por controlador
+- ✅ Respuestas JSON completas (API):
+  - successResponse() - Respuestas exitosas con data
+  - errorResponse() - Errores con validación
+  - jsonResponse() - JSON personalizado
+  - createdResponse() - Recursos creados (201)
+  - noContentResponse() - Sin contenido (204)
+- ✅ Respuestas HTML (Web):
+  - view() - Renderizar vistas PHP
+  - response() - Respuestas simples
+- ✅ Redirects:
+  - Simple (redirect a URL)
+  - Con query string
+  - Condicional (según lógica)
+  - Back (volver atrás)
+- ✅ Códigos de estado HTTP:
+  - Tabla completa con 12 códigos comunes
+  - Ejemplos detallados por código (200, 201, 204, 400, 401, 403, 404, 422, 429, 500)
+  - Cuándo usar cada código
+- ✅ Headers personalizados:
+  - Content-Type, Cache-Control, CORS, Security
+  - Ejemplos completos
+- ✅ Descargas de archivos:
+  - Attachment (descargar)
+  - Inline (ver en navegador)
+  - CSV export con generación dinámica
+- ✅ Content negotiation (JSON vs HTML)
+- ✅ 2 ejemplos completos:
+  - API REST completa con CRUD de productos
+  - Formulario web con validación y mensajes
+- ✅ Buenas prácticas exhaustivas (DOs y DON'Ts)
+- ✅ 50+ ejemplos de código funcionales
+- ✅ Tablas de referencia de métodos
+- ✅ Pruebas con cURL
+
+#### **Estadísticas Totales de Documentación**
+- ✅ **10 páginas** completas
+- ✅ **~9,943 líneas** de documentación
+- ✅ **200+ ejemplos** de código funcionales
+- ✅ **30+ tablas** de referencia
+- ✅ **100% en español**
+
+### 🔧 Mejorado
+- ✅ Sidebar actualizado con nuevas páginas
+- ✅ Navegación mejorada en GitHub Pages
+
 ## [v0.2.1] - 2024-12-14
 
 ### 📚 Añadido - Documentación Completa
