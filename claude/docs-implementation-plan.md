@@ -119,12 +119,12 @@ Total: ~30% completado
 
 ---
 
-#### 3. 🚧 `basics/routing.md` (EN PROGRESO - PRIORIDAD #1)
+#### 3. ✅ `basics/routing.md` (COMPLETADO)
 **Archivo:** `docs/basics/routing.md`  
-**Estado:** 🚧 EN PROGRESO  
+**Estado:** ✅ COMPLETADO  
 **Prioridad:** ⭐⭐⭐ MÁXIMA (Core del framework)
 
-**Contenido planificado:**
+**Contenido completado:**
 
 ##### **Introducción** (⏳ Pendiente)
 - Qué es el routing
