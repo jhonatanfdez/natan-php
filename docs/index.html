@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>NatanPHP Framework - Documentación</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Framework PHP MVC Simple, Moderno e Innovador. Documentación completa para aprender cómo funcionan los frameworks modernos.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  
+  <!-- Theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  
+  <!-- Custom styles -->
+  <style>
+    :root {
+      --theme-color: #4ecdc4;
+      --theme-color-dark: #2c9a93;
+    }
+    
+    .app-name-link img {
+      width: 40px;
+      margin-right: 10px;
+    }
+    
+    .markdown-section {
+      max-width: 900px;
+    }
+    
+    .markdown-section pre {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+    }
+    
+    .markdown-section code {
+      border-radius: 4px;
+      background-color: #f6f6f6;
+      color: #e83e8c;
+      padding: 3px 6px;
+    }
+    
+    .markdown-section pre code {
+      background-color: transparent;
+      color: #e6e6e6;
+      padding: 0;
+    }
+    
+    /* Alerts personalizados */
+    .markdown-section blockquote {
+      border-left: 4px solid var(--theme-color);
+      border-left-color: var(--theme-color);
+      margin: 2em 0;
+      padding: 12px 24px 12px 30px;
+      background-color: #f8f8f8;
+      position: relative;
+    }
+    
+    .markdown-section blockquote p {
+      font-weight: 500;
+    }
+    
+    .markdown-section blockquote.tip {
+      background-color: #f0f9ff;
+      border-left-color: #4299e1;
+    }
+    
+    .markdown-section blockquote.warning {
+      background-color: #fffbf0;
+      border-left-color: #f59e0b;
+    }
+    
+    .markdown-section blockquote.danger {
+      background-color: #fff5f5;
+      border-left-color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Cargando documentación...</div>
+  
+  <script>
+    window.$docsify = {
+      name: 'NatanPHP Framework',
+      repo: 'jhonatanfdez/natan-php',
+      homepage: 'README.md',
+      loadSidebar: true,
+      loadNavbar: false,
+      subMaxLevel: 3,
+      auto2top: true,
+      coverpage: false,
+      
+      // Search plugin
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Buscar...',
+        noData: 'No se encontraron resultados',
+        depth: 3,
+        hideOtherSidebarContent: false
+      },
+      
+      // Copy code plugin
+      copyCode: {
+        buttonText: 'Copiar',
+        errorText: 'Error',
+        successText: '¡Copiado!'
+      },
+      
+      // Pagination
+      pagination: {
+        previousText: 'Anterior',
+        nextText: 'Siguiente',
+        crossChapter: true,
+        crossChapterText: true
+      },
+      
+      // Plugins
+      plugins: [
+        function(hook, vm) {
+          // Footer
+          hook.beforeEach(function(html) {
+            return html;
+          });
+          
+          hook.afterEach(function(html, next) {
+            var footer = [
+              '<hr/>',
+              '<footer style="text-align: center; padding: 20px 0; color: #999;">',
+              '<p>Hecho con ❤️ para la comunidad PHP</p>',
+              '<p>',
+              '<a href="https://github.com/jhonatanfdez/natan-php" target="_blank" style="color: #4ecdc4;">GitHub</a> | ',
+              '<a href="https://github.com/jhonatanfdez/natan-php/issues" target="_blank" style="color: #4ecdc4;">Reportar un problema</a> | ',
+              '<a href="https://github.com/jhonatanfdez/natan-php/blob/main/LICENSE" target="_blank" style="color: #4ecdc4;">Licencia MIT</a>',
+              '</p>',
+              '<p><small>NatanPHP Framework v0.2.0 - ' + new Date().getFullYear() + '</small></p>',
+              '</footer>'
+            ].join('');
+            
+            next(html + footer);
+          });
+        }
+      ]
+    }
+  </script>
+  
+  <!-- Docsify core -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  
+  <!-- Search plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  
+  <!-- Copy code plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  
+  <!-- Pagination plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  
+  <!-- Syntax highlighting -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  
+  <!-- Zoom images -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  
+  <!-- Emoji support -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/emoji.min.js"></script>
+</body>
+</html>
