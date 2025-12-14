@@ -11,9 +11,9 @@
   
   **Un framework PHP diseñado para enseñar y aprender cómo funcionan los frameworks modernos por dentro**
   
-  📍 **Estado actual: v0.2.0** — Suite completa de testing con 140 tests y 320+ assertions, cobertura 100% del framework core, documentación exhaustiva en español, 4 fases completadas (Helpers, Request, Router, Integration).
+  📍 **Estado actual: v0.2.1** — Documentación completa con 7 páginas (~5,680 líneas, 150+ ejemplos), GitHub Pages live, 140 tests con cobertura 100%, documentación exhaustiva en español.
   
-  • **Changelog**: ver [v0.2.0 en CHANGELOG.md](CHANGELOG.md#v020---2024-12-14) · **Tag**: [v0.2.0](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.2.0)
+  • **Changelog**: ver [v0.2.1 en CHANGELOG.md](CHANGELOG.md#v021---2024-12-14) · **Tag**: [v0.2.1](https://github.com/jhonatanfdez/natan-php/releases/tag/v0.2.1)
   
   ---
   

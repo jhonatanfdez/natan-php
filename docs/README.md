@@ -3,7 +3,7 @@
 > Framework PHP MVC Simple, Moderno e Innovador
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://php.net)
-[![Version](https://img.shields.io/badge/version-0.2.0-brightgreen)](https://github.com/jhonatanfdez/natan-php/releases)
+[![Version](https://img.shields.io/badge/version-0.2.1-brightgreen)](https://github.com/jhonatanfdez/natan-php/releases)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-140%20passing-success)](https://github.com/jhonatanfdez/natan-php)
 

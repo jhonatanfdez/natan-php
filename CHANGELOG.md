@@ -13,6 +13,46 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Middleware system completo
 - Coverage testing reports
 
+## [v0.2.1] - 2024-12-14
+
+### 📚 Añadido - Documentación Completa
+
+#### **GitHub Pages Documentation**
+- ✅ **7 páginas de documentación** (~5,680 líneas totales)
+  - README.md (260 líneas): Landing page con features y roadmap
+  - installation.md (290 líneas): Guía de instalación completa
+  - basics/routing.md (850 líneas): Sistema de rutas completo
+  - basics/requests.md (1,180 líneas): Manejo de peticiones HTTP
+  - digging-deeper/helpers.md (1,450 líneas): 10 funciones helper documentadas
+  - configuration.md (670 líneas): Variables de entorno y .env
+  - directory-structure.md (980 líneas): Estructura de carpetas completa
+
+#### **Docsify Setup**
+- ✅ Configuración completa de Docsify 4.x
+- ✅ 7 plugins integrados: search, copy-code, pagination, zoom, emoji, prism, themeable
+- ✅ Sintaxis highlighting para PHP, Bash, JSON
+- ✅ Tema Vue personalizado
+- ✅ Navegación lateral (_sidebar.md)
+
+#### **GitHub Pages**
+- ✅ Desplegado en: https://jhonatanfdez.github.io/natan-php/
+- ✅ Archivo .nojekyll para deshabilitar Jekyll
+- ✅ DOCS_README.md con guía de contribución
+- ✅ Link en README principal del repositorio
+- ✅ Créditos del desarrollador en página de inicio
+
+#### **Contenido Documentado**
+- ✅ 150+ ejemplos de código funcionales
+- ✅ 20+ tablas de referencia
+- ✅ 15+ casos de uso completos
+- ✅ Guías de troubleshooting
+- ✅ 100% en español
+
+### 🔧 Mejorado
+- ✅ README.md con sección "Documentación Completa" y links directos
+- ✅ Badge de documentación en README
+- ✅ Créditos a Jhonatan Fernandez en docs
+
 ## [v0.2.0] - 2024-12-14
 
 ### ✨ Añadido - Suite Completa de Testing
